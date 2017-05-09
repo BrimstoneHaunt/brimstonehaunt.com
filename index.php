@@ -1,10 +1,13 @@
 <?php
+	$code_version = "1.0.0";
+	
 	$base_url = "http://" . $_SERVER['SERVER_NAME'];
 	$paths = explode('/', $_GET["q"]);
 	
 	$pageTitles = [
-		'404'	=> "404 Page Not Found",
-		'home'	=> "Home"
+		'404'		=> "404 Page Not Found",
+		'home'		=> "Home",
+		'actors'	=> "Actors"
 	];
 	
 	$page = '404';
