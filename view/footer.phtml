@@ -1,8 +1,63 @@
 <div id="footer" class="container-fluid">
-	<div class="row">
+	<div class="row first-footer">
+		<div class="col-md-4">
+			<h3>Links</h3>
+			<div id="link-section" class="row">
+				<div class="col-sm-6">
+					<ul>
+						<li><a href="http://blog.brimstonehaunt.com" target="_blank">Brimstone Blog</a>
+						<li><a href="<?php echo $base_url; ?>/photos">Photos and Videos</a></li>
+						<li><a href="<?php echo $base_url; ?>/actors">Actors</a></li>
+						<li><a href="<?php echo $base_url; ?>/sponsors">Our Sponsors</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-6">
+					<ul>
+						<li><a href="http://www.renfestival.com" target="_blank">Ohio Renaissance Festival</a></li>
+						<li><a href="http://www.celticfestohio.com" target="_blank">Celtic Fest Ohio</a></li>
+						<li><a href="http://www.1572roadhousebarbq.com" target="_blank">1572 Roadhouse BarB-Q</a></li>
+						<li><a href="http://www.renparkhenge.com" target="_blank">Sun Henge</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="divider hidden-xs"></div>
+		<div class="col-md-4">
+			<h3>Newsletter</h3>
+			<div class="newsletter-signup">
+				<p>Sign up for our quarterly newsletter and receive a promo code for discounted tickets!</p>
+				<form action="newsletter/signup.php" onsubmit="return false;">
+					<input type="email" class="form-control" placeholder="Email" value="" />
+					<br/>
+					<button class="btn btn-primary">SIGN ME UP</button>
+				</form>
+			</div>
+		</div>
+		<div class="divider hidden-xs"></div>
+		<div class="col-md-4">
+			<h3>Social</h3> 
+			<div class="visible-xs-block">
+				<p><center>
+					<a href="http://www.facebook.com/brimstonehaunt" target="_blank"><span class="fa fa-facebook-official fa-icon-huge"></span></a>
+					<a href="http://www.twitter.com/brimstonehaunt" target="_blank"><span class="fa fa-twitter fa-icon-huge"></span></a>
+					<a href="http://www.instagram.com/brimstonehaunt" target="_blank"><span class="fa fa-instagram fa-icon-huge"></span></a>
+					<a href="http://www.youtube.com/brimstonehauntedhayride" target="_blank"><span class="fa fa-youtube fa-icon-huge"></span></a>
+				</center></p>
+			</div>
+			<div class="hidden-xs">
+				<div id="social-link-wrapper">
+					<p><a href="http://www.facebook.com/brimstonehaunt" target="_blank"><span class="fa fa-facebook-official fa-icon-large"></span>Like us on Facebook</a></p>
+					<p><a href="http://www.twitter.com/brimstonehaunt" target="_blank"><span class="fa fa-twitter fa-icon-large"></span>Follow us on Twitter</a></p>
+					<p><a href="http://www.instagram.com/brimstonehaunt" target="_blank"><span class="fa fa-instagram fa-icon-large"></span>Follow us on Instagram</a></p>
+					<p><a href="http://www.youtube.com/brimstonehauntedhayride" target="_blank"><span class="fa fa-youtube fa-icon-large"></span>Watch us on YouTube</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row second-footer">
 		<div class="col-sm-12">
 			<center>
-				<span>&copy; 2017 Brimstone Haunt LLC. | <a href="mailto:contact@BrimstoneHaunt.com">contact@BrimstoneHaunt.com</a></span>
+				<span>&copy;2017 Brimstone Haunt LLC | <a href="mailto:contact@BrimstoneHaunt.com">contact@BrimstoneHaunt.com</a></span>
 			</center>
 		</div>
 	</div>

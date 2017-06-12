@@ -67,6 +67,76 @@ ul
 	margin: 0;
 }
 
+.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:visited
+{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	color: white;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, 
+.btn-primary:active:hover, .btn-primary:active:focus
+{
+	font-family: "HelveticaNeue-CondensedBold", "HelveticaNeue-Condensed", "Arial Narrow", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background: none;
+	font-weight: bold;
+	background-color: #F1592A;
+	border-color: #F1592A;
+	outline: none;
+}
+
+.fa
+{
+	margin: 0 10px;
+}
+
+.fa-icon-tiny
+{
+	font-size: 12px;
+}
+
+.fa-icon-small
+{
+	font-size: 18px;
+}
+
+.fa-icon-normal
+{
+	font-size: 24px;
+}
+
+.fa-icon-large
+{
+	font-size: 35px;
+}
+
+.fa-icon-huge
+{
+	font-size: 50px;
+}
+
+/*
+.fa-facebook-official
+{
+	color: #3b5998!important;
+}
+
+.fa-twitter
+{
+	color: #55acee!important;
+}
+
+.fa-instagram
+{
+	color: #3f729b!important;
+}
+
+.fa-youtube
+{
+	color: #e52d27!important;
+}
+*/
+
 #main_nav
 {
 	background: none;
@@ -129,11 +199,12 @@ ul
     margin-bottom:-1px;
 }
 
-#home-page
+#main_content
 {
 	min-height: 100%;
-	margin-bottom: -65px;
-	padding: 25px 0 90px 0;
+	/*margin-bottom: -65px;*/
+	padding-top: 25px;
+	padding-bottom: 50px;
 }
 
 .section
@@ -146,7 +217,7 @@ ul
 	margin-top: 0px;
 }
 
-.section .section-heading h2
+.section .section-heading h2, #sponsor-page h2, #photos-page h2, #actor-page h2
 {
 	text-transform: uppercase;
 	margin-bottom: 25px;
@@ -154,7 +225,7 @@ ul
 	font-size: 50px;
 	font-family: 'Creepster';
 	font-weight: bold;
-	color: black;
+	color: #2d2d2d;
 	text-shadow: 	0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 
 					0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C,
 					0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C,
@@ -181,11 +252,32 @@ ul
 	display: none;
 	height: 100%;
 	width: 100%;
+	z-index: -999;
 }
 
 #sliding-banner .slide.current
 {
 	display: inline-block;
+}
+
+#play-link
+{
+	z-index: -9;
+	position: relative;
+	bottom: 50px;
+	font-size: 20px;
+	font-family: 'Creepster';
+	font-weight: bold;
+	color: black;
+	text-shadow: 0px 0px 2px white, 0px 0px 2px white, 0px 0px 2px white, 0px 0px 2px white;
+}
+
+#teaser-video
+{
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,0.5);
+	opacity: 0;
 }
 
 #countdown-title
@@ -323,11 +415,115 @@ ul.farewell-letter-list li
 {
 	border: none;
 	border-top: 1px solid white;
-	background-color: #2D2D2D;
-	padding-top: 10px;
-	padding-bottom: 10px;
 	color: white;
-	height: 65px;
+}
+#footer .first-footer
+{
+	padding: 25px 0;
+	background-color: #4d4d4d;
+	position: relative;
+}
+
+#footer .first-footer h3
+{
+	font-size: 20px;
+	font-family: 'Creepster';
+	font-weight: bold;
+	color: #4d4d4d;
+	text-shadow: 	0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C,
+					0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C,
+					0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C,
+					0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C;
+}
+
+#footer .first-footer p, #footer .first-footer span, #footer .first-footer a
+{
+	color: white;
+}
+
+#footer #social-link-wrapper
+{
+	display: table;
+	margin: 0 auto;
+}
+
+#footer .second-footer
+{
+	padding: 25px 0;
+	background-color: black;
+}
+
+#footer .newsletter-signup
+{
+	text-align: center;
+	padding: 0 25px;
+}
+
+#footer .first-footer .divider
+{
+	background-color: white;
+	width: 1px;
+	height: 76%;
+	display: inline-block;
+	position: absolute;
+	top: 12%;
+}
+
+#footer .first-footer .col-md-4:last-child
+{
+	border-right: none;
+}
+
+#footer #link-section ul li
+{
+	margin: 10px 0;
+}
+
+#page-404 h1
+{
+	margin: 25px 0;
+}
+
+#sponsor-page .logo-container
+{
+	text-align: center;
+}
+
+#sponsor-page img
+{
+	height: auto;
+	max-height: 75px;
+	width: auto;
+	max-width: 100%;
+	margin: 15px 0;
+}
+
+#photos-page .img-container
+{
+	text-align: center;
+}
+
+#photos-page .img-container.vid:before
+{
+	content: '\f04b';
+	font-family: FontAwesome;
+ 	font-weight: normal;
+  	font-style: normal;
+	color: white;
+	font-size: 50px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	pointer-events: none;
+}
+
+#photos-page .img-container img
+{
+	border: 1px solid white;
+	height: auto;
+	width: auto;
+	max-width: 100%;
+	margin: 15px 0;
 }
 
 /* ----------------------------------------------------
@@ -354,7 +550,7 @@ ul.farewell-letter-list li
 		border-bottom: 1px solid white;
 	}
 	
-	.section .section-heading h2
+	.section .section-heading h2, #sponsor-page h2, #photos-page h2, #actor-page h2
 	{
 		font-size: 32px;
 	}
@@ -372,6 +568,11 @@ ul.farewell-letter-list li
 	#countdown-timer ul li .countdown-label
 	{
 		font-size: 14;
+	}
+	#play-link
+	{
+		font-size: 14px;
+		bottom: 25px;
 	}
 }
 
@@ -398,6 +599,30 @@ ul.farewell-letter-list li
 		height: 70%;
 		overflow: auto;
 	}
+	
+	#play-link
+	{
+		font-size: 16px;
+		bottom: 35px;
+	}
+	
+	#footer .first-footer h3
+	{
+		text-align: center;
+	}
+	
+	#footer #link-section ul
+	{
+		display: table;
+		margin: 0 auto;
+	}
+}
+@media (min-width: 768px) and (max-width: 991px)
+{
+	#footer .newsletter-signup
+	{
+		padding: 0 25%;
+	}
 }
 
 /* Medium devices (desktops, 992px and up) */
@@ -406,6 +631,11 @@ ul.farewell-letter-list li
 	.modal-dialog
 	{
 		width: 60%;
+	}
+	#play-link
+	{
+		font-size: 20px;
+		bottom: 50px;
 	}
 }
 

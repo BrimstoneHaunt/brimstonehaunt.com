@@ -4,11 +4,31 @@ $.extend(pages, {
 			console.info("Initiating Home Page...");
 			pages.home.slidingBanner.start();
 			pages.home.countdown.start();
+			$('#teaser-video').on('click', function(){
+				if($('#teaser-video').get(0).paused)
+				{
+					$('#teaser-video').get(0).play();
+					$('#teaser-video').fadeTo(1000, 1);
+				}
+				else
+				{
+					$('#teaser-video').get(0).pause();
+					$('#teaser-video').fadeTo(1000, 0);
+				}
+			});
+			$('#teaser-video').get(0).addEventListener('ended', function(){
+				$('#teaser-video').get(0).webkitExitFullScreen()
+				$('#teaser-video').fadeTo(500, 0);
+			});
+			$('#teaser-video').get(0).addEventListener('webkitendfullscreen', function(){
+				$('#teaser-video').fadeTo(1000, 0);
+			});
 		},
 		deinit: function() {
 			console.info("De-initiating Home Page...");
 			pages.home.slidingBanner.stop();
 			pages.home.countdown.stop();
+			$('#teaser-video').get(0).pause();
 		},
 		scrollTo: function(section) {
 			if($('#main_nav .navbar-collapse').attr('aria-expanded'))
