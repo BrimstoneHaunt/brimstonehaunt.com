@@ -1,6 +1,6 @@
 /*
-	Yellow: #ECB51C;
-	Orange:	#F1592A;
+	YELLOW: #f9c703;
+	ORANGE: #d8541f;
 */
 html, body, p
 {
@@ -11,7 +11,7 @@ html, body, p
 
 a, a:hover, a:focus, a:visited
 {
-	color: #F1592A;
+	color: #d8541f;
 }
 
 a.subtle-link, a.subtle-link:hover, a.subtle-link:focus, a.subtle-link:visited
@@ -22,7 +22,7 @@ a.subtle-link, a.subtle-link:hover, a.subtle-link:focus, a.subtle-link:visited
 body
 {
 	height: 100%;
-	padding-top: 50px;
+	padding-top: 75px;
 	background-color: #2D2D2D;
 }
 
@@ -80,8 +80,8 @@ ul
 	font-family: "HelveticaNeue-CondensedBold", "HelveticaNeue-Condensed", "Arial Narrow", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	background: none;
 	font-weight: bold;
-	background-color: #F1592A;
-	border-color: #F1592A;
+	background-color: #d8541f;
+	border-color: #d8541f;
 	outline: none;
 }
 
@@ -143,13 +143,13 @@ ul
 	background-color: #4D4D4D;
 	border: none;
 	border-bottom: 1px solid white;
-	height: 50px;
+	height: 75px;
 }
 
 #main_nav .navbar-brand
 {
 	color: white;
-	height: 50px;
+	height: 75px;
 	padding: 5px;
 }
 
@@ -157,6 +157,7 @@ ul
 {
 	border-color: white;
 	color: white;
+	margin-top: 20px;
 }
 
 #main_nav .navbar-toggle, #main_nav .navbar-toggle:focus, 
@@ -168,11 +169,6 @@ ul
 #main_nav .navbar-toggle .icon-bar
 {
 	background-color: white;
-}
-
-#main-nav .navbar-nav
-{
-	margin-left: 50px;
 }
 
 #main-nav .navbar-nav li a
@@ -217,19 +213,19 @@ ul
 	margin-top: 0px;
 }
 
-.section .section-heading h2, #sponsor-page h2, #photos-page h2, #actor-page h2
+.section .section-heading h2, #sponsor-page h2, #photos-page h2, #team-page h2
 {
 	text-transform: uppercase;
 	margin-bottom: 25px;
-	border-bottom: 1px dotted #ECB51C;
+	border-bottom: 1px dotted #f9c703;
 	font-size: 50px;
 	font-family: 'Creepster';
 	font-weight: bold;
 	color: #2d2d2d;
-	text-shadow: 	0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 
-					0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C,
-					0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C,
-					0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C, 0px 0px 3px #ECB51C;
+	text-shadow: 	0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 
+					0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703,
+					0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703,
+					0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703;
 }
 
 .section .section-content
@@ -260,18 +256,6 @@ ul
 	display: inline-block;
 }
 
-#play-link
-{
-	z-index: -9;
-	position: relative;
-	bottom: 50px;
-	font-size: 20px;
-	font-family: 'Creepster';
-	font-weight: bold;
-	color: black;
-	text-shadow: 0px 0px 2px white, 0px 0px 2px white, 0px 0px 2px white, 0px 0px 2px white;
-}
-
 #teaser-video
 {
 	height: 100%;
@@ -287,10 +271,10 @@ ul
 	font-family: 'Creepster';
 	font-weight: bold;
 	color: #2D2D2D;
-	text-shadow: 	0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 
-					0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C,
-					0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C,
-					0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C;
+	text-shadow: 	0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703;
 }
 
 #countdown-timer
@@ -336,10 +320,10 @@ ul
 	font-size: 20px;
 	font-family: 'Creepster';
 	color: #2D2D2D;
-	text-shadow: 	0px 0px 2px #F1592A, 0px 0px 2px #F1592A, 0px 0px 2px #F1592A, 0px 0px 2px #F1592A, 
-					0px 0px 2px #F1592A, 0px 0px 2px #F1592A, 0px 0px 2px #F1592A, 0px 0px 2px #F1592A,
-					0px 0px 2px #F1592A, 0px 0px 2px #F1592A, 0px 0px 2px #F1592A, 0px 0px 2px #F1592A,
-					0px 0px 2px #F1592A, 0px 0px 2px #F1592A, 0px 0px 2px #F1592A, 0px 0px 2px #F1592A;
+	text-shadow: 	0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 
+					0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f,
+					0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f,
+					0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f;
 }
 
 .attraction-img
@@ -430,10 +414,10 @@ ul.farewell-letter-list li
 	font-family: 'Creepster';
 	font-weight: bold;
 	color: #4d4d4d;
-	text-shadow: 	0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C,
-					0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C,
-					0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C,
-					0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C, 0px 0px 2px #ECB51C;
+	text-shadow: 	0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703;
 }
 
 #footer .first-footer p, #footer .first-footer span, #footer .first-footer a
@@ -526,6 +510,31 @@ ul.farewell-letter-list li
 	margin: 15px 0;
 }
 
+#team-page p
+{
+	text-align: justify;
+}
+
+#team-page .team-member, #team-page .full-team
+{
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+#team-page img
+{
+	height: 100px;
+	width: 100px;
+}
+
+#team-page .full-team img
+{
+	height: auto;
+	width: auto;
+	max-width: 100%;
+	max-height: 100%;
+}
+
 /* ----------------------------------------------------
   |                                                    |
   |	MEDIA QUERIES                                      |
@@ -550,7 +559,7 @@ ul.farewell-letter-list li
 		border-bottom: 1px solid white;
 	}
 	
-	.section .section-heading h2, #sponsor-page h2, #photos-page h2, #actor-page h2
+	.section .section-heading h2, #sponsor-page h2, #photos-page h2, #team-page h2
 	{
 		font-size: 32px;
 	}
@@ -569,16 +578,38 @@ ul.farewell-letter-list li
 	{
 		font-size: 14;
 	}
-	#play-link
+	
+	#footer #link-section ul
 	{
-		font-size: 14px;
-		bottom: 25px;
+		margin-left: 25px;
 	}
 }
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) 
 {	
+	body
+	{
+		padding-top: 100px;
+	}
+		
+	#main_nav
+	{
+		height: 100px;
+	}
+	
+	#main-nav .navbar-nav
+	{
+		margin-left: 50px;
+		margin-top: 25px;
+	}
+
+	
+	#main_nav .navbar-brand	
+	{
+		height: 100px;
+	}
+
 	#main-nav .navbar-nav li a
 	{
 		text-align: center;
@@ -598,12 +629,6 @@ ul.farewell-letter-list li
 	{
 		height: 70%;
 		overflow: auto;
-	}
-	
-	#play-link
-	{
-		font-size: 16px;
-		bottom: 35px;
 	}
 	
 	#footer .first-footer h3
@@ -631,11 +656,6 @@ ul.farewell-letter-list li
 	.modal-dialog
 	{
 		width: 60%;
-	}
-	#play-link
-	{
-		font-size: 20px;
-		bottom: 50px;
 	}
 }
 
