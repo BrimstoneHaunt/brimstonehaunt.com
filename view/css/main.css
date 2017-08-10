@@ -115,28 +115,6 @@ ul
 	font-size: 50px;
 }
 
-/*
-.fa-facebook-official
-{
-	color: #3b5998!important;
-}
-
-.fa-twitter
-{
-	color: #55acee!important;
-}
-
-.fa-instagram
-{
-	color: #3f729b!important;
-}
-
-.fa-youtube
-{
-	color: #e52d27!important;
-}
-*/
-
 #main_nav
 {
 	background: none;
@@ -199,7 +177,7 @@ ul
 {
 	min-height: 100%;
 	/*margin-bottom: -65px;*/
-	padding-top: 25px;
+	/*padding-top: 25px;*/
 	padding-bottom: 50px;
 }
 
@@ -533,6 +511,37 @@ ul.farewell-letter-list li
 	width: auto;
 	max-width: 100%;
 	max-height: 100%;
+}
+
+/* Swiper CSS */
+.swiper-container
+{
+	margin-bottom: 50px;
+	overflow: visible;
+}
+
+.swiper-slide 
+{
+    text-align: center;
+    font-size: 18px;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-container-horizontal>.swiper-pagination-bullets
+{
+	bottom: -25px;
 }
 
 /* ----------------------------------------------------
