@@ -7,8 +7,8 @@ $.extend(pages, {
 			pages.home.topSwiper = new Swiper('.swiper-container', {
 				direction: 'horizontal',
 				loop: true,
-				nextButton: '.swiper-button-next',
-				prevButton: '.swiper-button-prev',
+				// nextButton: '.swiper-button-next',
+				// prevButton: '.swiper-button-prev',
 				pagination: '.swiper-pagination',
 				paginationClickable: true,
 				autoHeight: true,

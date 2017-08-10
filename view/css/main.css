@@ -514,6 +514,11 @@ ul.farewell-letter-list li
 }
 
 /* Swiper CSS */
+.swiper-container
+{
+	margin-bottom: 25px;
+}
+
 .swiper-slide 
 {
     text-align: center;
