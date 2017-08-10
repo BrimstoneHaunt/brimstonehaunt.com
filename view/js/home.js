@@ -12,10 +12,12 @@ $.extend(pages, {
 				pagination: '.swiper-pagination',
 				paginationClickable: true,
 				autoHeight: true,
-				autoplay: 3000,
+				autoplay: 5000,
 				grabCursor: true,
 				effect: 'slide',
-				spaceBetween: 25
+				spaceBetween: 25,
+				preloadImages: false,
+				lazyLoading: true
 			});
 			// $('#teaser-video').on('click', function(){
 			// 	if($('#teaser-video').get(0).paused)
