@@ -1,6 +1,7 @@
 /*
 	YELLOW: #f9c703;
 	ORANGE: #d8541f;
+	Green:	#c0d12f;
 */
 html, body, p
 {
@@ -11,12 +12,13 @@ html, body, p
 
 a, a:hover, a:focus, a:visited
 {
-	color: #d8541f;
+	color: #f9c703;
 }
 
 a.subtle-link, a.subtle-link:hover, a.subtle-link:focus, a.subtle-link:visited
 {
 	color: white;
+	text-decoration: underline;
 }
 
 body
@@ -80,8 +82,8 @@ ul
 	font-family: "HelveticaNeue-CondensedBold", "HelveticaNeue-Condensed", "Arial Narrow", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	background: none;
 	font-weight: bold;
-	background-color: #d8541f;
-	border-color: #d8541f;
+	background-color: #f9c703;
+	border-color: #f9c703;
 	outline: none;
 }
 
@@ -195,15 +197,15 @@ ul
 {
 	text-transform: uppercase;
 	margin-bottom: 25px;
-	border-bottom: 1px dotted #f9c703;
+	border-bottom: 1px dotted #c0d12f;
 	font-size: 50px;
 	font-family: 'Creepster';
 	font-weight: bold;
 	color: #2d2d2d;
-	text-shadow: 	0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 
-					0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703,
-					0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703,
-					0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703, 0px 0px 3px #f9c703;
+	text-shadow: 	0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 
+					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f,
+					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f,
+					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f;
 }
 
 .section .section-content
@@ -249,10 +251,10 @@ ul
 	font-family: 'Creepster';
 	font-weight: bold;
 	color: #2D2D2D;
-	text-shadow: 	0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 
-					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
-					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
-					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703;
+	text-shadow: 	0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 
+					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f,
+					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f,
+					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f;
 }
 
 #countdown-timer
@@ -288,7 +290,6 @@ ul
 #countdown-timer ul li .countdown-count
 {
 	font-size: 38px;
-	font-weight: bold;
 	color: white;
 	font-family: 'Creepster';
 }
@@ -298,10 +299,10 @@ ul
 	font-size: 20px;
 	font-family: 'Creepster';
 	color: #2D2D2D;
-	text-shadow: 	0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 
-					0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f,
-					0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f,
-					0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f, 0px 0px 2px #d8541f;
+	text-shadow: 	0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703;
 }
 
 .attraction-img
@@ -392,10 +393,10 @@ ul.farewell-letter-list li
 	font-family: 'Creepster';
 	font-weight: bold;
 	color: #4d4d4d;
-	text-shadow: 	0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
-					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
-					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
-					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703;
+	text-shadow: 	0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f,
+					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f,
+					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f,
+					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f;
 }
 
 #footer .first-footer p, #footer .first-footer span, #footer .first-footer a
