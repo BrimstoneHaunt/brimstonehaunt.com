@@ -12,7 +12,7 @@ $.extend(pages, {
 				pagination: '.swiper-pagination',
 				paginationClickable: true,
 				autoHeight: true,
-				autoplay: 5000,
+				autoplay: 10000,
 				grabCursor: true,
 				effect: 'slide',
 				spaceBetween: 25,
