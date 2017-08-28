@@ -7,9 +7,10 @@
 	$pageTitles = [
 		'404'		=> "404 Page Not Found",
 		'home'		=> "Home",
-		'team' 	=> "The Team",
+		'team' 		=> "The Team",
 		'photos'	=> "Photos",
-		'sponsors'	=> "Our Sponsors"
+		'sponsors'	=> "Our Sponsors",
+		'news'		=> "News"
 	];
 	
 	$page = '404';

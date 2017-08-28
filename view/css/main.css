@@ -163,6 +163,11 @@ ul
 	font-weight: bold;
 }
 
+#main-nav .navbar-nav li a:focus, #main-nav .navbar-nav li a:active, #main-nav .navbar-nav li a:active:focus, #main-nav .navbar-nav li.open a
+{
+	background: none!important;
+}
+
 #main-nav .navbar-nav li a::after 
 {
     display:block;
@@ -173,6 +178,18 @@ ul
     overflow:hidden;
     visibility:hidden;
     margin-bottom:-1px;
+}
+
+#main-nav .dropdown-menu
+{
+	background: none;
+	background-color: #4d4d4d;
+}
+
+#main-nav .navbar-nav .dropdown-menu li a
+{
+	text-align: left;
+	text-transform: none;
 }
 
 #main_content
@@ -193,7 +210,7 @@ ul
 	margin-top: 0px;
 }
 
-.section .section-heading h2, #sponsor-page h2, #photos-page h2, #team-page h2
+.section .section-heading h2, #sponsor-page h2, #photos-page h2, #team-page h2, #news-page h2
 {
 	text-transform: uppercase;
 	margin-bottom: 25px;
@@ -206,6 +223,22 @@ ul
 					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f,
 					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f,
 					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f;
+}
+
+#news-page ul
+{
+	list-style: square;
+	margin-left: 25px;
+}
+
+#news-page ul li
+{
+	padding: 0 0 25px 0;
+}
+
+#news-page ul li a
+{
+	font-size: 16px;
 }
 
 .section .section-content
