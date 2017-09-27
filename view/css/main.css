@@ -572,6 +572,43 @@ ul.farewell-letter-list li
     align-items: center;
 }
 
+.zombie-bg
+{
+	background: url("/mediashare/img/zombie_woods.jpg");
+	width: 100%;
+	background-position:50% 100%;
+	background-size: cover;
+	padding: 10px 25px;
+	background-repeat: no-repeat;
+}
+
+.zombie-bg p, .zombie-bg h2
+{
+	color: white;
+}
+
+#group-pricing p
+{
+	font-size: 18px;
+}
+
+#group-pricing .modal-header button.close
+{
+	color: white;
+	opacity: 1;
+}
+
+#group-pricing .modal-content
+{
+	background: #2d2d2d;
+	color: white;
+}
+
+#group-pricing .modal-footer
+{
+	display: none;
+}
+
 /* ----------------------------------------------------
   |                                                    |
   |	MEDIA QUERIES                                      |
@@ -620,6 +657,17 @@ ul.farewell-letter-list li
 	{
 		margin-left: 25px;
 	}
+	
+	.modal
+	{
+		overflow: hidden!important;
+	}
+	
+	.modal-body
+	{
+		max-height: 70%;
+		overflow: auto;
+	}
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -664,7 +712,7 @@ ul.farewell-letter-list li
 	
 	.modal-body
 	{
-		height: 70%;
+		max-height: 70%;
 		overflow: auto;
 	}
 	
