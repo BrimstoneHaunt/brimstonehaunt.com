@@ -106,7 +106,7 @@ $.extend(pages, {
 			newModal({
 				name: "group-pricing",
 				title: "Group Pricing",
-				body: "<div class='zombie-bg'><center><h2>The more the scarier!</h2><br/><br/><p>Groups of 10 or more can enjoy hauntingly good prices:</p><br/><p>Haunted Hayride - $11 ($2 off)</p><br/><p>Enjoy both haunted attractions with a combo ticket!</p><br/><p>Combo - $16 ($4 off)</p><br/><p>Email <a href='mailto:groups@brimstonehaunt.com'>groups@brimstonehaunt.com</a> to book your group haunting now!</p></center></div>"
+				body: "<div class='zombie-bg'><center><h2>The more the scarier!</h2><br/><p>Groups of 10 or more may purchase combo tickets at the ticket office for $16 each ($4 off)</p><br/><br/><p>Groups of 20 or more can enjoy hauntingly good prices:</p><p>Haunted Hayride - $11 ($2 off)</p><br/><p>Enjoy both haunted attractions with a combo ticket!</p><p>Combo - $16 ($4 off)</p><br/><p>Please fill out <a target='_blank' href='/mediashare/pdf/group_haunt.pdf'>this form</a> and email it to <a href='mailto:groups@brimstonehaunt.com'>groups@brimstonehaunt.com</a> at least 24 hours in advance to book your group haunting!</p></center></div>"
 			});
 		} 
 	}
