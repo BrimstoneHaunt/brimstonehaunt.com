@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- SEO -->
+    	<title>Brimstone Haunt | {{title}}</title>
+    	<meta name="description" content="">
+    	
+    	<!-- Open Graph (Facebook) -->
+		<meta property="og:image" content="">
+		<meta property="og:title" content="Brimstone Haunt">
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://www.brimstonehaunt.com/" />
+		<meta property="og:description" content="">
+
+		<!-- Twitter Card data -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@BrimstoneHaunt">
+		<meta name="twitter:title" content="Brimstone Haunt">
+		<meta name="twitter:description" content="">
+		<meta name="twitter:image" content="">
+		
+		<!-- JQuery -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		
+		<!-- Fonts -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Creepster|Roboto|Roboto+Condensed">
+		
+		<!-- Swiper -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/css/swiper.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js"></script>
+		
+		<!-- Analytics -->
+		<!-- <script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-97987615-1', 'auto');
+			ga('send', 'pageview');
+		</script> -->
+
+		<!--STYLES-->
+		<link rel="stylesheet" href="/styles/importer.css">
+		<!--STYLES END-->
+		<!--SCRIPTS-->
+		<script src="/js/main.js"></script>
+		<!--SCRIPTS END-->
+	</head>
+	<body>
+		{{> header }}
+		{{{ body }}}
+		{{> footer }}
+		<div id="my-modal-container">
+			<div id="my-empty-modal" class="modal fade hidden" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h3 class="modal-title"></h3>
+						</div>
+						<div class="modal-body"></div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--TEMPLATES-->
+		
+		<!--TEMPLATES END-->
+	</body>
+</html>

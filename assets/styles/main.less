@@ -1,0 +1,669 @@
+/*
+	YELLOW: #f9c703;
+	ORANGE: #d8541f;
+	Green:	#c0d12f;
+*/
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	GENERAL                                            |
+  |                                                    |
+   ---------------------------------------------------- */
+
+html, body, p
+{
+	font-size: 14px;
+	color: #CDCDCD;
+	font-family: 'Roboto', sans-serif;
+}
+
+a, a:hover, a:focus, a:visited
+{
+	color: #f9c703;
+}
+
+a.subtle-link, a.subtle-link:hover, a.subtle-link:focus, a.subtle-link:visited
+{
+	color: white;
+	text-decoration: underline;
+}
+
+body
+{
+	height: 100%;
+	padding-top: 75px;
+	background-color: #2D2D2D;
+}
+
+img
+{
+	max-width: 100%;
+	max-height: 100%;
+}
+
+ul
+{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	HEADINGS                                           |
+  |                                                    |
+   ---------------------------------------------------- */
+
+h1
+{
+	font-size: 28px;
+	padding: 10px 0px;
+	margin: 0;
+}
+
+h2
+{
+	font-size: 24px;
+	padding: 10px 0px;
+	margin: 0;
+}
+
+h3
+{
+	font-size: 20px;
+	padding: 10px 0px;
+	margin: 0;
+}
+
+h4
+{
+	font-size: 16px;
+	padding: 10px 0px;
+	margin: 0;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	BUTTONS                                            |
+  |                                                    |
+   ---------------------------------------------------- */
+
+.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:visited
+{
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	color: white;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, 
+.btn-primary:active:hover, .btn-primary:active:focus
+{
+	font-family: 'Roboto Condensed', sans-serif;
+	background: none;
+	font-weight: bold;
+	background-color: #f9c703;
+	border-color: #f9c703;
+	outline: none;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	FONT AWESOME                                       |
+  |                                                    |
+   ---------------------------------------------------- */
+
+.fa
+{
+	margin: 5px;
+	
+	&.icon-circle
+	{ 
+		border-radius: 50%;
+    	text-align: center;
+	}
+	
+	&.icon-zoom 
+	{ 
+		-webkit-transition: 0.25s ease-in-out;
+	    -moz-transition: 0.25s ease-in-out;
+	    -ms-transition: 0.25s ease-in-out;
+	    -o-transition: 0.25s ease-in-out;
+	    transition: 0.25s ease-in-out;
+	    
+	    &:hover, &:active
+	    {
+		    -webkit-transform: scale(1.25);
+			-moz-transform: scale(1.25);
+			-ms-transform: scale(1.25);
+			-o-transform: scale(1.25);
+			transform: scale(1.25);
+		}
+	}
+}
+
+.fa-icon-tiny
+{
+	&:before
+	{
+		font-size: 12px;
+	}
+	
+	&.icon-circle
+	{
+		height: 24px;
+		width: 24px;
+		line-height: 24px;
+	}
+}
+
+.fa-icon-small
+{
+	&:before
+	{
+		font-size: 18px;
+	}
+	
+	&.icon-circle
+	{
+		height: 36px;
+		width: 36px;
+		line-height: 36px;
+	}
+}
+
+.fa-icon-normal
+{
+	&:before
+	{
+		font-size: 24px;
+	}
+	
+	&.icon-circle
+	{
+		height: 48px;
+		width: 48px;
+		line-height: 48px;
+	}
+}
+
+.fa-icon-large
+{
+	&:before
+	{
+		font-size: 35px;
+	}
+	
+	&.icon-circle
+	{
+		height: 70px;
+		width: 70px;
+		line-height: 70px;
+	}
+}
+
+.fa-icon-huge
+{
+	&:before
+	{
+		font-size: 50px;
+	}
+	
+	&.icon-circle
+	{
+		height: 100px;
+		width: 100px;
+		line-height: 100px;
+	}
+}
+
+.fa-facebook
+{
+	background-color: #3C599F;
+}
+
+.fa-twitter
+{
+	background-color: #32CCFE
+}
+
+.fa-instagram
+{
+	background-color: #A1755C;
+}
+
+.fa-youtube
+{
+	background-color: #C52F30;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	HEADER                                             |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#main-nav
+{
+	background: none;
+	background-color: #4D4D4D;
+	border: none;
+	border-bottom: 1px solid white;
+}
+
+#main-nav .navbar-brand
+{
+	color: white;
+	height: 75px;
+	padding: 5px;
+}
+
+.navbar-toggler {
+	border: 1px solid white;
+	
+	.navbar-toggler-icon-white
+	{
+		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+	}
+}
+
+#main-nav-menu .navbar-nav li a
+{
+	color: white;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+
+#main-nav-menu .navbar-nav li a:hover
+{
+	font-weight: bold;
+}
+
+#main-nav-menu .navbar-nav li a:focus, #main-nav-menu .navbar-nav li a:active, #main-nav-menu .navbar-nav li a:active:focus, #main-nav-menu .navbar-nav li.open a,
+#main-nav-menu .dropdown-item:focus, #main-nav-menu .dropdown-item:hover
+{
+	background: none!important;
+}
+
+#main-nav-menu .navbar-nav li a:not(.dropdown-toggle)::after
+{
+    display:block;
+    content:attr(title);
+    font-weight:bold;
+    height:1px;
+    color:transparent;
+    overflow:hidden;
+    visibility:hidden;
+    margin-bottom:-1px;
+}
+
+#main-nav-menu .dropdown-menu
+{
+	background: none;
+	background-color: #4d4d4d;
+	min-width: 200px;
+}
+
+#main-nav-menu .navbar-nav .dropdown-menu a
+{
+	text-align: left;
+	text-transform: none;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	FOOTER                                             |
+  |                                                    |
+   ---------------------------------------------------- */
+
+html 
+{
+  position: relative;
+  min-height: 100%;
+}
+
+body 
+{
+  margin-bottom: 61px; /* Margin bottom by footer height */
+}
+
+.footer 
+{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 61px; /* Set the fixed height of the footer here */
+	line-height: 60px; /* Vertically center the text there */
+	background-color: black;
+	border-top: 1px solid white;
+	overflow: hidden;
+	font-size: 12px;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	SWIPER                                             |
+  |                                                    |
+   ---------------------------------------------------- */
+   
+.swiper-container
+{
+	margin-bottom: 25px;
+}
+
+.swiper-slide 
+{
+    text-align: center;
+    font-size: 18px;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	COUNTDOWN                                          |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#countdown-title
+{
+	font-size: 36px;
+	font-family: 'Creepster';
+	font-weight: bold;
+	color: #2D2D2D;
+	text-shadow: 	0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 
+					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f,
+					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f,
+					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f;
+}
+
+#countdown-timer ul
+{
+	display: inline-block;
+	margin: 10px 0 0 0;
+}
+
+#countdown-timer ul li
+{
+	display: inline-block;
+	text-align: center;
+	padding: 0px 20px;
+	border-right: 1px solid #4D4D4D;
+}
+
+#countdown-timer ul li:first-child
+{
+	width: auto;
+}
+
+#countdown-timer ul li:last-child
+{
+	width: auto;
+	border: none;
+}
+
+#countdown-timer ul li .countdown-count
+{
+	font-size: 38px;
+	color: white;
+	font-family: 'Creepster';
+}
+
+#countdown-timer ul li .countdown-label
+{
+	font-size: 20px;
+	font-family: 'Creepster';
+	color: #2D2D2D;
+	text-shadow: 	0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
+					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	SECTIONS                                           |
+  |                                                    |
+   ---------------------------------------------------- */
+   
+.section
+{
+	margin-top: 50px;
+}
+
+.section:first-child
+{
+	margin-top: 0px;
+}
+
+.section .section-heading h2, #sponsor-page h2, #photos-page h2, #team-page h2, #news-page h2
+{
+	text-transform: uppercase;
+	margin-bottom: 25px;
+	border-bottom: 1px dotted #c0d12f;
+	font-size: 50px;
+	font-family: 'Creepster';
+	font-weight: bold;
+	color: #2d2d2d;
+	text-shadow: 	0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 
+					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f,
+					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f,
+					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f;
+}
+
+.section .section-content
+{
+	padding: 0 25px;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	ATTRACTIONS                                        |
+  |                                                    |
+   ---------------------------------------------------- */
+
+.attraction-img
+{
+	max-height: 350px;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	TICKETS                                            |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#price-list li
+{
+	font-size: 18px;
+	margin-bottom: 10px;
+	border-bottom: 1px dashed #8D8D8D;
+	display: inline-block;
+	width: 100%;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	DIRECTIONS                                            |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#directions li
+{
+	margin-bottom: 10px;
+	text-align: justify;
+}
+
+#embeded-map
+{
+	border: 0;
+	width: 100%;
+	height: 400px;
+}
+   
+/* ----------------------------------------------------
+  |                                                    |
+  |	FAQ                                                |
+  |                                                    |
+   ---------------------------------------------------- */
+   
+.faq li
+{
+	text-align: justify;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	GROUP PROCING MODAL                                |
+  |                                                    |
+   ---------------------------------------------------- */
+   
+.zombie-bg
+{
+	background: url("/media/img/zombie_woods.jpg");
+	width: 100%;
+	background-position:50% 100%;
+	background-size: cover;
+	padding: 10px 25px;
+	background-repeat: no-repeat;
+}
+
+.zombie-bg p, .zombie-bg h2
+{
+	color: white;
+}
+
+#groupPricingModal p
+{
+	font-size: 18px;
+}
+
+#groupPricingModal .modal-header button.close
+{
+	color: white;
+	opacity: 1;
+}
+
+#groupPricingModal .modal-content
+{
+	background: #2d2d2d;
+	color: white;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	SOCIAL LINKS                                       |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#social-links 
+{
+	background-color: #4d4d4d;
+	
+	p, span, a 
+	{
+		color: white;
+		text-decoration: none!important;
+	}
+	
+	.prompt
+	{
+		font-family: 'Roboto Condensed', sans-serif;
+		font-size: 18px;
+	}
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	NEWS PAGE                                          |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#news-page
+{
+	ul
+	{
+		list-style: square;
+		margin-left: 25px;
+		
+		li
+		{
+			padding: 0 0 25px 0;
+			
+			a
+			{
+				font-size: 16px;
+			}
+		}
+	}
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	SPONSORS PAGE                                      |
+  |                                                    |
+   ---------------------------------------------------- */
+   
+#sponsor-page
+{
+	.logo-container
+	{
+		text-align: center;
+	}
+	
+	img
+	{
+		height: auto;
+		max-height: 75px;
+		width: auto;
+		max-width: 100%;
+		margin: 15px 0;
+	}
+} 
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	PHOTOS PAGE                                        |
+  |                                                    |
+   ---------------------------------------------------- */
+   
+#photos-page
+{
+	.img-container
+	{
+		text-align: center;
+		
+		&.vid:before
+		{
+			content: '\f04b';
+			font-family: FontAwesome;
+		 	font-weight: normal;
+		  	font-style: normal;
+			color: white;
+			font-size: 50px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			pointer-events: none;
+		}
+		
+		img
+		{
+			border: 1px solid white;
+			height: auto;
+			width: auto;
+			max-width: 100%;
+			margin: 15px 0;
+		}
+	}
+}

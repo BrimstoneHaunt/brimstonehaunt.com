@@ -1,0 +1,21 @@
+// processes.json:
+{
+	"apps" : [{
+		"name"        		: "brimstonehaunt.com",
+		"script"      		: "app.js",
+		"watch"       		: false,
+		"log_date_format"	: "YYYY-MM-DD HH:mm Z",
+		"out_file"			: "logs/combined.log",
+		"error_file"		: "logs/combined.log",
+		"node_args"			: "",
+		"env" : {
+			
+		},
+		"env_development" : {
+			"NODE_ENV": "development",
+		},
+		"env_production" : {
+			"NODE_ENV": "production",
+		},
+	}]
+}
