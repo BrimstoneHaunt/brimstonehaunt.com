@@ -32,21 +32,62 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
+  // Public Pages
+  
+  'get /': {
     view: 'homepage',
     locals: {
-    	homepage: true
+    	homepage: true,
+    	title: "Home"
     }
   },
-  '/gallery': {
-    view: 'gallery'
+  'get /gallery': {
+    view: 'gallery',
+    locals: {
+    	title: "Gallery"
+    }
   },
-  '/sponsors': {
-    view: 'sponsors'
+  'get /sponsors': {
+    view: 'sponsors',
+    locals: {
+    	title: "Sponsors"
+    }
   },
-  '/news': {
-    view: 'news'
-  }
+  'get /news': {
+    view: 'news',
+    locals: {
+    	title: "News"
+    }
+  },
+  'get /giveaway': {
+    view: 'giveaway',
+    locals: {
+	    layout: 'simple',
+    	title: "Giveaway"
+    }
+  },
+  'post /giveaway': 'GiveawayController.index',
+  
+  // Employee Pages
+  
+  'get /timeclock': 'TimeClockController.index',
+  
+  // User Account Stuff
+  
+  'get /user/create': 'UserController.showCreate',
+  'post /user/create': 'UserController.create',
+  'get /login': {
+  	view: 'login',
+    locals: {
+    	layout: 'management',
+    	title: "Login"
+    }
+  },
+  'post /login': 'UserController.login',
+  'get /logout': 'UserController.logout',
+  'post /logout': 'UserController.logout'
+  
+  // Admin Pages
 
   /***************************************************************************
   *                                                                          *

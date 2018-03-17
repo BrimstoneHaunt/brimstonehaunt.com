@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<div id="giveaway-page" class="container-fluid">
+	<div class="row justify-content-center my-4">
+		<div class="col">
+			<center><img class="giveaway-flyer" src="media/img/brimstone-giveaway-1.jpg"></center>
+		</div>
+	</div>
+	<div class="row justify-content-center my-4">
+		<div class="col-auto">
+			<h2>WINNERS WILL BE CHOSEN ON MARCH 28th</h2>
+		</div>
+	</div>
+	<form method="post" action="/giveaway">
+		<div class="row justify-content-center my-4">
+			<div class="col-md-4">
+				<input name="email" class="form-control" type="email" placeholder="EMAIL" required>
+			</div>
+		</div>
+		<div class="row justify-content-center my-4">
+			<div class="col-auto">
+				<button class="btn btn-primary" type="submit">SUBMIT</button>
+			</div>
+		</div>
+		<div class="row justify-content-center my-4">
+			<div class="col-md-6">
+				<p class="fine-print text-center">By clicking submit you agree to receive emails from Brimstone Haunt related to this giveaway, general news or announcements, and other promotional messages. We will not share or sell your information to 3rd parties.</p>
+			</div>
+		</div>
+	</form>
+</div>
+{{#if message }}
+<script>$(document).ready(function() { alert("{{ message }}"); });</script>
+{{/if}}

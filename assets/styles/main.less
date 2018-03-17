@@ -10,31 +10,6 @@
   |                                                    |
    ---------------------------------------------------- */
 
-html, body, p
-{
-	font-size: 14px;
-	color: #CDCDCD;
-	font-family: 'Roboto', sans-serif;
-}
-
-a, a:hover, a:focus, a:visited
-{
-	color: #f9c703;
-}
-
-a.subtle-link, a.subtle-link:hover, a.subtle-link:focus, a.subtle-link:visited
-{
-	color: white;
-	text-decoration: underline;
-}
-
-body
-{
-	height: 100%;
-	padding-top: 75px;
-	background-color: #2D2D2D;
-}
-
 img
 {
 	max-width: 100%;
@@ -46,6 +21,12 @@ ul
 	list-style: none;
 	padding: 0;
 	margin: 0;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, 
+.btn-primary:active:hover, .btn-primary:active:focus
+{
+	font-family: 'Roboto Condensed', sans-serif;
 }
 
 /* ----------------------------------------------------
@@ -80,30 +61,6 @@ h4
 	font-size: 16px;
 	padding: 10px 0px;
 	margin: 0;
-}
-
-/* ----------------------------------------------------
-  |                                                    |
-  |	BUTTONS                                            |
-  |                                                    |
-   ---------------------------------------------------- */
-
-.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:visited
-{
-	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	color: white;
-}
-
-.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, 
-.btn-primary:active:hover, .btn-primary:active:focus
-{
-	font-family: 'Roboto Condensed', sans-serif;
-	background: none;
-	font-weight: bold;
-	background-color: #f9c703;
-	border-color: #f9c703;
-	outline: none;
 }
 
 /* ----------------------------------------------------
@@ -238,7 +195,68 @@ h4
 
 /* ----------------------------------------------------
   |                                                    |
-  |	HEADER                                             |
+  |	ALL LAYOUTs                                        |
+  |                                                    |
+   ---------------------------------------------------- */
+   
+body
+{
+	font-size: 14px;
+	font-family: 'Roboto', sans-serif;
+	height: 100%;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	MAIN LAYOUT                                        |
+  |                                                    |
+   ---------------------------------------------------- */
+
+body#main-layout
+{
+	color: #CDCDCD;
+	padding-top: 75px;
+	background-color: #2D2D2D;
+	
+	p
+	{
+		font-size: 14px;
+		color: #CDCDCD;
+		font-family: 'Roboto', sans-serif;
+	}
+	
+	a, a:hover, a:focus, a:visited
+	{
+		color: #f9c703;
+	}
+	
+	a.subtle-link, a.subtle-link:hover, a.subtle-link:focus, a.subtle-link:visited
+	{
+		color: white;
+	}
+	
+	.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:visited
+	{
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		color: white;
+	}
+
+	.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, 
+	.btn-primary:active:hover, .btn-primary:active:focus
+	{
+		font-family: 'Roboto Condensed', sans-serif;
+		background: none;
+		font-weight: bold;
+		background-color: #f9c703;
+		border-color: #f9c703;
+		outline: none;
+	}
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	MAIN HEADER                                        |
   |                                                    |
    ---------------------------------------------------- */
 
@@ -311,6 +329,26 @@ h4
 
 /* ----------------------------------------------------
   |                                                    |
+  |	SIMPLE HEADER                                      |
+  |                                                    |
+   ---------------------------------------------------- */
+   
+#simple-nav
+{
+	background: none;
+	background-color: #8D8D8D;
+	border: none;
+	border-bottom: 1px solid #4d4d4d;
+	
+	.navbar-brand
+	{
+		height: 75px;
+		padding: 5px;
+	}
+}
+
+/* ----------------------------------------------------
+  |                                                    |
   |	FOOTER                                             |
   |                                                    |
    ---------------------------------------------------- */
@@ -337,6 +375,12 @@ body
 	border-top: 1px solid white;
 	overflow: hidden;
 	font-size: 12px;
+	color: #CDCDCD;
+	
+	a
+	{
+		color: white;
+	}
 }
 
 /* ----------------------------------------------------
@@ -665,5 +709,28 @@ body
 			max-width: 100%;
 			margin: 15px 0;
 		}
+	}
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	GIVEAWAY PAGE                                      |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#giveaway-page {
+	h2 {
+		font-size: 16px;
+		font-weight: 400;
+		font-family: 'Roboto Condensed', sans-serif;
+	}
+	
+	.giveaway-flyer {
+		max-height: 1000px;
+		max-width: 100%;
+	}
+	
+	.fine-print {
+		font-size: 11px;
 	}
 }

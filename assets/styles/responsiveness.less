@@ -41,14 +41,23 @@
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) 
 {	
-	body
+	body#main-layout
 	{
 		padding-top: 100px;
 	}
 	
-	#main-nav .navbar-brand	
+	#main-nav, #simple-nav
 	{
-		height: 100px;
+		.navbar-brand	
+		{
+			height: 100px;
+		}
+	}
+	
+	#giveaway-page {
+		h2 {
+			font-size: 32px;
+		}
 	}
 }
 

@@ -1,0 +1,29 @@
+<div id="login-page" class="container-fluid">
+	<form action="/login" method="post">
+		<div class="row justify-content-center py-3">
+			<div class="col-auto">
+				<h2>Please login</h2>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-auto">
+				<span class="text-danger">{{ message }}</span>
+			</div>
+		</div>
+		<div class="row justify-content-center py-3">
+			<div class="col-md-4 col-sm-6">
+				<input name="email" class="form-control" type="text" value="" placeholder="Username" required>
+			</div>
+		</div>
+		<div class="row justify-content-center py-3">
+			<div class="col-md-4 col-sm-6">
+				<input name="password" class="form-control" type="password" value="" placeholder="Password" required>
+			</div>
+		</div>
+		<div class="row justify-content-center py-3">
+			<div class="col-auto">
+				<button class="btn btn-primary">LOG IN</button>
+			</div>
+		</div>
+	</form>
+</div>
