@@ -84,4 +84,9 @@ $(document).ready(function() {
 	if($("#countdown-timer").length > 0) {
 		countdown.start();
 	}
+}).on("submit", "#giveaway-form", function() {
+	if($("input[name=code]").val() != "FREETIX18HH") {
+		alert("Invalid Code! The correct code for this giveaway can be found on our flier.");
+		return false;
+	}
 });
