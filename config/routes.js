@@ -70,12 +70,15 @@ module.exports.routes = {
   
   // Employee Pages
   
+  'get /employees': 'MiscController.employees',
   'get /timeclock': 'TimeClockController.index',
+  'post /timeclock/clockin': 'TimeClockController.clockin',
+  'post /timeclock/clockout': 'TimeClockController.clockout',
+  'post /timeclock/update': 'TimeClockController.update',
+  'post /timeclock/delete': 'TimeClockController.delete',
   
   // User Account Stuff
   
-  'get /user/create': 'UserController.showCreate',
-  'post /user/create': 'UserController.create',
   'get /login': {
   	view: 'login',
     locals: {
@@ -85,9 +88,25 @@ module.exports.routes = {
   },
   'post /login': 'UserController.login',
   'get /logout': 'UserController.logout',
-  'post /logout': 'UserController.logout'
+  'post /logout': 'UserController.logout',
+  'get /user/account': 'UserController.account',
+  'post /user/account': 'UserController.update',
+  'get /user/changepassword': 'UserController.showChangePassword',
+  'post /user/changepassword': 'UserController.changePassword',
+  'get /user/resetpassword': 'UserController.showResetPassword',
+  'post /user/resetpassword': 'UserController.resetPassword',
   
   // Admin Pages
+  
+  'get /admin': 'AdminController.index',
+  'get /user/create': 'UserController.showCreate',
+  'post /user/create': 'UserController.create',
+  'get /user/list': 'UserController.list',
+  'post /user/adminupdate': 'UserController.adminUpdate',
+  'post /user/adminresetpassword': 'UserController.resetPasswordForUser',
+  'get /timeclock/export': 'TimeClockController.showExport',
+  'post /timeclock/export': 'TimeClockController.export',
+  'post /user/admindeleteaccount': 'UserController.adminDelete'
 
   /***************************************************************************
   *                                                                          *

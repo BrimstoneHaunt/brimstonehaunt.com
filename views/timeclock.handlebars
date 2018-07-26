@@ -1,12 +1,72 @@
 <div id="timeclock-page" class="container-fluid">
-	<div class="row justify-content-center">
+	<div class="row justify-content-center my-5">
 		<div class="col-auto">
-			<button id="clock-in-btn" class="btn btn-success">Clock In Now</button>
-			<button id="clock-out-btn" class="btn btn-danger">Clock Out Now</button>
+			<button id="clock-in-btn" class="btn btn-success {{#if clockedIn}} d-none {{/if}}" onclick="startTimeClockNow();">Clock In Now</button>
+			<button id="clock-out-btn" class="btn btn-danger {{#unless clockedIn}} d-none {{/unless}}" onclick="stopTimeClockNow();">Clock Out Now</button>
 		</div>
 		<div class="col-auto">
-			<button class="btn btn-secondary">Start Clock At</button>
-			<button class="btn btn-secondary">Stop Clock At</button>
+			<button class="btn btn-secondary {{#if clockedIn}} d-none {{/if}}" onclick="openTimeClockModal(null, 'start');">Start Clock At</button>
+			<button class="btn btn-secondary {{#unless clockedIn}} d-none {{/unless}}" onclick="openTimeClockModal(null, 'stop');">Stop Clock At</button>
+		</div>
+	</div>
+	{{#each timeEntries}}
+		<div class="row entry-row">
+			<div class="col-3 start-time">
+				<span class="text-success">{{ this.startTime }}</span>
+			</div>
+			<div class="col-3 end-time" data-time="{{ this.endTimeLocal }}">
+				<span class="text-danger">{{ this.endTime }}</span>
+			</div>
+			<div class="col-1">
+				<span>{{ this.duration }}</span>
+			</div>
+			<div class="col-4 comments">
+				<p class="m-0">{{{nl2br this.comments }}}</p>
+			</div>
+			<div class="col-1 actions">
+				<button class="btn btn-link edit-btn" data-entryid="{{ this.id }}" data-starttime="{{ this.startTimeLocal }}" data-endtime="{{ this.endTimeLocal }}" data-comments="{{ this.comments }}" onclick="openTimeClockModal(this);">Edit</button>
+			</div>
+		</div>
+	{{/each}}
+</div>
+<div class="modal fade" id="timeclock-modal" tabindex="-1" role="dialog" aria-labelledby="timeclockModalLabel" aria-hidden="true" data-entryid="">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="timeclockModalLabel">Time Clock Entry</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-6">
+						<label>Start Time</label>
+						<input type="datetime-local" class="form-control start-time-input">
+					</div>
+					<div class="col-6">
+						<label>End Time</label>
+						<input type="datetime-local" class="form-control end-time-input">
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col">
+						<label>Comments</label>
+						<textarea class="form-control comments-input" rows="5"></textarea>
+					</div>
+				</div>
+				<br>
+				<div class="row justify-content-center">
+					<div class="col-6">
+						<button class="btn btn-block btn-danger" onclick="deleteTimeEntry();">Delete Entry</button>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="updateTimeEntry();">Save</button>
+			</div>
 		</div>
 	</div>
 </div>

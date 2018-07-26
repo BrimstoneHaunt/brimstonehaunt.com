@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<nav id="management-nav" class="navbar navbar-expand-md py-0">
+	<a class="navbar-brand" href="/employees">
+		<img alt ="" src="/images/logos/brimstone_haunt_flat_color.png">
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav-menu" aria-controls="main-nav-menu" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon navbar-toggler-icon-white"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="main-nav-menu">
+		{{#if isLoggedIn}}
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="/timeclock" title="Time Clock">Time Clock</a></li>
+				<li class="nav-item"><a class="nav-link" href="/user/account" title="Account">Account</a></li>
+				{{#if canAdmin}}<li class="nav-item"><a class="nav-link" href="/admin" title="Admin">Admin</a></li>{{/if}}
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="/logout" title="Logout">Logout</a></li>
+			</ul>
+		{{else}}
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="/login" title="Logout">Login</a></li>
+			</ul>
+		{{/if}}
+	</div>
+</nav>

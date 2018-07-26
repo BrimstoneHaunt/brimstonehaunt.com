@@ -29,6 +29,20 @@ ul
 	font-family: 'Roboto Condensed', sans-serif;
 }
 
+.link-unstyled {
+	&, &:visited, &:hover, &:active, &:focus, &:active:hover {
+		font-style: inherit;
+		color: inherit;
+		background-color: transparent;
+		font-size: inherit;
+		text-decoration: none;
+		font-variant: inherit;
+		font-weight: inherit;
+		line-height: inherit;
+		font-family: inherit;
+	}
+}
+
 /* ----------------------------------------------------
   |                                                    |
   |	HEADINGS                                           |
@@ -37,23 +51,26 @@ ul
 
 h1
 {
-	font-size: 28px;
+	font-size: 40px;
 	padding: 10px 0px;
 	margin: 0;
+	font-weight: bold;
 }
 
 h2
 {
-	font-size: 24px;
+	font-size: 32px;
 	padding: 10px 0px;
 	margin: 0;
+	font-weight: bold;
 }
 
 h3
 {
-	font-size: 20px;
+	font-size: 24px;
 	padding: 10px 0px;
 	margin: 0;
+	font-weight: bold;
 }
 
 h4
@@ -61,6 +78,7 @@ h4
 	font-size: 16px;
 	padding: 10px 0px;
 	margin: 0;
+	font-weight: bold;
 }
 
 /* ----------------------------------------------------
@@ -344,6 +362,37 @@ body#main-layout
 	{
 		height: 75px;
 		padding: 5px;
+	}
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	MANAGEMENT HEADER                                  |
+  |                                                    |
+   ---------------------------------------------------- */
+   
+#management-nav
+{
+	background: none;
+	background-color: #8D8D8D;
+	border: none;
+	border-bottom: 1px solid #4d4d4d;
+	
+	.navbar-brand
+	{
+		height: 75px;
+		padding: 5px;
+	}
+	
+	.nav-link
+	{
+		color: white;
+		text-transform: uppercase;
+		
+		&:hover
+		{
+			font-weight: bold;
+		}
 	}
 }
 
@@ -732,5 +781,42 @@ body
 	
 	.fine-print {
 		font-size: 11px;
+	}
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	Timeclock PAGE                                      |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#timeclock-page {
+	.entry-row {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		
+		&.on-the-clock {
+			background: #ffe5e5;
+		}
+	}
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	ADMIN PAGE                                      |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#admin-page {
+	.dashboard {
+		.cell {
+			padding: 25px 0;
+			font-size: 24px;
+			border: 1px solid #4d4d4d;
+			
+			span.large {
+				font-size: 100px;
+			}
+		}
 	}
 }
