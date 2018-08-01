@@ -6,6 +6,7 @@
   "keywords": [],
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "connect-redis": "^3.3.3",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
     "grunt-contrib-coffee": "1.0.0",
@@ -20,11 +21,11 @@
     "grunt-sync": "0.5.2",
     "handlebars": "^4.0.11",
     "include-all": "^1.0.0",
+    "moment-timezone": "^0.5.21",
     "rc": "1.0.1",
     "sails": "~0.12.14",
     "sails-disk": "~0.10.9",
-    "sails-mysql": "^0.11.5",
-    "moment-timezone": "^0.5.17"
+    "sails-mysql": "^0.11.5"
   },
   "scripts": {
     "debug": "node debug app.js",
