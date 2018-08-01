@@ -1,0 +1,152 @@
+<div id="applicationlist-page" class="container-fluid my-5">
+	<div class="row">
+		<div class="col">
+			<h1 class="ml-lg-3">{{appListType}} Applications</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<div id="app-list" class="list-group">
+				<script type="text/javascript">
+					var startWeek = 2;
+					var endWeek = 6;
+					var fridays = ["", "", "Friday 9/28", "Friday 10/5", "Friday 10/12", "Friday 10/19", "Friday 10/26"];
+					var saturdays = ["", "", "Saturday 9/29", "Saturday 10/6", "Saturday 10/13", "Saturday 10/20", "Saturday 10/27"];
+				</script>
+				{{#each appList}}
+					<div class="list-group-item list-group-item-action" data-target="#app{{this.id}}-content" data-appid="{{this.id}}">
+						<div class="row justify-content-center">
+							<div class="col-sm">
+								<div class="row">
+									<div class="col-sm-9">
+										<div class="row">
+											<div class="col-lg-5">
+												{{ this.firstName }} {{ this.middleName }} {{ this.lastName }}
+											</div>
+											<div class="col-lg-7">
+												{{ this.email }}
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										{{#if this.over16 }}
+											<span class="text-success">Over 16</span>
+										{{else}}
+											<span class="text-danger">Under 16</span>
+										{{/if}}
+									</div>
+								</div>
+							</div>
+							<div class="col-auto">
+								<div class="btn-group ">
+									<button type="button" class="btn btn-success btn-sm">Hire</button>
+									<button type="button" class="btn btn-warning btn-sm">Hold</button>
+									<button type="button" class="btn btn-danger btn-sm">Reject</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="list-group-item collapse py-3 app-content" id="app{{this.id}}-content">
+						<div class="row">
+							<div class="col-md-4 my-2">
+								{{#if this.returning_worker }}
+									Returning Employee
+								{{else}}
+									New Employee
+								{{/if}}
+							</div>
+							<div class="col-md-4 my-2">
+								{{ this.phone }}
+							</div>
+							<div class="col-md-4 my-2">
+								{{ this.street }} {{ this.city }}, {{ this.state }} {{ this.zip }}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 my-2">
+								{{ this.previous_role }}
+							</div>
+							<div class="col-md-4 my-2">
+								{{ this.previous_haunt_work }}
+							</div>
+							<div class="col-md-4 my-2">
+								{{ this.comments }}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 my-2">
+								Height: {{ this.height }}
+							</div>
+							<div class="col-md-4 my-2">
+								Gender: {{ this.gender }}
+							</div>
+							<div class="col-md-4 my-2">
+								Shirt Size: {{ this.shirt_size }}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 my-2">
+								Womens Pant Size: {{ this.pant_size }}
+							</div>
+							<div class="col-md-4 my-2">
+								Mens Pant Waist: {{ this.pant_waist }}
+							</div>
+							<div class="col-md-4 my-2">
+								Mens Pant Length: {{ this.pant_length }}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 my-2">
+								{{#if this.makeup_allergies }}
+									Has makeup allergies
+								{{else}}
+									Does not have any makeup allergies
+								{{/if}}
+							</div>
+							<div class="col-md-4 my-2">
+								{{#if this.glasses }}
+									Wears glasses
+								{{else}}
+									Does not wear glasses
+								{{/if}}
+							</div>
+							<div class="col-md-4 my-2">
+								{{#if this.contacts }}
+									Wears contacts
+								{{else}}
+									Does not wear contacts
+								{{/if}}
+							</div>
+						</div>
+						<div class="row my-3 justify-content-center availability{{ this.id }}">
+							<div class="col-md-2 col-sm-4 fr"></div>
+							<div class="col-md-2 col-sm-4 sa"></div>
+						</div>
+					</div>
+					<script type="text/javascript">
+						var availabilitySTR = "{{ this.availability }}";
+						var availabilityARR = availabilitySTR.split(":");
+						
+						for(var i = startWeek;i <= endWeek;i++) {
+							if($.inArray("fr" + i, availabilityARR) == -1) {
+								$(".availability{{ this.id }} > .fr").append("<span class='text-danger'>" + fridays[i] + "</span><br>");
+							} else {
+								$(".availability{{ this.id }} > .fr").append("<span class='text-success'>" + fridays[i] + "</span><br>");
+							}
+							
+							if($.inArray("sa" + i, availabilityARR) == -1) {
+								$(".availability{{ this.id }} > .sa").append("<span class='text-danger'>" + saturdays[i] + "</span><br>");
+							} else {
+								$(".availability{{ this.id }} > .sa").append("<span class='text-success'>" + saturdays[i] + "</span><br>");
+							}
+						}
+					</script>
+				{{else}}
+					<div class="list-group-item">
+						<center>No Applications Found!</center>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</div>

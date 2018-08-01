@@ -56,5 +56,10 @@ module.exports.policies = {
 	},
 	'AdminController': {
 		'*': 'canAdmin'
+	},
+	'ApplicationController': {
+		'*': true,
+		'pendingList': 'canAdmin',
+		'heldList': 'canAdmin'
 	}
 };

@@ -208,6 +208,17 @@ function adminDeleteAccount() {
 	return false;
 }
 
+function preSubmitApplication() {
+	if($("#application-form").valid()) {
+		if(confirm("Are you sure you're ready to submit this application? You will not be able to make any further changes or submit another application once this one is submitted.")) {
+			$("#submit-application-btn").prop('disabled', true);
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 /* ----------------------------------------------------
   |                                                    |
   |	INIT                                               |
@@ -250,9 +261,32 @@ $(document).ready(function() {
 	if($("#timeclock-page").length > 0) {
 		initTimeClockPage();
 	}
+	
+	if($("#application-form").length > 0) {
+		$("#application-form").validate({
+			onfocusout: function(element) {
+			    if (!this.checkable(element)) {
+			        this.element(element);
+			    }
+			},
+			rules: {
+				phone: {
+      				phoneUS: true
+				},
+				zip: {
+					zipcodeUS: true
+				}
+			}
+		});
+	}
 }).on("submit", "#giveaway-form", function() {
 	if($("input[name=code]").val() != "FREETIX18HH") {
 		alert("Invalid Code! The correct code for this giveaway can be found on our Facebook post.");
 		return false;
 	}
+}).on("click", "#app-list > .list-group-item-action", function() {
+	var appID = $(this).data("appid");
+	
+	$($(this).data("target")).slideToggle();
+	$(this).toggleClass("active");
 });

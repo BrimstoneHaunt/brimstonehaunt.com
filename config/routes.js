@@ -67,6 +67,8 @@ module.exports.routes = {
     }
   },
   'post /giveaway': 'GiveawayController.index',
+  'get /apply': 'ApplicationController.index',
+  'post /apply': 'ApplicationController.submitApplication',
   
   // Employee Pages
   
@@ -106,7 +108,9 @@ module.exports.routes = {
   'post /user/adminresetpassword': 'UserController.resetPasswordForUser',
   'get /timeclock/export': 'TimeClockController.showExport',
   'post /timeclock/export': 'TimeClockController.export',
-  'post /user/admindeleteaccount': 'UserController.adminDelete'
+  'post /user/admindeleteaccount': 'UserController.adminDelete',
+  'get /applications/pending': 'ApplicationController.pendingList',
+  'get /applications/held': 'ApplicationController.heldList'
 
   /***************************************************************************
   *                                                                          *
