@@ -36,7 +36,7 @@ module.exports.session = {
     // For example, use 24 * 60 * 60 * 1000 to make sessions expire in 24 hours.
     // Default is null, making it a browser cookie, so the session will
     // last only for as long as the browser is open.
-    maxAge: null,
+    maxAge: 60 * 60 * 1000, // 1 hour
     // Path that the cookie is valid for.
     path: '/',
     // Should the session cookie be HTTP-only? (See https://www.owasp.org/index.php/HttpOnly)
@@ -57,7 +57,7 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // adapter: 'connect-redis',
+  adapter: 'connect-redis',
 
   /***************************************************************************
   *                                                                          *
@@ -68,12 +68,12 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // host: 'localhost',
-  // port: 6379,
-  // ttl: <redis session TTL in seconds>,
-  // db: 0,
-  // pass: <redis auth password>,
-  // prefix: 'sess:',
+  host: 'brimstone-redis.hbwa5x.ng.0001.use2.cache.amazonaws.com',
+  port: 6379,
+  ttl: 60 * 60, // 1 hour
+  db: 0,
+  // pass: '',
+  prefix: 'sess:',
 
 
   /***************************************************************************
