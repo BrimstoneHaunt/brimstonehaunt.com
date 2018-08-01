@@ -27,16 +27,39 @@ module.exports.policies = {
 	***************************************************************************/
 
 	'*': false,
+	'MiscController': {
+		'employees': 'isLoggedIn'
+	},
 	'GiveawayController': {
 		'*': true
 	},
 	'TimeClockController': {
-		'*': 'isLoggedIn'
+		'*': 'isLoggedIn',
+		'showExport': 'isAdmin',
+		'export': 'isAdmin'
 	},
-	'UserController' : {
-		'showCreate': 'isAdmin',
-		'create': 'isAdmin',
+	'UserController': {
+		'showCreate': 'canAdmin',
+		'create': 'canAdmin',
 		'login': true,
-		'logout': true
+		'logout': true,
+		'showChangePassword': 'isLoggedIn',
+		'changePassword': true,
+		'account': 'isLoggedIn',
+		'update': 'isLoggedIn',
+		'list': 'canAdmin',
+		'resetPassword': true,
+		'showResetPassword': true,
+		'adminUpdate': 'canAdmin',
+		'resetPasswordForUser': 'canAdmin',
+		'adminDelete': 'canAdmin'
+	},
+	'AdminController': {
+		'*': 'canAdmin'
+	},
+	'ApplicationController': {
+		'*': true,
+		'pendingList': 'canAdmin',
+		'heldList': 'canAdmin'
 	}
 };

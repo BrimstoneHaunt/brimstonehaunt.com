@@ -1,0 +1,49 @@
+<div id="createuser-page" class="container-fluid my-5">
+	<div class="row">
+		<div class="col">
+			<h1 class="ml-lg-3">Your Account</h1>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-auto">
+			<span class="text-danger">{{ message }}</span>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-lg-6 col-md-10 col-12">
+			<form action="/user/account" method="post">
+				<div class="row justify-content-center">
+					<div class="col-sm-6">
+						<input name="email" class="form-control" type="email" required="required" placeholder="Email Address" value="{{user.email}}"><br>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<input name="firstName" class="form-control" type="text" required="required" placeholder="First Name" value="{{user.firstName}}"><br>
+					</div>
+					<div class="col-sm-4">
+						<input name="middleName" class="form-control" type="text" placeholder="Middle Name" value="{{user.middleName}}"><br>
+					</div>
+					<div class="col-sm-4">
+						<input name="lastName" class="form-control" type="text" required="required" placeholder="Last Name" value="{{user.lastName}}"><br>
+					</div>
+				</div>
+				<div class="row justify-content-center my-3">
+					<div class="col-auto">
+						<span>Payrate: ${{user.payrate}}.00/hr</span>
+					</div>
+				</div>
+				<div class="row justify-content-center my-3">
+					<div class="col-auto">
+						<a href="/user/changepassword">Change Password</a>
+					</div>
+				</div>
+				<div class="row my-3 justify-content-center">
+					<div class="col-sm-6">
+						<input type="submit" class="btn btn-primary btn-block" value="Update">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

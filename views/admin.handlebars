@@ -1,0 +1,62 @@
+<div id="admin-page" class="container-fluid">
+	<div class="row justify-content-center dashboard">
+		<div class="col-md-4 cell">
+			<a href="/user/list" class="link-unstyled">
+				<center><span class="large">{{numEmployees}}</span><br><span>Total Employees</span></center>
+			</a>
+		</div>
+		<div class="col-md-1"><p>&nbsp;</p></div>
+		<div class="col-md-4 cell">
+			<a href="#" class="link-unstyled" data-toggle="modal" data-target="#clocked-in-modal">
+				<center><span class="large">{{numOnClock}}</span><br><span>Clocked In Employees</span></center>
+			</a>
+		</div>
+	</div>
+	<div class="row justify-content-center dashboard">
+		<div class="col-md-4 cell">
+			<a href="/applications/pending" class="link-unstyled">
+				<center><span class="large">{{numPendingApps}}</span><br><span>Pending Applications</span></center>
+			</a>
+		</div>
+		<div class="col-md-1"><p>&nbsp;</p></div>
+		<div class="col-md-4 cell">
+			<a href="/applications/held" class="link-unstyled">
+				<center><span class="large">{{numHeldApps}}</span><br><span>Held Applications</span></center>
+			</a>
+		</div>
+	</div>
+	<div class="row mb-5 justify-content-center">
+		{{#if (gteq user.accessLvl 5)}}
+			<div class="col-auto my-3">
+				<a href="/timeclock/export" class="btn btn-outline-primary">Export Time Sheets</a>
+			</div>
+		{{/if}}
+	</div>
+</div>
+<div class="modal fade" id="clocked-in-modal" tabindex="-1" role="dialog" aria-labelledby="clockedInModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="clockedInModalLabel">Clocked In Employees</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				{{#each timeEntries}}
+					<div class="row py-2">
+						<div class="col-6">
+							<span>{{ this.user.firstName }} {{ this.user.middleName }} {{ this.user.lastName }}</span>
+						</div>
+						<div class="col-4">
+							<span>{{ this.startTime }}</span>
+						</div>
+						<div class="col-2">
+							<span>{{ this.duration }}</span>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</div>

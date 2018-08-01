@@ -1,0 +1,229 @@
+<div id="application-page" class="container-fluid my-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-8">
+			<h1>Employment Application</h1>
+			<center><p class="text-danger">{{{ message }}}</p></center>
+			<form id="application-form" action="/apply" method="post" onsubmit="return preSubmitApplication();">
+				<div class="row mt-4">
+					<div class="col">
+						<span>Name</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 mt-2">
+						<input name="first" class="form-control" type="text" placeholder="First" value="{{ data.first }}" required />
+					</div>
+					<div class="col-md-4 mt-2">
+						<input name="middle" class="form-control" type="text" placeholder="Middle or Initial" value="{{ data.middle }}" />
+					</div>
+					<div class="col-md-4 mt-2">
+						<input name="last" class="form-control" type="text" placeholder="Last" value="{{ data.last }}" required />
+					</div>
+				</div>
+				<div class="row  mt-4">
+					<div class="col">
+						<span>Address</span>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col">
+						<input name="street" class="form-control" type="text" placeholder="Street" value="{{ data.street }}" required />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 mt-2">
+						<input name="city" class="form-control" type="text" placeholder="City" value="{{ data.city }}" required />
+					</div>
+					<div class="col-md-4 mt-2">
+						<input name="state" class="form-control" type="text" placeholder="State" value="{{ data.state }}" required />
+					</div>
+					<div class="col-md-4 mt-2">
+						<input id="zip" name="zip" class="form-control" type="text" placeholder="Zip" value="{{ data.zip }}" required />
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>Contact</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 mt-2">
+						<input name="email" class="form-control" type="email" placeholder="Email" value="{{ data.email }}" required />
+					</div>
+					<div class="col-md-6 mt-2">
+						<input id="phone" name="phone" class="form-control" type="text" placeholder="Phone" value="{{ data.phone }}" required />
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>Are you over the age of 16?</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<input name="over16" type="radio" value="y" checked><label for="">Yes</label>
+						<input name="over16" type="radio" value="n"><label for="">No</label>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>Have you worked for Brimstone Haunt (or previously Springboro Haunted Hayride) before?</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<input name="returning_worker" type="radio" value="y"><label for="">Yes</label>
+						<input name="returning_worker" type="radio" value="n" checked><label for="">No</label>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>If yes, what position and scene/character (for actors) did you work in?</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<textarea name="previous_role" class="form-control" rows="10">{{ data.previous_role }}</textarea>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>Explain any previous work you have done with/for other haunts. Please include details such as the name of the haunt, position held, length of employment, responsibilities, scenes/characters (for actors), reason for leaving, etc.</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<textarea name="previous_haunt_work" class="form-control" rows="10">{{ data.previous_haunt_work }}</textarea>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>Other Comments</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<textarea name="comments" class="form-control" rows="10">{{ data.comments }}</textarea>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>If offered a position, the information below will help with costuming and makeup. This info will NOT be used to determine employment.</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 mt-2">
+						<input name="height" class="form-control" type="text" placeholder="Height (eg. 6 Feet 2 Inches)" value="{{ data.height }}" />
+					</div>
+					<div class="col-md-6 mt-2">
+						<input name="gender" class="form-control" type="text" placeholder="Gender" value="{{ data.gender }}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 mt-2">
+						<input name="shirt_size" class="form-control" type="text" placeholder="Shirt Size (eg. XL)" value="{{ data.shirt_size }}" />
+					</div>
+					<div class="col-md-6 mt-2">
+						<input name="pant_size" class="form-control" type="text" placeholder="Womens Pants Size" value="{{ data.pant_size }}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 mt-2">
+						<input name="pant_waist" class="form-control" type="text" placeholder="Mens Pants Waist (In Inches)" value="{{ data.pant_waist }}" />
+					</div>
+					<div class="col-md-6 mt-2">
+						<input name="pant_length" class="form-control" type="text" placeholder="Mens Pants Length (In Inches)" value="{{ data.pant_length }}" />
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>Do you have any makeup allergies?</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<input name="makeup_allergies" type="radio" value="y"><label for="">Yes</label>
+						<input name="makeup_allergies" type="radio" value="n" checked><label for="">No</label>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>Do you regularly wear Glasses?</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<input name="glasses" type="radio" value="y"><label for="">Yes</label>
+						<input name="glasses" type="radio" value="n" checked><label for="">No</label>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>Do you regularly wear Contacts?</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<input name="contacts" type="radio" value="y"><label for="">Yes</label>
+						<input name="contacts" type="radio" value="n" checked><label for="">No</label>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>2018 Season Availability (Please check all of the days that you will be available 5pm - 1am to work)</span>
+					</div>
+				</div>
+				<div class="row justify-content-center mt-2">
+					<div class="col-sm-4">
+						<input id="fr2" name="availability[]" type="checkbox" value="fr2" checked><label for="fr2">Friday 9/28</label><br/>
+						<input id="fr3" name="availability[]" type="checkbox" value="fr3" checked><label for="fr3">Friday 10/5</label><br/>
+						<input id="fr4" name="availability[]" type="checkbox" value="fr4" checked><label for="fr4">Friday 10/12</label><br/>
+						<input id="fr5" name="availability[]" type="checkbox" value="fr5" checked><label for="fr5">Friday 10/19</label><br/>
+						<input id="fr6" name="availability[]" type="checkbox" value="fr6" checked><label for="fr6">Friday 10/26</label><br/>
+					</div>
+					<div class="col-sm-4">
+						<input id="sa2" name="availability[]" type="checkbox" value="sa2" checked><label for="sa2">Saturday 9/29</label><br/>
+						<input id="sa3" name="availability[]" type="checkbox" value="sa3" checked><label for="sa3">Saturday 10/6</label><br/>
+						<input id="sa4" name="availability[]" type="checkbox" value="sa4" checked><label for="sa4">Saturday 10/13</label><br/>
+						<input id="sa5" name="availability[]" type="checkbox" value="sa5" checked><label for="sa5">Saturday 10/20</label><br/>
+						<input id="sa6" name="availability[]" type="checkbox" value="sa6" checked><label for="sa6">Saturday 10/27</label><br/>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<input id="submit-application-btn" class="btn btn-primary btn-block" type="submit" value="SUBMIT APPLICATION" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	{{#if (eq data.over16 "n")}}
+		$("input[name='over16'][value='y'").prop("checked", false);
+		$("input[name='over16'][value='n'").prop("checked", true);
+	{{/if}}
+	{{#if (eq data.returning_worker "y")}}
+		$("input[name='returning_worker'][value='y'").prop("checked", true);
+		$("input[name='returning_worker'][value='n'").prop("checked", false);
+	{{/if}}
+	{{#if (eq data.makeup_allergies "y")}}
+		$("input[name='makeup_allergies'][value='y'").prop("checked", true);
+		$("input[name='makeup_allergies'][value='n'").prop("checked", false);
+	{{/if}}
+	{{#if (eq data.glasses "y")}}
+		$("input[name='glasses'][value='y'").prop("checked", true);
+		$("input[name='glasses'][value='n'").prop("checked", false);
+	{{/if}}
+	{{#if (eq data.contacts "y")}}
+		$("input[name='contacts'][value='y'").prop("checked", true);
+		$("input[name='contacts'][value='n'").prop("checked", false);
+	{{/if}}
+	
+	$("input[name='availability\\[\\]']").prop("checked", false);
+	{{#each data.availability }}
+		$("input#{{this}}").prop("checked", true);
+	{{else}}
+		$("input[name='availability\\[\\]']").prop("checked", true);
+	{{/each}}
+</script>

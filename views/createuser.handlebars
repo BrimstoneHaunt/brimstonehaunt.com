@@ -1,0 +1,49 @@
+<div id="createuser-page" class="container-fluid my-5">
+	<div class="row">
+		<div class="col">
+			<h1 class="ml-lg-3">Create User</h1>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-lg-6 col-md-10 col-12">
+			<form action="/user/create" method="post">
+				<div class="row">
+					<div class="col-sm-4">
+						<input name="firstName" class="form-control" type="text" required="required" placeholder="First Name"><br>
+					</div>
+					<div class="col-sm-4">
+						<input name="middleName" class="form-control" type="text" placeholder="Middle Name"><br>
+					</div>
+					<div class="col-sm-4">
+						<input name="lastName" class="form-control" type="text" required="required" placeholder="Last Name"><br>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<input name="email" class="form-control" type="email" required="required" placeholder="Email Address"><br>
+					</div>
+					<div class="col-sm-4">
+						<select name="accessLvl" class="form-control">
+							<option value="1">Employee</option>
+							{{#if (gteq user.accessLvl 3)}}<option value="2">Supervisor</option>{{/if}}
+							{{#if (gteq user.accessLvl 4)}}<option value="3">Management</option>{{/if}}
+							{{#if (gteq user.accessLvl 5)}}<option value="4">Upper Management</option>{{/if}}
+						</select><br>
+					</div>
+					<div class="col-sm-4">
+						{{#if (gteq user.accessLvl 3)}}
+							<input name="payrate" class="form-control" type="Number" placeholder="Pay Rate"><br>
+						{{else}}
+							<input name="payrate" class="form-control" type="Number" placeholder="Pay Rate" value="9" disabled="disabled"><br>
+						{{/if}}
+					</div>
+				</div>
+				<div class="row my-5 justify-content-center">
+					<div class="col-sm-6">
+						<input type="submit" class="btn btn-primary btn-block" value="Create">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

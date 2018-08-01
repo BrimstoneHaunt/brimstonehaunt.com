@@ -17,11 +17,42 @@ module.exports = {
 			type: 'string',
 			required: true
 		},
+		isTempPassword: {
+			type: 'boolean',
+			required: true,
+			defaultsTo: true
+		},
 		accessLvl: {
 			type: 'integer',
 			required: true,
 			defaultsTo: '1'
-		}
+		},
+		payrate: {
+			type: 'integer',
+			required: false,
+			defaultsTo: '9'
+		},
+		firstName: {
+			type: 'string',
+			required: true,
+		},
+		middleName: {
+			type: 'string',
+			required: false,
+		},
+		lastName: {
+			type: 'string',
+			required: true,
+		},
+		timeEntries: {
+			collection: 'timeclock',
+			via: 'user'
+		},
+		isDeleted: {
+			type: 'boolean',
+			required: true,
+			defaultsTo: false
+		},
 	},
 	customToJSON: function() {
 		return _.omit(this, ['password'])
@@ -34,5 +65,18 @@ module.exports = {
 				return cb();
 			});
 		});
+	},
+	beforeUpdate: function(user, cb) {
+		if(user.password) {
+			bcrypt.genSalt(10, function(err, salt) {
+				bcrypt.hash(user.password, salt, null, function(err, hash) {
+					if(err) return cb(err);
+					user.password = hash;
+					return cb();
+				});
+			});
+		} else {
+			return cb();
+		}
 	}
 };
