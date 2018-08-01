@@ -627,22 +627,36 @@ body
    
 .zombie-bg
 {
+	width: 100%;
+	padding: 10px 25px;
+	position: relative;
+	z-index: 1;
+}
+
+.zombie-bg::before
+{
+	content: "";
+	position: absolute;
+	top: 0; 
+	left: 0;
 	background: url("/media/img/zombie_woods.jpg");
 	width: 100%;
+	height: 100%;
 	background-position:50% 100%;
 	background-size: cover;
-	padding: 10px 25px;
 	background-repeat: no-repeat;
+	opacity: .4; 
+  	z-index: -1;
 }
 
 .zombie-bg p, .zombie-bg h2
 {
-	color: white;
+	color: white!important;
 }
 
 #groupPricingModal p
 {
-	font-size: 18px;
+	font-size: 18px!important;
 }
 
 #groupPricingModal .modal-header button.close
