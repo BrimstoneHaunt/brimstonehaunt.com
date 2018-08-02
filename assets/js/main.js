@@ -219,6 +219,35 @@ function preSubmitApplication() {
 	return false;
 }
 
+function applicationHire(appID, appListType) {
+	if(confirm("Are you sure you want to hire this applicant? This will create them an account in the system, assign them a payrate, and grant them access to the time clock.")) {
+		$.post("/application/hire", { id: appID, appListType: appListType }, function(resp) {
+			var newContent = $(resp).filter("#applicationlist-page").html();
+			$("#applicationlist-page").html(newContent);
+		}).fail(function() {
+			alert("Something went wrong!");
+		});
+	}
+}
+
+function applicationHold(appID, appListType) {
+	$.post("/application/hold", { id: appID, appListType: appListType }, function(resp) {
+		var newContent = $(resp).filter("#applicationlist-page").html();
+		$("#applicationlist-page").html(newContent);
+	}).fail(function() {
+		alert("Something went wrong!");
+	});
+}
+
+function applicationReject(appID, appListType) {
+	$.post("/application/reject", { id: appID, appListType: appListType }, function(resp) {
+		var newContent = $(resp).filter("#applicationlist-page").html();
+		$("#applicationlist-page").html(newContent);
+	}).fail(function() {
+		alert("Something went wrong!");
+	});
+}
+
 /* ----------------------------------------------------
   |                                                    |
   |	INIT                                               |
@@ -289,4 +318,14 @@ $(document).ready(function() {
 	
 	$($(this).data("target")).slideToggle();
 	$(this).toggleClass("active");
+}).on("click", ".application-action", function(e) {
+	e.stopPropagation();
+	
+	if($(this).data("action") == "hire") {
+		applicationHire($(this).data("appid"), $(this).data("applisttype"));
+	} else if($(this).data("action") == "hold") {
+		applicationHold($(this).data("appid"), $(this).data("applisttype"));
+	} else if($(this).data("action") == "reject") {
+		applicationReject($(this).data("appid"), $(this).data("applisttype"));
+	}
 });

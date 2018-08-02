@@ -30,7 +30,7 @@ module.exports = {
 		payrate: {
 			type: 'integer',
 			required: false,
-			defaultsTo: '9'
+			defaultsTo: '10'
 		},
 		firstName: {
 			type: 'string',

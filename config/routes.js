@@ -110,7 +110,11 @@ module.exports.routes = {
   'post /timeclock/export': 'TimeClockController.export',
   'post /user/admindeleteaccount': 'UserController.adminDelete',
   'get /applications/pending': 'ApplicationController.pendingList',
-  'get /applications/held': 'ApplicationController.heldList'
+  'get /applications/held': 'ApplicationController.heldList',
+  'get /applications/rejected': 'ApplicationController.rejectedList',
+  'post /application/hire': 'ApplicationController.hire',
+  'post /application/hold': 'ApplicationController.hold',
+  'post /application/reject': 'ApplicationController.reject'
 
   /***************************************************************************
   *                                                                          *

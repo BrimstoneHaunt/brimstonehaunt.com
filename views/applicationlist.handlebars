@@ -39,9 +39,13 @@
 							</div>
 							<div class="col-auto">
 								<div class="btn-group ">
-									<button type="button" class="btn btn-success btn-sm">Hire</button>
-									<button type="button" class="btn btn-warning btn-sm">Hold</button>
-									<button type="button" class="btn btn-danger btn-sm">Reject</button>
+									<button type="button" class="btn btn-success btn-sm application-action" data-action="hire" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Hire</button>
+									{{#if (neq ../appListType 'Held')}}
+										<button type="button" class="btn btn-warning btn-sm application-action" data-action="hold" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Hold</button>
+									{{/if}}
+									{{#if (neq ../appListType 'Rejected')}}
+										<button type="button" class="btn btn-danger btn-sm application-action" data-action="reject" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Reject</button>
+									{{/if}}
 								</div>
 							</div>
 						</div>

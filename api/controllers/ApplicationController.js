@@ -83,5 +83,63 @@ module.exports = {
 				appList: records
 			});
 		});
-	}		
+	},
+	rejectedList: function(req, res) {
+		Application.find({status: 4}).sort('createdAt ASC').exec(function(err, records) {
+			return res.view('applicationlist', {
+				layout: 'management',
+				title: 'Application List',
+				isLoggedIn: req.session.isLoggedIn,
+				canAdmin: req.session.canAdmin,
+				user: req.session.user,
+				appListType: "Rejected",
+				appList: records
+			});
+		});
+	},
+	hire: function(req, res) {
+		Application.find({id: req.body.id}).exec(function(err, records) {
+			if(err) {
+				console.log(err);
+				return res.serverError(err);
+			}
+			
+			if(records.length == 1) {
+				AccountService.createAccount({email: records[0].email, accessLvl: 1, firstName: records[0].firstName, middleName: records[0].middleName, lastName: records[0].lastName}, function(error) {
+					if(error) {
+						return res.serverError(error);
+					}
+					
+					Application.update({id: req.body.id}, {status: 2}).exec(function(err2, records2) {
+						if(err2) {
+							return res.serverError(err2);
+						}
+					
+						return res.redirect("/applications/" + req.body.appListType);
+					});
+				});
+			} else {
+				console.log("Find application by id did not return 1 record.");
+				return res.serverError("Find application by id did not return 1 record.");
+			}
+		});
+	},
+	hold: function(req, res) {
+		Application.update({id: req.body.id}, {status: 3}).exec(function(err, records) {
+			if(err) {
+				return res.serverError(err);
+			}
+		
+			return res.redirect("/applications/" + req.body.appListType);
+		});
+	},
+	reject: function(req, res) {
+		Application.update({id: req.body.id}, {status: 4}).exec(function(err, records) {
+			if(err) {
+				return res.serverError(err);
+			}
+		
+			return res.redirect("/applications/" + req.body.appListType);
+		});
+	}
 }
