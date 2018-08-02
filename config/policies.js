@@ -60,6 +60,10 @@ module.exports.policies = {
 	'ApplicationController': {
 		'*': true,
 		'pendingList': 'canAdmin',
-		'heldList': 'canAdmin'
+		'heldList': 'canAdmin',
+		'rejectedList': 'canAdmin',
+		'hire': 'canAdmin',
+		'hold': 'canAdmin',
+		'reject': 'canAdmin'
 	}
 };

@@ -23,7 +23,7 @@ module.exports = {
 			pass = (req.body.firstName.charAt(0) + req.body.lastName + "123").toLowerCase();
 		}
 
-		User.create({email: req.body.email, password: pass, accessLvl: req.body.accessLvl, firstName: req.body.firstName, middleName: req.body.middleName, lastName: req.body.lastName, payrate: req.body.payrate}).exec(function(err, records) {
+		AccountService.createAccount(req.body, function(err) {
 			if(err) {
 				return res.redirect("/user/create");
 			}

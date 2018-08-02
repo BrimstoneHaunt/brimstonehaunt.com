@@ -5,7 +5,6 @@
 				<center><span class="large">{{numEmployees}}</span><br><span>Total Employees</span></center>
 			</a>
 		</div>
-		<div class="col-md-1"><p>&nbsp;</p></div>
 		<div class="col-md-4 cell">
 			<a href="#" class="link-unstyled" data-toggle="modal" data-target="#clocked-in-modal">
 				<center><span class="large">{{numOnClock}}</span><br><span>Clocked In Employees</span></center>
@@ -13,15 +12,19 @@
 		</div>
 	</div>
 	<div class="row justify-content-center dashboard">
-		<div class="col-md-4 cell">
+		<div class="col-md-3 cell">
 			<a href="/applications/pending" class="link-unstyled">
 				<center><span class="large">{{numPendingApps}}</span><br><span>Pending Applications</span></center>
 			</a>
 		</div>
-		<div class="col-md-1"><p>&nbsp;</p></div>
-		<div class="col-md-4 cell">
+		<div class="col-md-3 cell">
 			<a href="/applications/held" class="link-unstyled">
 				<center><span class="large">{{numHeldApps}}</span><br><span>Held Applications</span></center>
+			</a>
+		</div>
+		<div class="col-md-3 cell">
+			<a href="/applications/rejected" class="link-unstyled">
+				<center><span class="large">{{numRejectedApps}}</span><br><span>Rejected Applications</span></center>
 			</a>
 		</div>
 	</div>
