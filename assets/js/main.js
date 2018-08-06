@@ -313,7 +313,7 @@ $(document).ready(function() {
 		alert("Invalid Code! The correct code for this giveaway can be found on our Facebook post.");
 		return false;
 	}
-}).on("click", "#app-list > .list-group-item-action", function() {
+}).on("click", "#app-list .list-group-item-action", function() {
 	var appID = $(this).data("appid");
 	
 	$($(this).data("target")).slideToggle();
