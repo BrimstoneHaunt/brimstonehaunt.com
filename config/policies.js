@@ -52,7 +52,8 @@ module.exports.policies = {
 		'showResetPassword': true,
 		'adminUpdate': 'canAdmin',
 		'resetPasswordForUser': 'canAdmin',
-		'adminDelete': 'canAdmin'
+		'adminDelete': 'canAdmin',
+		'getAppDataDisplay': 'canAdmin'
 	},
 	'AdminController': {
 		'*': 'canAdmin'

@@ -37,17 +37,19 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-auto">
-								<div class="btn-group ">
-									<button type="button" class="btn btn-success btn-sm application-action" data-action="hire" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Hire</button>
-									{{#if (neq ../appListType 'Held')}}
-										<button type="button" class="btn btn-warning btn-sm application-action" data-action="hold" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Hold</button>
-									{{/if}}
-									{{#if (neq ../appListType 'Rejected')}}
-										<button type="button" class="btn btn-danger btn-sm application-action" data-action="reject" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Reject</button>
-									{{/if}}
+							{{#if (neq ../appListType 'Hired')}}
+								<div class="col-auto">
+									<div class="btn-group ">
+										<button type="button" class="btn btn-success btn-sm application-action" data-action="hire" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Hire</button>
+										{{#if (neq ../appListType 'Held')}}
+											<button type="button" class="btn btn-warning btn-sm application-action" data-action="hold" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Hold</button>
+										{{/if}}
+										{{#if (neq ../appListType 'Rejected')}}
+											<button type="button" class="btn btn-danger btn-sm application-action" data-action="reject" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Reject</button>
+										{{/if}}
+									</div>
 								</div>
-							</div>
+							{{/if}}
 						</div>
 					</div>
 					<div class="list-group-item collapse py-3 app-content" id="app{{this.id}}-content">

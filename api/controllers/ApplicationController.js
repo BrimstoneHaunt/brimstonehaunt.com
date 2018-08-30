@@ -105,7 +105,7 @@ module.exports = {
 			}
 			
 			if(records.length == 1) {
-				AccountService.createAccount({email: records[0].email, accessLvl: 1, firstName: records[0].firstName, middleName: records[0].middleName, lastName: records[0].lastName}, function(error) {
+				AccountService.createAccount({email: records[0].email, accessLvl: 1, firstName: records[0].firstName, middleName: records[0].middleName, lastName: records[0].lastName, application: records[0]}, function(error) {
 					if(error) {
 						return res.serverError(error);
 					}

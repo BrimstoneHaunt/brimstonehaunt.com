@@ -279,5 +279,18 @@ module.exports = {
 			
 			return res.redirect("/user/list");
 		});
+	},
+	getAppDataDisplay: function(req, res) {
+		User.find({id: req.body.id, isDeleted: false}).populate('application').exec(function(err, records) {
+			return res.view('applicationlist', {
+				layout: 'management',
+				title: 'Application',
+				isLoggedIn: req.session.isLoggedIn,
+				canAdmin: req.session.canAdmin,
+				user: req.session.user,
+				appListType: "Hired",
+				appList: [records[0].application]
+			});
+		})
 	}
 };

@@ -139,6 +139,19 @@ function deleteTimeEntry() {
 	return false;
 }
 
+function openAdminAppModal(userID) {	
+	$("#admin-app-modal .modal-body").html("");
+	
+	$.post("/user/app", { id: userID }, function(resp) {
+		var newContent = $(resp).find("#app-list").html();
+		$("#admin-app-modal .modal-body").html(newContent);
+	}).fail(function() {
+		alert("Something went wrong!");
+	});
+	
+	$("#admin-app-modal").modal();
+}
+
 function openAdminAccountModal(userID) {
 	$("#admin-account-modal input[name='firstName']").val($("#" + userID + "-first").val());
 	$("#admin-account-modal input[name='middleName']").val($("#" + userID + "-middle").val());

@@ -1,5 +1,16 @@
 var moment = require('moment-timezone');
 
+function formatCurrency(amount) {
+	var numericAmount = amount;
+    var pennies = Math.round(numericAmount * 100);
+    var cents = pennies % 100;
+    var dollars = Math.round(pennies / 100 - cents / 100);
+    var centsStr = '' + cents;
+    var result = '$' + dollars + '.' + ( centsStr.length < 2 ? '0'+cents : cents);
+
+    return '$' + dollars + '.' + ( centsStr.length < 2 ? '0' + cents : cents);
+}
+
 module.exports = {
 	index: function(req, res) {
 		Timeclock.find({user: req.session.user.id}).sort('startTime DESC').exec(function(err1, records1) {
@@ -145,7 +156,8 @@ module.exports = {
 
 					if(currentUser != elem.user.id) {
 						if(currentUser !== null) {
-							CSV_STR += "Total,,,\"" + (Math.round(totalDuration * 4) / 4).toFixed(2) + " hrs\",,\"$" + payRate + "/hr\",\"$" + (Math.round(payRate * (Math.round(totalDuration * 4) / 4).toFixed(2) * 4) / 4).toFixed(2) + "\"\r\n\r\n";
+							var payrateSTR = formatCurrency(payRate);
+							CSV_STR += "Total,,,\"" + (Math.round(totalDuration * 4) / 4).toFixed(2) + " hrs\",,\"" + payrateSTR + "/hr\",\"$" + (Math.round(payRate * (Math.round(totalDuration * 4) / 4).toFixed(2) * 4) / 4).toFixed(2) + "\"\r\n\r\n";
 						}
 						CSV_STR += "\"" + elem.user.firstName + " " + elem.user.middleName + " " + elem.user.lastName + "\"";
 						currentUser = elem.user.id;
@@ -154,9 +166,11 @@ module.exports = {
 					} else {
 						totalDuration += diffHrs;
 					}
-					CSV_STR += ",\"" + startTimeLocal + "\",\"" + endTimeLocal + "\",\"" + duration + " hrs\",\"" + elem.comments + "\",\"$" + elem.user.payrate + "/hr\",\"$" + (Math.round(duration * elem.user.payrate * 4) / 4).toFixed(2) + "\"\r\n";
+					var payrateSTR = formatCurrency(elem.user.payrate);
+					CSV_STR += ",\"" + startTimeLocal + "\",\"" + endTimeLocal + "\",\"" + duration + " hrs\",\"" + elem.comments + "\",\"" + payrateSTR + "/hr\",\"$" + (Math.round(duration * elem.user.payrate * 4) / 4).toFixed(2) + "\"\r\n";
 				});
-				CSV_STR += "Total,,,\"" + (Math.round(totalDuration * 4) / 4).toFixed(2) + " hrs\",,\"$" + payRate + "/hr\",\"$" + (Math.round(payRate * (Math.round(totalDuration * 4) / 4).toFixed(2) * 4) / 4).toFixed(2) + "\"\r\n\r\n";
+				var payrateSTR = formatCurrency(payRate);
+				CSV_STR += "Total,,,\"" + (Math.round(totalDuration * 4) / 4).toFixed(2) + " hrs\",,\"" + payrateSTR + "/hr\",\"$" + (Math.round(payRate * (Math.round(totalDuration * 4) / 4).toFixed(2) * 4) / 4).toFixed(2) + "\"\r\n\r\n";
 				
 				res.set({ 'Content-Disposition': 'attachment; filename=Brimstone_Time_Sheets.csv', 'Content-Type': 'text/csv' });
 				res.status(200).send(CSV_STR);

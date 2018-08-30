@@ -13,7 +13,7 @@
 				{{#each accountList}}
 					<div class="list-group-item">
 						<div class="row">
-							<div class="col-sm-10 col-9">
+							<div class="col-sm-10 col-8">
 								<div class="row">
 									<div class="col-lg-4 col-md-6 my-2">
 										<span>{{this.firstName}} {{this.middleName}} {{this.lastName}}</span>
@@ -26,20 +26,20 @@
 									</div>
 									<div class="col-lg-2 col-md-6 my-2">
 										{{#if (gteq ../user.accessLvl 5)}}
-											<span>${{this.payrate}}.00/hr</span>
+											<span>{{currency this.payrate}}/hr</span>
 										{{else if (gt ../user.accessLvl this.accessLvl)}}
-											<span>${{this.payrate}}.00/hr</span>
+											<span>{{currency this.payrate}}/hr</span>
 										{{else if (eq ../user.id this.id)}}
-											<span>${{this.payrate}}.00/hr</span>
+											<span>{{currency this.payrate}}/hr</span>
 										{{else}}
 											<span>$XX.00/hr</span>
 										{{/if}}
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-2 col-3">
+							<div class="col-sm-2 col-4">
 								{{#if (gteq ../user.accessLvl 5)}}
-									<button class="btn btn-sm btn-outline-primary" onclick="openAdminAccountModal({{ this.id }});">Edit</button>
+									<button class="btn btn-link" onclick="openAdminAccountModal({{ this.id }});">Edit</button>
 									<input type="hidden" id="{{this.id}}-first" value="{{this.firstName}}">
 									<input type="hidden" id="{{this.id}}-middle" value="{{this.middleName}}">
 									<input type="hidden" id="{{this.id}}-last" value="{{this.lastName}}">
@@ -47,13 +47,16 @@
 									<input type="hidden" id="{{this.id}}-accessLvl" value="{{this.accessLvl}}">
 									<input type="hidden" id="{{this.id}}-payrate" value="{{this.payrate}}">
 								{{else if (gt ../user.accessLvl this.accessLvl)}}
-									<button class="btn btn-sm btn-outline-primary" onclick="openAdminAccountModal({{ this.id }});">Edit</button>
+									<button class="btn btn-link" onclick="openAdminAccountModal({{ this.id }});">Edit</button>
 									<input type="hidden" id="{{this.id}}-first" value="{{this.firstName}}">
 									<input type="hidden" id="{{this.id}}-middle" value="{{this.middleName}}">
 									<input type="hidden" id="{{this.id}}-last" value="{{this.lastName}}">
 									<input type="hidden" id="{{this.id}}-email" value="{{this.email}}">
 									<input type="hidden" id="{{this.id}}-accessLvl" value="{{this.accessLvl}}">
 									<input type="hidden" id="{{this.id}}-payrate" value="{{this.payrate}}">
+								{{/if}}
+								{{#if this.application}}
+									<button class="btn btn-link" onclick="openAdminAppModal({{ this.id }});">View App</button>
 								{{/if}}
 							</div>
 						</div>
@@ -123,6 +126,24 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				<button type="button" class="btn btn-primary" onclick="adminUpdateAccount();">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="admin-app-modal" tabindex="-1" role="dialog" aria-labelledby="adminAppModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="adminAppModalLabel">Original Application</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
