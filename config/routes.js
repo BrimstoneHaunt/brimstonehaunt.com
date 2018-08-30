@@ -104,6 +104,7 @@ module.exports.routes = {
   'get /user/create': 'UserController.showCreate',
   'post /user/create': 'UserController.create',
   'get /user/list': 'UserController.list',
+  'post /user/app': 'UserController.getAppDataDisplay',
   'post /user/adminupdate': 'UserController.adminUpdate',
   'post /user/adminresetpassword': 'UserController.resetPasswordForUser',
   'get /timeclock/export': 'TimeClockController.showExport',

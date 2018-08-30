@@ -28,9 +28,9 @@ module.exports = {
 			defaultsTo: '1'
 		},
 		payrate: {
-			type: 'integer',
+			type: 'float',
 			required: false,
-			defaultsTo: '10'
+			defaultsTo: '9.5'
 		},
 		firstName: {
 			type: 'string',
@@ -47,6 +47,10 @@ module.exports = {
 		timeEntries: {
 			collection: 'timeclock',
 			via: 'user'
+		},
+		application: {
+			model: 'application',
+			required: false
 		},
 		isDeleted: {
 			type: 'boolean',
