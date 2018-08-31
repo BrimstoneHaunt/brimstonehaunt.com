@@ -40,8 +40,8 @@ Handlebars.registerHelper('lteq', function(a, b) {
 	return a <= b;
 });
 
-Handlebars.registerHelper('currency', function(amount, options) {
-    var numericAmount = typeof amount === 'string' ? options.contexts[0].get(amount) : amount;
+Handlebars.registerHelper('currency', function(amount) {
+    var numericAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
     var pennies = Math.round(numericAmount * 100);
     var cents = pennies % 100;
     var dollars = Math.round(pennies / 100 - cents / 100);

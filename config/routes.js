@@ -109,6 +109,7 @@ module.exports.routes = {
   'post /user/adminresetpassword': 'UserController.resetPasswordForUser',
   'get /timeclock/export': 'TimeClockController.showExport',
   'post /timeclock/export': 'TimeClockController.export',
+  'post /timeclock/view': 'TimeClockController.viewExport',
   'post /user/admindeleteaccount': 'UserController.adminDelete',
   'get /applications/pending': 'ApplicationController.pendingList',
   'get /applications/held': 'ApplicationController.heldList',

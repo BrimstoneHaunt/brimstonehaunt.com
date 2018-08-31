@@ -36,7 +36,8 @@ module.exports.policies = {
 	'TimeClockController': {
 		'*': 'isLoggedIn',
 		'showExport': 'isAdmin',
-		'export': 'isAdmin'
+		'export': 'isAdmin',
+		'viewExport': 'isAdmin'
 	},
 	'UserController': {
 		'showCreate': 'canAdmin',

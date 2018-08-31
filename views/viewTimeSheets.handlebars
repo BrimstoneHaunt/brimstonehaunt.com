@@ -1,0 +1,60 @@
+<div id="time-sheet-data" class="container-fluid my-5">
+	<div class="row">
+		<div class="col">
+			<div id="time-clock-user-list" class="list-group">
+				{{#each timeClockData}}
+					<div class="list-group-item list-group-item-action" data-target="#{{this.id}}-content" onclick="// Empty on click fixes a bug? in mobile safari that wasn't triggering the document.on click action for this element">
+						<div class="row">
+							<div class="col-lg-6 col-sm-12">
+								{{this.name}}
+							</div>
+							<div class="col-lg-3 col-sm-7 col-4">
+								Total: {{this.totalDuration}} hrs
+							</div>
+							<div class="col-lg-1 col-sm-2 col-4">
+								{{currency this.payRate}}/hr
+							</div>
+							<div class="col-lg-2 col-sm-3 col-4">
+								Total: {{currency this.totalPay}}
+							</div>
+						</div>
+					</div>
+					<div class="list-group-item collapse py-3 time-clock-user-content" id="{{this.id}}-content">
+						{{#each this.entries}}
+							<div class="row my-3">
+								<div class="col-lg-3 col-sm-6">
+									{{this.startTime}}
+								</div>
+								<div class="col-lg-3 col-sm-6">
+									{{this.endTime}}
+								</div>
+								<div class="col-lg-1 col-sm-3">
+									{{this.duration}} hrs
+								</div>
+								<div class="col-lg-2 col-sm-4">
+									{{this.comments}}
+								</div>
+								<div class="col-lg-1 col-sm-2">
+									{{currency this.payRate}}/hr
+								</div>
+								<div class="col-lg-2 col-sm-3">
+									{{currency this.pay}}
+								</div>
+							</div>
+						{{else}}
+							<div class="row">
+								<div class="col">
+									No Entries Found!
+								</div>
+							</div>
+						{{/each}}
+					</div>
+				{{else}}
+					<div class="list-group-item">
+						<center>No Data Found!</center>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</div>

@@ -129,52 +129,93 @@ module.exports = {
 			user: req.session.user
 		});
 	},
-	export: function(req, res) {
-		console.log("TimeClock::Export | " + req.body.startExport + " - " + req.body.endExport);
-		
+	export: function(req, res) {		
 		var start = moment.tz(req.body.startExport, 'YYYY-MM-DD', 'America/New_York').startOf('day').toDate();
 		var end = moment.tz(req.body.endExport, 'YYYY-MM-DD', 'America/New_York').endOf('day').toDate();
 		
-		Timeclock.find({startTime: {'>=': start, '<=': end}, endTime: {'!': null}}).sort('user ASC').sort('startTime ASC').populate('user').exec(function(err, records) {
+		User.find().populate('timeEntries', {where: {startTime: {'>=': start, '<=': end}, endTime: {'!': null}}, sort: 'startTime ASC'}).sort('lastName ASC').sort('firstName ASC').exec(function(err, records) {
 			if(err) {
 				console.log(err);
 				return res.serverError("Something went wrong. Unable to export time sheet data.");
 			} else {
-				var CSV_STR = ",Clock In,Clock Out,Duration,Comments,Rate,Pay\r\n";
-				var currentUser = null;
-				var totalDuration = 0.0;
-				var payRate = 0;
-				records.forEach(function(elem) {
-					var start = elem.startTime;
-					var end = elem.endTime;
-					var diffHrs = (((((end ? end : new Date()) - start) / 1000) / 60) / 60);
-					var duration = (Math.round(diffHrs * 4) / 4).toFixed(2);
-					var startMoment = moment(start);
-					var endMoment = end ? moment(end) : null;
-					var startTimeLocal = startMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A');
-					var endTimeLocal = end ? endMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A') : "";
+				var CSV_STR = "Employee,Duration,Rate,Pay\r\n";
+				records.forEach(function(user) {
+					if(user.timeEntries.length > 0) {
+						var totalDuration = 0;
+						var payRate = user.payrate;
+						
+						user.timeEntries.forEach(function(elem) {
+							var start = elem.startTime;
+							var end = elem.endTime;
+							var diffHrs = (((((end ? end : new Date()) - start) / 1000) / 60) / 60);
 
-					if(currentUser != elem.user.id) {
-						if(currentUser !== null) {
-							var payrateSTR = formatCurrency(payRate);
-							CSV_STR += "Total,,,\"" + (Math.round(totalDuration * 4) / 4).toFixed(2) + " hrs\",,\"" + payrateSTR + "/hr\",\"$" + (Math.round(payRate * (Math.round(totalDuration * 4) / 4).toFixed(2) * 4) / 4).toFixed(2) + "\"\r\n\r\n";
-						}
-						CSV_STR += "\"" + elem.user.firstName + " " + elem.user.middleName + " " + elem.user.lastName + "\"";
-						currentUser = elem.user.id;
-						totalDuration = diffHrs;
-						payRate = elem.user.payrate;
-					} else {
-						totalDuration += diffHrs;
+							totalDuration += diffHrs;
+						});
+						
+						var payrateSTR = formatCurrency(payRate);
+						CSV_STR += "\"" + user.firstName + " " + user.middleName + " " + user.lastName + "\"";
+						CSV_STR += ",\"" + (Math.round(totalDuration * 4) / 4).toFixed(2) + " hrs\",\"" + payrateSTR + "/hr\",\"$" + (Math.round(payRate * (Math.round(totalDuration * 4) / 4).toFixed(2) * 4) / 4).toFixed(2) + "\"\r\n";
 					}
-					var payrateSTR = formatCurrency(elem.user.payrate);
-					CSV_STR += ",\"" + startTimeLocal + "\",\"" + endTimeLocal + "\",\"" + duration + " hrs\",\"" + elem.comments + "\",\"" + payrateSTR + "/hr\",\"$" + (Math.round(duration * elem.user.payrate * 4) / 4).toFixed(2) + "\"\r\n";
 				});
-				var payrateSTR = formatCurrency(payRate);
-				CSV_STR += "Total,,,\"" + (Math.round(totalDuration * 4) / 4).toFixed(2) + " hrs\",,\"" + payrateSTR + "/hr\",\"$" + (Math.round(payRate * (Math.round(totalDuration * 4) / 4).toFixed(2) * 4) / 4).toFixed(2) + "\"\r\n\r\n";
 				
 				res.set({ 'Content-Disposition': 'attachment; filename=Brimstone_Time_Sheets.csv', 'Content-Type': 'text/csv' });
 				res.status(200).send(CSV_STR);
 				return;
+			}
+		});
+	},
+	viewExport: function(req, res) {
+		var start = moment.tz(req.body.start, 'YYYY-MM-DD', 'America/New_York').startOf('day').toDate();
+		var end = moment.tz(req.body.end, 'YYYY-MM-DD', 'America/New_York').endOf('day').toDate();
+		var finalData = [];
+		
+		User.find().populate('timeEntries', {where: {startTime: {'>=': start, '<=': end}, endTime: {'!': null}}, sort: 'startTime ASC'}).sort('lastName ASC').sort('firstName ASC').exec(function(err, records) {
+			if(err) {
+				console.log(err);
+				return res.serverError("Something went wrong. Unable to get time sheet data.");
+			} else {				
+				records.forEach(function(user) {
+					if(user.timeEntries.length > 0) {
+						var tempData = { id: user.id, name: user.firstName + " " + user.middleName + " " + user.lastName, payRate: user.payrate, entries: [] };						
+						var totalDuration = 0;
+						var payRate = user.payrate;
+						
+						user.timeEntries.forEach(function(elem) {
+							var start = elem.startTime;
+							var end = elem.endTime;
+							var diffHrs = (((((end ? end : new Date()) - start) / 1000) / 60) / 60);
+							var duration = (Math.round(diffHrs * 4) / 4).toFixed(2);
+							var startMoment = moment(start);
+							var endMoment = end ? moment(end) : null;
+							var startTimeLocal = startMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A');
+							var endTimeLocal = end ? endMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A') : "";
+
+							totalDuration += diffHrs;
+							
+							tempData.entries.push({
+								startTime: startTimeLocal,
+								endTime: endTimeLocal,
+								duration: duration,
+								comments: elem.comments,
+								payRate: payRate,
+								pay: (Math.round(duration * payRate * 4) / 4).toFixed(2)
+							});
+						});
+						
+						tempData.totalDuration = (Math.round(totalDuration * 4) / 4).toFixed(2);
+						tempData.totalPay = (Math.round(payRate * (Math.round(totalDuration * 4) / 4).toFixed(2) * 4) / 4).toFixed(2);
+						finalData.push(tempData);
+					}
+				});
+				
+				return res.view('viewTimeSheets', {
+					layout: 'management',
+					title: 'Time Sheets',
+					isLoggedIn: req.session.isLoggedIn,
+					canAdmin: req.session.canAdmin,
+					user: req.session.user,
+					timeClockData: finalData
+				});
 			}
 		});
 	}
