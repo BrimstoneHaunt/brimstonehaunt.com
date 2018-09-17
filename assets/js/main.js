@@ -326,9 +326,7 @@ $(document).ready(function() {
 		alert("Invalid Code! The correct code for this giveaway can be found on our Facebook post.");
 		return false;
 	}
-}).on("click", "#app-list .list-group-item-action", function() {
-	var appID = $(this).data("appid");
-	
+}).on("click", "#app-list .list-group-item-action, #time-clock-user-list .list-group-item-action", function() {
 	$($(this).data("target")).slideToggle();
 	$(this).toggleClass("active");
 }).on("click", ".application-action", function(e) {
@@ -340,5 +338,15 @@ $(document).ready(function() {
 		applicationHold($(this).data("appid"), $(this).data("applisttype"));
 	} else if($(this).data("action") == "reject") {
 		applicationReject($(this).data("appid"), $(this).data("applisttype"));
+	}
+}).on("change", "#time-sheet-page input[name='startExport'], #time-sheet-page input[name='endExport']", function() {
+	$("#time-sheet-data").html("");
+	if($("#time-sheet-page input[name='startExport']").val() != "" && $("#time-sheet-page input[name='endExport']").val() != "") {
+		$.post("/timeclock/view", { start: $("#time-sheet-page input[name='startExport']").val(), end: $("#time-sheet-page input[name='endExport']").val() }, function(resp) {
+			var newContent = $(resp).filter("#time-sheet-data").html();
+			$("#time-sheet-data").html(newContent);
+		}).fail(function() {
+			alert("Something went wrong!");
+		});
 	}
 });

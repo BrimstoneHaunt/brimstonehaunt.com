@@ -509,7 +509,7 @@ body
 	border: none;
 }
 
-#countdown-timer ul li .countdown-count
+#countdown-timer ul li .countdown-count, .countdown-open
 {
 	font-size: 38px;
 	color: white;
@@ -735,7 +735,7 @@ body
 	img
 	{
 		height: auto;
-		max-height: 75px;
+		max-height: 150px;
 		width: auto;
 		max-width: 100%;
 		margin: 15px 0;
@@ -840,8 +840,8 @@ body
 	}
 }
 
-#applicationlist-page {
-	.app-content {
+#applicationlist-page, #time-sheet-data {
+	.app-content, .time-clock-user-content {
 		display: none;
 	}
 	.list-group-item.active {
