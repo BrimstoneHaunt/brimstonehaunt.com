@@ -1,14 +1,19 @@
 <div id="admin-page" class="container-fluid">
 	<div class="row mt-5 justify-content-center">
-		<div class="col-auto my-3">
-			<a href="#" class="btn btn-outline-primary">Content Management</a>
-		</div>
+		{{#if (gteq user.accessLvl 3)}}
+			<div class="col-auto my-3">
+				<a href="#" class="btn btn-outline-primary">Positions</a>
+			</div>
+			<div class="col-auto my-3">
+				<a href="#" class="btn btn-outline-primary">Content</a>
+			</div>
+		{{/if}}
 		<div class="col-auto my-3">
 			<a href="#" class="btn btn-outline-primary">Messages</a>
 		</div>
 		{{#if (gteq user.accessLvl 5)}}
 			<div class="col-auto my-3">
-				<a href="/timeclock/export" class="btn btn-outline-primary">Export Time Sheets</a>
+				<a href="/timeclock/export" class="btn btn-outline-primary">Time Sheets</a>
 			</div>
 		{{/if}}
 	</div>
