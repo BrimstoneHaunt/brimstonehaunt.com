@@ -27,8 +27,12 @@
 									<div class="col-lg-2 col-md-6 my-2">
 										{{#if (gteq ../user.accessLvl 5)}}
 											<span>{{currency this.payrate}}/hr</span>
-										{{else if (gt ../user.accessLvl this.accessLvl)}}
-											<span>{{currency this.payrate}}/hr</span>
+										{{else if (gt ../user.accessLvl 2)}}
+                                            {{#if (gt ../user.accessLvl this.accessLvl)}}
+									           <span>{{currency this.payrate}}/hr</span>
+                                            {{else}}
+                                                <span>$XX.00/hr</span>
+                                            {{/if}}
 										{{else if (eq ../user.id this.id)}}
 											<span>{{currency this.payrate}}/hr</span>
 										{{else}}
@@ -108,7 +112,7 @@
 						{{#if (gteq user.accessLvl 3)}}
 							<input name="payrate" class="form-control" type="Number" placeholder="Pay Rate"><br>
 						{{else}}
-							<input name="payrate" class="form-control" type="Number" placeholder="Pay Rate" disabled="disabled"><br>
+							<input name="payrate" class="form-control d-none" type="Number" placeholder="Pay Rate" disabled="disabled"><br>
 						{{/if}}
 					</div>
 				</div>
