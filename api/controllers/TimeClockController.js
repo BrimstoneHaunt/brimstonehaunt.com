@@ -60,6 +60,43 @@ module.exports = {
 			}
 		});
 	},
+    timeSheetForUser: function(req, res) {
+        Timeclock.find({user: req.body.id}).populate('user').sort('startTime DESC').exec(function(err1, records1) {
+            if(err1) 
+            {
+                console.log(err1);
+                return res.serverError(err1);
+            } else {
+                var finalData = [];
+                records1.forEach(function(elem) {
+                    var start = elem.startTime;
+                    var end = elem.endTime;
+                    var diffHrs = (((((end ? end : new Date()) - start) / 1000) / 60) / 60);
+                    var duration = (Math.round(diffHrs * 4) / 4).toFixed(2);
+                    var startMoment = moment(start);
+                    var endMoment = end ? moment(end) : null;
+                    
+                    finalData.push({ 
+                        id: elem.id,
+                        startTime: startMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A'),
+                        endTime: endMoment ? endMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A') : "",
+                        comments: elem.comments, 
+                        duration: duration + " hrs"
+                    });
+                });
+                
+                return res.view('timesheet', {
+                    layout: 'management',
+                    title: 'Time Sheet',
+                    isLoggedIn: req.session.isLoggedIn,
+                    canAdmin: req.session.canAdmin,
+                    user: req.session.user,
+                    employee: records1[0] ? records1[0].user : null,
+                    timeEntries: finalData
+                });
+            }
+        });
+    },
 	clockin: function(req, res) {
 		var now = new Date();
 		var start = now;
