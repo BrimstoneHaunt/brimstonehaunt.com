@@ -78,6 +78,28 @@ function stopTimeClockNow() {
 	return false;
 }
 
+function clockout(user) {
+    $.post("/timeclock/clockout/user", { user: user }, function(resp) {
+        var newContent = $(resp).filter("#clockedin-page").html();
+        $("#clockedin-page").html(newContent);
+    }).fail(function() {
+        alert("Something went wrong!");
+    });
+    
+    return false;
+}
+
+function clockoutAll() {
+    $.post("/timeclock/clockout/all", {  }, function(resp) {
+        var newContent = $(resp).filter("#clockedin-page").html();
+        $("#clockedin-page").html(newContent);
+    }).fail(function() {
+        alert("Something went wrong!");
+    });
+    
+    return false;
+}
+
 function openTimeClockModal(that, type) {
 	if(that) {
 		$("#timeclock-modal").data("entryid", $(that).data("entryid"));
