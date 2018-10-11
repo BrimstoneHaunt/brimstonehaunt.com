@@ -1,0 +1,32 @@
+<div id="clockedin-page" class="container-fluid my-5">
+    <div class="row">
+        <div class="col">
+            <h1 class="ml-lg-3">Clocked In Employees</h1>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-danger" onclick="clockoutAll();">Clock Out All</button>
+        </div>
+    </div>
+    {{#each timeEntries}}
+        <div class="list-group-item">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <span>{{ this.user.firstName }} {{ this.user.middleName }} {{ this.user.lastName }}</span>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <span>{{ this.startTime }}</span>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <span>{{ this.duration }}</span>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <button class="btn btn-sm btn-outline-danger" onclick="clockout({{ this.user.id }});">Clock Out</button>
+                </div>
+            </div>
+        </div>
+    {{else}}
+        <div class="list-group-item">
+            <center>No Clocked In Employees!</center>
+        </div>
+    {{/each}}
+</div>

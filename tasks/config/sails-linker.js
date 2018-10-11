@@ -27,6 +27,9 @@
  *   https://github.com/Zolmeister/grunt-sails-linker
  *
  */
+ 
+var buildNumber = '1';
+
 module.exports = function(grunt) {
 
   grunt.config.set('sails-linker', {
@@ -63,7 +66,7 @@ module.exports = function(grunt) {
       options: {
         startTag: '<!--SCRIPTS-->',
         endTag: '<!--SCRIPTS END-->',
-        fileTmpl: '<script src="%s"></script>',
+        fileTmpl: '<script src="%s?v='+buildNumber+'"></script>',
         appRoot: '.tmp/public'
       },
       files: {
@@ -77,7 +80,7 @@ module.exports = function(grunt) {
       options: {
         startTag: '<!--SCRIPTS-->',
         endTag: '<!--SCRIPTS END-->',
-        fileTmpl: '<script src="%s"></script>',
+        fileTmpl: '<script src="%s?v='+buildNumber+'"></script>',
         appRoot: '.tmp/public',
         relative: true
       },
@@ -123,7 +126,7 @@ module.exports = function(grunt) {
       options: {
         startTag: '<!--STYLES-->',
         endTag: '<!--STYLES END-->',
-        fileTmpl: '<link rel="stylesheet" href="%s">',
+        fileTmpl: '<link rel="stylesheet" href="%s?v='+buildNumber+'">',
         appRoot: '.tmp/public'
       },
       files: {
@@ -137,7 +140,7 @@ module.exports = function(grunt) {
       options: {
         startTag: '<!--STYLES-->',
         endTag: '<!--STYLES END-->',
-        fileTmpl: '<link rel="stylesheet" href="%s">',
+        fileTmpl: '<link rel="stylesheet" href="%s?v='+buildNumber+'">',
         appRoot: '.tmp/public',
         relative: true
       },

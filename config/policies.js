@@ -37,7 +37,10 @@ module.exports.policies = {
 		'*': 'isLoggedIn',
 		'showExport': 'isAdmin',
 		'export': 'isAdmin',
-		'viewExport': 'isAdmin'
+		'viewExport': 'isAdmin',
+        'clockedIn': 'canAdmin',
+        'clockoutUser': 'canAdmin',
+        'clockoutAll': 'canAdmin'
 	},
 	'UserController': {
 		'showCreate': 'canAdmin',

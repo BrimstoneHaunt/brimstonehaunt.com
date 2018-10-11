@@ -99,6 +99,26 @@ module.exports = {
 			return res.redirect("/timeclock");
 		});
 	},
+    clockoutUser: function(req, res) {
+        var now = new Date();
+        Timeclock.update({user: req.body.user, startTime: {'!': null }, endTime: null}, {endTime: now}).exec(function(err, records) {
+            if(err) {
+                return res.serverError(err);
+            }
+            
+            return res.redirect("/timeclock/clockedin");
+        });
+    },
+    clockoutAll: function(req, res) {
+        var now = new Date();
+        Timeclock.update({startTime: {'!': null }, endTime: null}, {endTime: now}).exec(function(err, records) {
+            if(err) {
+                return res.serverError(err);
+            }
+            
+            return res.redirect("/timeclock/clockedin");
+        });
+    },
 	update: function(req, res) {
 		var startTime = moment.tz(req.body.startTime, 'YYYY-MM-DDTHH:mm', 'America/New_York').toDate();
 		var endTime = req.body.endTime ? moment.tz(req.body.endTime, 'YYYY-MM-DDTHH:mm', 'America/New_York').toDate() : null;
@@ -218,5 +238,45 @@ module.exports = {
 				});
 			}
 		});
-	}
+	},
+    clockedIn: function(req, res) {
+        Timeclock.find({startTime: {'!': null }, endTime: null}).populate('user').sort('startTime ASC').exec(function(err, records) {
+            if(err) {
+                console.log(err);
+                
+                return res.view('clockedin', {
+                    layout: 'management',
+                    title: "Clocked In Employees",
+                    isLoggedIn: req.session.isLoggedIn,
+                    canAdmin: req.session.canAdmin,
+                    user: req.session.user
+                });
+            } else {
+                var timeEntries = [];
+                records.forEach(function(elem) {
+                    var start = elem.startTime;
+                    var diffHrs = ((((new Date() - start) / 1000) / 60) / 60);
+                    var duration = (Math.round(diffHrs * 4) / 4).toFixed(2);
+                    var startMoment = moment(start);
+                    var startTimeLocal = startMoment.tz('America/New_York').format('YYYY-MM-DDTHH:mm');
+                    
+                    timeEntries.push({ 
+                        id: elem.id,
+                        startTime: startMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A'),
+                        duration: duration + " hrs",
+                        user: elem.user
+                    });
+                });
+                
+                return res.view('clockedin', {
+                    layout: 'management',
+                    title: "Clocked In Employees",
+                    isLoggedIn: req.session.isLoggedIn,
+                    canAdmin: req.session.canAdmin,
+                    timeEntries: timeEntries,
+                    user: req.session.user
+                });
+            }
+        });
+    }
 }
