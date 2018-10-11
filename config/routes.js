@@ -104,6 +104,7 @@ module.exports.routes = {
   'get /user/create': 'UserController.showCreate',
   'post /user/create': 'UserController.create',
   'get /user/list': 'UserController.list',
+  'post /timeclock/user': 'TimeClockController.timeSheetForUser',
   'get /timeclock/clockedin': 'TimeClockController.clockedIn',
   'post /timeclock/clockout/user': 'TimeClockController.clockoutUser',
   'post /timeclock/clockout/all': 'TimeClockController.clockoutAll',

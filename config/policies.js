@@ -40,7 +40,8 @@ module.exports.policies = {
 		'viewExport': 'isAdmin',
         'clockedIn': 'canAdmin',
         'clockoutUser': 'canAdmin',
-        'clockoutAll': 'canAdmin'
+        'clockoutAll': 'canAdmin',
+        'timeSheetForUser': 'canAdmin'
 	},
 	'UserController': {
 		'showCreate': 'canAdmin',

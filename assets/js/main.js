@@ -174,6 +174,19 @@ function openAdminAppModal(userID) {
 	$("#admin-app-modal").modal();
 }
 
+function openTimeSheet(userID) {    
+    $("#time-sheet-modal .modal-body").html("");
+    
+    $.post("/timeclock/user", { id: userID }, function(resp) {
+        var newContent = $(resp).filter("#time-sheet-page").html();
+        $("#time-sheet-modal .modal-body").html(newContent);
+    }).fail(function() {
+        alert("Something went wrong!");
+    });
+    
+    $("#time-sheet-modal").modal();
+}
+
 function openAdminAccountModal(userID) {
 	$("#admin-account-modal input[name='firstName']").val($("#" + userID + "-first").val());
 	$("#admin-account-modal input[name='middleName']").val($("#" + userID + "-middle").val());

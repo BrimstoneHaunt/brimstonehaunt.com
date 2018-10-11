@@ -1,0 +1,26 @@
+<div id="time-sheet-page" class="container-fluid">
+    <div class="list-group">
+        {{#each timeEntries}}
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-5">
+                        <span class="text-success">{{ this.startTime }}</span>
+                    </div>
+                    <div class="col-5">
+                        <span class="text-danger">{{ this.endTime }}</span>
+                    </div>
+                    <div class="col-2">
+                        <span>{{ this.duration }}</span>
+                    </div>
+                    <div class="col-12 pt-2">
+                        <p class="m-0">{{{nl2br this.comments }}}</p>
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            <div class="list-group-item">
+                <center>No Time Entries Found!</center>
+            </div>
+        {{/each}}
+    </div>
+</div>
