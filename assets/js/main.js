@@ -7,7 +7,7 @@
 var scrollOffset = 100;
 var homePageBanner = null;
 var countdown = {
-	openingDate: new Date("Sep 28, 2018 19:00:00").getTime(),
+	openingDate: new Date("Sep 27, 2019 19:00:00").getTime(),
 	timer: null,
 	update: function() {
 		var now = new Date().getTime();
