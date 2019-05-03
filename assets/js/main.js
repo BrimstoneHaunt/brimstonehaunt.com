@@ -315,6 +315,10 @@ $(document).ready(function() {
 		homePageBanner = new Swiper('.swiper-container', {
 			direction: 'horizontal',
 			loop: true,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
 			pagination: {
 				el: '.swiper-pagination',
 				hideOnClick: false,
@@ -322,7 +326,7 @@ $(document).ready(function() {
 			},
 			autoHeight: true,
 			autoplay: {
-				delay: 5000
+				delay: 10000
 			},
 			grabCursor: true,
 			effect: 'slide',
@@ -356,8 +360,24 @@ $(document).ready(function() {
 			}
 		});
 	}
+}).on("scroll", function() {
+	var taglineDistance = $(window).scrollTop() - $('#tagline').offset().top;
+	var faqDistance = $(window).scrollTop() - $('#faq').offset().top;
+	
+	if(taglineDistance >= -150) {
+		$('#scythe').addClass('animate');
+	} else {
+		$('#scythe').removeClass('animate');
+	}
+	
+	if(faqDistance > -150) {
+		$('#zombie').addClass('animate');
+	} else {
+		$('#zombie').removeClass('animate');
+	}
+	
 }).on("submit", "#giveaway-form", function() {
-	if($("input[name=code]").val() != "FREETIX18HH") {
+	if($("input[name=code]").val() != "FREETIX19HH") {
 		alert("Invalid Code! The correct code for this giveaway can be found on our Facebook post.");
 		return false;
 	}

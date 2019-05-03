@@ -1,8 +1,36 @@
 /*
-	YELLOW: #f9c703;
+	YELLOW: #F4D402;
 	ORANGE: #d8541f;
 	Green:	#c0d12f;
 */
+
+
+@font-face {
+	font-family:"mistress";
+	src: url("/mistress.ttf");
+}
+
+@font-face {
+	font-family:"lakeshore-drive";
+	src: url("/lakeshore-drive.otf");
+}
+
+@keyframes spin {
+	0% { z-index: 9; opacity: 0; width: 0%; top: 9.25%; transform: rotate(-90deg); }
+	25% { opacity: 1; width: 20%; top: 1%; transform: rotate(-100deg); }
+	50% { transform: rotate(-120deg); }
+	75% { transform: rotate(-150deg); }
+	100% { z-index: 9; opacity: 1; width: 40%; top: -9%; transform: rotate(-260deg); }
+}
+
+@keyframes pop-in {
+	0% { opacity: 0; background-position-x: 250px; }
+	25% { opacity: 0.05; }
+	50% { opacity: 0.1; }
+	75% { opacity: 0.15; }
+	100% { opacity: 1; background-position-x: center; }
+}
+
 
 /* ----------------------------------------------------
   |                                                    |
@@ -98,20 +126,20 @@ h4
 	&.icon-circle
 	{ 
 		border-radius: 50%;
-    	text-align: center;
+		text-align: center;
 	}
 	
 	&.icon-zoom 
 	{ 
 		-webkit-transition: 0.25s ease-in-out;
-	    -moz-transition: 0.25s ease-in-out;
-	    -ms-transition: 0.25s ease-in-out;
-	    -o-transition: 0.25s ease-in-out;
-	    transition: 0.25s ease-in-out;
-	    
-	    &:hover, &:active
-	    {
-		    -webkit-transform: scale(1.25);
+		-moz-transition: 0.25s ease-in-out;
+		-ms-transition: 0.25s ease-in-out;
+		-o-transition: 0.25s ease-in-out;
+		transition: 0.25s ease-in-out;
+		
+		&:hover, &:active
+		{
+			-webkit-transform: scale(1.25);
 			-moz-transform: scale(1.25);
 			-ms-transform: scale(1.25);
 			-o-transform: scale(1.25);
@@ -236,20 +264,20 @@ body
 
 body#main-layout
 {
-	color: #CDCDCD;
+	color: white;
 	padding-top: 75px;
 	background-color: #2D2D2D;
 	
 	p
 	{
 		font-size: 14px;
-		color: #CDCDCD;
+		color: white;
 		font-family: 'Roboto', sans-serif;
 	}
 	
 	a, a:hover, a:focus, a:visited
 	{
-		color: #f9c703;
+		color: #F4D402;
 	}
 	
 	a.subtle-link, a.subtle-link:hover, a.subtle-link:focus, a.subtle-link:visited
@@ -270,9 +298,127 @@ body#main-layout
 		font-family: 'Roboto Condensed', sans-serif;
 		background: none;
 		font-weight: bold;
-		background-color: #f9c703;
-		border-color: #f9c703;
+		background-color: #F4D402;
+		border-color: #F4D402;
 		outline: none;
+	}
+	
+	.font-mistress {
+		font-family: 'mistress';
+	}
+	
+	.bg-1 {
+		background-image: url("/images/scratchy metal.png");
+		/* Create the parallax scrolling effect */
+		background-attachment: fixed;
+		background-position: top left;
+		background-repeat: no-repeat;
+		background-size: cover;
+		
+		.mask {
+			display: flex;
+			margin-right: -15px;
+			margin-left: -15px;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+	}
+	
+	.bg-2 {
+		background-image: url("/images/scratchy stone.png");
+		/* Create the parallax scrolling effect */
+		background-attachment: fixed;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		color: black;
+		
+		.mask {
+			display: flex;
+			margin-right: -15px;
+			margin-left: -15px;
+			background-color: rgba(255, 255, 255, 0.5);
+		}
+		
+		p {
+			color: black;
+		}
+	}
+	
+	.bg-3 {
+		background-image: url("/images/red cave.png");
+		/* Create the parallax scrolling effect */
+		background-attachment: fixed;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		
+		.mask {
+			display: flex;
+			margin-right: -15px;
+			margin-left: -15px;
+			background-color: rgba(0, 0, 0, 0.25);
+		}
+	}
+	
+	.tag-line {
+		font-size: 75px;
+		color: #F4D402;
+		line-height: 75px;
+		text-align: center;
+		margin-top: 50px;
+	}
+	
+	.tag-line2 {
+		font-size: 35px;
+		text-align: center;
+	}
+	
+	// .cover-scythe {
+	// 	z-index: 10;
+	// 	position: relative;
+	// }
+	
+	.cover-zombie {
+		z-index: 10;
+		position: relative;
+	}
+	
+	#scythe {
+		opacity: 0;
+		position: absolute;
+		z-index: -1;
+		width: 40%;
+		top: -9%;
+		left: 18%;
+		transform: rotate(-90deg);
+		transform-origin: 100% 100% 0;
+		
+		&.animate {
+			animation: spin 0.75s linear 1;
+		}
+	}
+	
+	#zombie {
+		opacity: 0;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background-image: url("/images/zombie.png");
+		/* Create the parallax scrolling effect */
+		background-attachment: fixed;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		
+		&.animate {
+			animation: pop-in 0.1s linear 1;
+			opacity: 1;
+		}
+	}
+	
+	#animation-container {
+		position: relative;
+		overflow: hidden;
 	}
 }
 
@@ -285,7 +431,7 @@ body#main-layout
 #main-nav
 {
 	background: none;
-	background-color: #4D4D4D;
+	background-color: #2D2D2D;
 	border: none;
 	border-bottom: 1px solid white;
 }
@@ -308,14 +454,14 @@ body#main-layout
 
 #main-nav-menu .navbar-nav li a
 {
-	color: white;
+	color: #F4D402;
 	font-size: 16px;
 	text-transform: uppercase;
 }
 
 #main-nav-menu .navbar-nav li a:hover
 {
-	font-weight: bold;
+	color: white;
 }
 
 #main-nav-menu .navbar-nav li a:focus, #main-nav-menu .navbar-nav li a:active, #main-nav-menu .navbar-nav li a:active:focus, #main-nav-menu .navbar-nav li.open a,
@@ -326,20 +472,20 @@ body#main-layout
 
 #main-nav-menu .navbar-nav li a:not(.dropdown-toggle)::after
 {
-    display:block;
-    content:attr(title);
-    font-weight:bold;
-    height:1px;
-    color:transparent;
-    overflow:hidden;
-    visibility:hidden;
-    margin-bottom:-1px;
+	display:block;
+	content:attr(title);
+	font-weight:bold;
+	height:1px;
+	color:transparent;
+	overflow:hidden;
+	visibility:hidden;
+	margin-bottom:-1px;
 }
 
 #main-nav-menu .dropdown-menu
 {
 	background: none;
-	background-color: #4d4d4d;
+	background-color: #2D2D2D;
 	min-width: 200px;
 }
 
@@ -420,12 +566,12 @@ body
 .footer 
 {
 	position: absolute;
+	z-index: 10;
 	bottom: 0;
 	width: 100%;
 	height: 61px; /* Set the fixed height of the footer here */
 	line-height: 60px; /* Vertically center the text there */
 	background-color: black;
-	border-top: 1px solid white;
 	overflow: hidden;
 	font-size: 12px;
 	color: #CDCDCD;
@@ -441,29 +587,24 @@ body
   |	SWIPER                                             |
   |                                                    |
    ---------------------------------------------------- */
-   
-.swiper-container
-{
-	margin-bottom: 25px;
-}
 
 .swiper-slide 
 {
-    text-align: center;
-    font-size: 18px;
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
+	text-align: center;
+	font-size: 18px;
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
 }
 
 /* ----------------------------------------------------
@@ -474,14 +615,10 @@ body
 
 #countdown-title
 {
-	font-size: 36px;
-	font-family: 'Creepster';
-	font-weight: bold;
-	color: #2D2D2D;
-	text-shadow: 	0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 
-					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f,
-					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f,
-					0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f, 0px 0px 2px #c0d12f;
+	font-size: 100px;
+	line-height: 100px;
+	font-family: 'mistress';
+	color: white;
 }
 
 #countdown-timer ul
@@ -494,8 +631,11 @@ body
 {
 	display: inline-block;
 	text-align: center;
-	padding: 0px 20px;
-	border-right: 1px solid #4D4D4D;
+	padding: 0px 10px;
+	background-color: #2d2d2d;
+	border-radius: 10px;
+	border: 1px solid #2d2d2d;
+	margin: 0 10px;
 }
 
 #countdown-timer ul li:first-child
@@ -513,18 +653,12 @@ body
 {
 	font-size: 38px;
 	color: white;
-	font-family: 'Creepster';
 }
 
 #countdown-timer ul li .countdown-label
 {
 	font-size: 20px;
-	font-family: 'Creepster';
-	color: #2D2D2D;
-	text-shadow: 	0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 
-					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
-					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703,
-					0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703, 0px 0px 2px #f9c703;
+	color: #c0d12f;
 }
 
 /* ----------------------------------------------------
@@ -547,15 +681,10 @@ body
 {
 	text-transform: uppercase;
 	margin-bottom: 25px;
-	border-bottom: 1px dotted #c0d12f;
-	font-size: 50px;
-	font-family: 'Creepster';
-	font-weight: bold;
-	color: #2d2d2d;
-	text-shadow: 	0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 
-					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f,
-					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f,
-					0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f, 0px 0px 3px #c0d12f;
+	font-size: 75px;
+	font-family: 'lakeshore-drive';
+	font-weight: normal;
+	color: #F4D402;
 }
 
 .section .section-content
@@ -565,34 +694,23 @@ body
 
 /* ----------------------------------------------------
   |                                                    |
-  |	ATTRACTIONS                                        |
-  |                                                    |
-   ---------------------------------------------------- */
-
-.attraction-img
-{
-	max-height: 350px;
-}
-
-/* ----------------------------------------------------
-  |                                                    |
   |	TICKETS                                            |
   |                                                    |
    ---------------------------------------------------- */
 
 #tickets {
-    #price-list li
-    {
+	#price-list li
+	{
 	   margin-bottom: 10px;
 	   border-bottom: 1px dashed #8D8D8D;
 	   display: inline-block;
 	   width: 100%;
-    }
-    
-    .fine-print p {
-        font-size: 10px;
-        margin-bottom: 0;
-    }
+	}
+	
+	.fine-print p {
+		font-size: 10px;
+		margin-bottom: 0;
+	}
 }
 
 
@@ -633,31 +751,43 @@ body
   |                                                    |
    ---------------------------------------------------- */
    
-.zombie-bg
-{
-	width: 100%;
-	padding: 10px 25px;
-	position: relative;
-	z-index: 1;
-}
+// .zombie-bg
+// {
+// 	width: 100%;
+// 	padding: 10px 25px;
+// 	position: relative;
+// 	z-index: 1;
+// }
 
-.zombie-bg::before
-{
-	content: "";
-	position: absolute;
-	top: 0; 
-	left: 0;
-	background: url("/media/img/zombie_woods.jpg");
-	width: 100%;
-	height: 100%;
-	background-position:50% 100%;
-	background-size: cover;
+// .zombie-bg::before
+// {
+// 	content: "";
+// 	position: absolute;
+// 	top: 0; 
+// 	left: 0;
+// 	background: url("/media/img/zombie_woods.jpg");
+// 	width: 100%;
+// 	height: 100%;
+// 	background-position:50% 100%;
+// 	background-size: cover;
+// 	background-repeat: no-repeat;
+// 	opacity: .4; 
+// 	z-index: -1;
+// }
+
+.zombie-bg {
+	background: #2d2d2d;
+	background-image: url("/media/img/zombie_woods.jpg");
+	background-position: center;
 	background-repeat: no-repeat;
-	opacity: .4; 
-  	z-index: -1;
+	background-size: cover;
+	
+	.mask {
+		background-color: rgba(0, 0, 0, 0.3);
+	}
 }
 
-.zombie-bg p, .zombie-bg h2
+#groupPricingModal p, #groupPricingModal h2
 {
 	color: white!important;
 }
@@ -675,7 +805,6 @@ body
 
 #groupPricingModal .modal-content
 {
-	background: #2d2d2d;
 	color: white;
 }
 
@@ -683,6 +812,7 @@ body
 	
 	#pricing-table {
 		text-align: left!important;
+		color: #F4D402;
 		
 		.row {
 			border: 1px solid #8d8d8d;
@@ -695,8 +825,8 @@ body
 	}
 	
 	.fine-print p {
-        font-size: 10px!important;
-    }
+		font-size: 10px!important;
+	}
 }
 
 /* ----------------------------------------------------
@@ -707,7 +837,8 @@ body
 
 #social-links 
 {
-	background-color: #4d4d4d;
+	background-color: #2D2D2D;
+	border-top: 1px solid white;
 	
 	p, span, a 
 	{
@@ -786,8 +917,8 @@ body
 		{
 			content: '\f04b';
 			font-family: FontAwesome;
-		 	font-weight: normal;
-		  	font-style: normal;
+			font-weight: normal;
+			font-style: normal;
 			color: white;
 			font-size: 50px;
 			position: absolute;
