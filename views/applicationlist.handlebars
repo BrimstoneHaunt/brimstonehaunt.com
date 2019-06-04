@@ -52,7 +52,7 @@
 							{{/if}}
 						</div>
 					</div>
-					<div class="list-group-item collapse py-3 app-content" id="app{{this.id}}-content">
+					<div class="list-group-item {{#if (neq ../appListType 'Hired')}}collapse{{/if}} py-3 app-content" id="app{{this.id}}-content">
 						<div class="row">
 							<div class="col-md-4 my-2">
 								{{#if this.returning_worker }}
@@ -125,8 +125,8 @@
 							</div>
 						</div>
 						<div class="row my-3 justify-content-center availability{{ this.id }}">
-							<div class="col-md-2 col-sm-4 fr"></div>
-							<div class="col-md-2 col-sm-4 sa"></div>
+							<div class="col-auto fr"></div>
+							<div class="col-auto sa"></div>
 						</div>
 					</div>
 					<script type="text/javascript">
