@@ -30,7 +30,15 @@ module.exports = {
 				var makeup_allergies = req.body.makeup_allergies == 'y';
 				var glasses = req.body.glasses == 'y';
 				var contacts = req.body.contacts == 'y';
+				var preavailability = "";
 				var availability = "";
+				
+				req.body.preavailability.forEach(function(elem) {
+					if(preavailability !== "") {
+						preavailability += ":";
+					}
+					preavailability += elem;
+				});
 				
 				req.body.availability.forEach(function(elem) {
 					if(availability !== "") {
@@ -39,7 +47,7 @@ module.exports = {
 					availability += elem;
 				});
 				
-				Application.create({firstName: req.body.first, middleName: req.body.middle, lastName: req.body.last, street: req.body.street, city: req.body.city, state: req.body.state, zip: req.body.zip, email: req.body.email, phone: req.body.phone, over16: over16, returning_worker: returning_worker, previous_role: req.body.previous_role, previous_haunt_work: req.body.previous_haunt_work, comments: req.body.comments, height: req.body.height, gender: req.body.gender, shirt_size: req.body.shirt_size, pant_size: req.body.pant_size, pant_waist: req.body.pant_waist, pant_length: req.body.pant_length, makeup_allergies: makeup_allergies, glasses: glasses, contacts: contacts, availability: availability}).exec(function(err, records) {
+				Application.create({firstName: req.body.first, middleName: req.body.middle, lastName: req.body.last, street: req.body.street, city: req.body.city, state: req.body.state, zip: req.body.zip, email: req.body.email, phone: req.body.phone, over16: over16, returning_worker: returning_worker, previous_role: req.body.previous_role, previous_haunt_work: req.body.previous_haunt_work, comments: req.body.comments, height: req.body.height, gender: req.body.gender, shirt_size: req.body.shirt_size, pant_size: req.body.pant_size, pant_waist: req.body.pant_waist, pant_length: req.body.pant_length, makeup_allergies: makeup_allergies, glasses: glasses, contacts: contacts, preavailability: preavailability, availability: availability}).exec(function(err, records) {
 					if(err) {
 						console.log(err);
 						return res.view('apply', {

@@ -90,6 +90,10 @@ module.exports = {
 			type: 'boolean',		
 			required: true
 		},
+		preavailability: {
+			type: 'string',
+			required: true
+		},
 		availability: {
 			type: 'string',
 			required: true

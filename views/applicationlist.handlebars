@@ -8,13 +8,17 @@
 		<div class="col">
 			<div id="app-list" class="list-group">
 				<script type="text/javascript">
+					var startPre = 1;
+					var endPre = 5;
+					var predays = ["", "Saturday 9/7 (Rehearsal Day 1)", "Sunday 9/8 (Rehearsal Day 2)", "Saturday 9/14 (Rehearsal Day 3)", "Sunday 9/15 (Rehearsal Day 4)", "Saturday 9/21 (Dry Run)"];
+					
 					var startWeek = 2;
 					var endWeek = 6;
 					var fridays = ["", "", "Friday 9/27", "Friday 10/4", "Friday 10/11", "Friday 10/18", "Friday 10/25"];
 					var saturdays = ["", "", "Saturday 9/28", "Saturday 10/5", "Saturday 10/12", "Saturday 10/19", "Saturday 10/26"];
 				</script>
 				{{#each appList}}
-					<div class="list-group-item list-group-item-action" data-target="#app{{this.id}}-content" data-appid="{{this.id}}" onclick="// Empty on click fixes a bug? in mobile safari that wasn't triggering the document.on click action for this element">
+					<div class="list-group-item list-group-item-action" data-target="#app{{this.id}}-content" data-appid="{{this.id}}" onclick="">
 						<div class="row justify-content-center">
 							<div class="col-sm">
 								<div class="row">
@@ -124,12 +128,26 @@
 								{{/if}}
 							</div>
 						</div>
+						<div class="row my-3 justify-content-center preavailability{{ this.id }}">
+							<div class="col-auto pre"></div>
+						</div>
 						<div class="row my-3 justify-content-center availability{{ this.id }}">
 							<div class="col-auto fr"></div>
 							<div class="col-auto sa"></div>
 						</div>
 					</div>
 					<script type="text/javascript">
+						var preavailabilitySTR = "{{ this.preavailability }}";
+						var preavailabilityARR = preavailabilitySTR.split(":");
+						
+						for(var i = startPre;i <= endPre;i++) {
+							if($.inArray("pre" + i, preavailabilityARR) == -1) {
+								$(".preavailability{{ this.id }} > .pre").append("<span class='text-danger'>" + predays[i] + "</span><br>");
+							} else {
+								$(".preavailability{{ this.id }} > .pre").append("<span class='text-success'>" + predays[i] + "</span><br>");
+							}
+						}
+						
 						var availabilitySTR = "{{ this.availability }}";
 						var availabilityARR = availabilitySTR.split(":");
 						

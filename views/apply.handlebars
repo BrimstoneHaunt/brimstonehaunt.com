@@ -170,18 +170,32 @@
 				</div>
 				<div class="row mt-4">
 					<div class="col">
-						<span>2018 Season Availability (Please check all of the days that you will be available 5pm - 1am to work)</span>
+						<span>2019 Pre-Season Availability (Please check all of the days that you will be available)</span>
 					</div>
 				</div>
-				<div class="row justify-content-center mt-2">
-					<div class="col-sm-4">
+				<div class="row mt-2">
+					<div class="col-auto">
+						<input id="pre1" name="preavailability[]" type="checkbox" value="pre1" checked><label for="pre1">Saturday 9/7 (Rehearsal Day 1)</label><br/>
+						<input id="pre2" name="preavailability[]" type="checkbox" value="pre2" checked><label for="pre2">Sunday 9/8 (Rehearsal Day 2)</label><br/>
+						<input id="pre3" name="preavailability[]" type="checkbox" value="pre3" checked><label for="pre3">Saturday 9/14 (Rehearsal Day 3)</label><br/>
+						<input id="pre4" name="preavailability[]" type="checkbox" value="pre4" checked><label for="pre4">Sunday 9/15 (Rehearsal Day 4)</label><br/>
+						<input id="pre5" name="preavailability[]" type="checkbox" value="pre5" checked><label for="pre5">Saturday 9/21 (Dry Run)</label><br/>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>2019 Season Availability (Please check all of the days that you will be available 5pm - 1am to work)</span>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-auto">
 						<input id="fr2" name="availability[]" type="checkbox" value="fr2" checked><label for="fr2">Friday 9/27</label><br/>
 						<input id="fr3" name="availability[]" type="checkbox" value="fr3" checked><label for="fr3">Friday 10/4</label><br/>
 						<input id="fr4" name="availability[]" type="checkbox" value="fr4" checked><label for="fr4">Friday 10/11</label><br/>
 						<input id="fr5" name="availability[]" type="checkbox" value="fr5" checked><label for="fr5">Friday 10/18</label><br/>
 						<input id="fr6" name="availability[]" type="checkbox" value="fr6" checked><label for="fr6">Friday 10/25</label><br/>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-auto">
 						<input id="sa2" name="availability[]" type="checkbox" value="sa2" checked><label for="sa2">Saturday 9/28</label><br/>
 						<input id="sa3" name="availability[]" type="checkbox" value="sa3" checked><label for="sa3">Saturday 10/5</label><br/>
 						<input id="sa4" name="availability[]" type="checkbox" value="sa4" checked><label for="sa4">Saturday 10/12</label><br/>
@@ -200,25 +214,32 @@
 </div>
 <script type="text/javascript">
 	{{#if (eq data.over16 "n")}}
-		$("input[name='over16'][value='y'").prop("checked", false);
-		$("input[name='over16'][value='n'").prop("checked", true);
+		$("input[name='over16'][value='y']").prop("checked", false);
+		$("input[name='over16'][value='n']").prop("checked", true);
 	{{/if}}
 	{{#if (eq data.returning_worker "y")}}
-		$("input[name='returning_worker'][value='y'").prop("checked", true);
-		$("input[name='returning_worker'][value='n'").prop("checked", false);
+		$("input[name='returning_worker'][value='y']").prop("checked", true);
+		$("input[name='returning_worker'][value='n']").prop("checked", false);
 	{{/if}}
 	{{#if (eq data.makeup_allergies "y")}}
-		$("input[name='makeup_allergies'][value='y'").prop("checked", true);
-		$("input[name='makeup_allergies'][value='n'").prop("checked", false);
+		$("input[name='makeup_allergies'][value='y']").prop("checked", true);
+		$("input[name='makeup_allergies'][value='n']").prop("checked", false);
 	{{/if}}
 	{{#if (eq data.glasses "y")}}
-		$("input[name='glasses'][value='y'").prop("checked", true);
-		$("input[name='glasses'][value='n'").prop("checked", false);
+		$("input[name='glasses'][value='y']").prop("checked", true);
+		$("input[name='glasses'][value='n']").prop("checked", false);
 	{{/if}}
 	{{#if (eq data.contacts "y")}}
-		$("input[name='contacts'][value='y'").prop("checked", true);
-		$("input[name='contacts'][value='n'").prop("checked", false);
+		$("input[name='contacts'][value='y']").prop("checked", true);
+		$("input[name='contacts'][value='n']").prop("checked", false);
 	{{/if}}
+	
+	$("input[name='preavailability\\[\\]']").prop("checked", false);
+	{{#each data.preavailability }}
+		$("input#{{this}}").prop("checked", true);
+	{{else}}
+		$("input[name='preavailability\\[\\]']").prop("checked", true);
+	{{/each}}
 	
 	$("input[name='availability\\[\\]']").prop("checked", false);
 	{{#each data.availability }}
