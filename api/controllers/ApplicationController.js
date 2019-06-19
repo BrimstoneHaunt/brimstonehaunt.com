@@ -8,7 +8,7 @@ module.exports = {
 		});
 	},
 	submitApplication: function(req, res) {
-		Application.find({email: req.body.email}).exec(function(err1, records1) {
+		Application.find({email: req.body.email, status: [1, 3]}).exec(function(err1, records1) {
 			if(err1) {
 				console.log(err1);
 				return res.view('apply', {
@@ -105,18 +105,47 @@ module.exports = {
 			}
 			
 			if(records.length == 1) {
-				AccountService.createAccount({email: records[0].email, accessLvl: 1, firstName: records[0].firstName, middleName: records[0].middleName, lastName: records[0].lastName, application: records[0]}, function(error) {
-					if(error) {
-						return res.serverError(error);
+				// Look up existing account
+				User.find({email: records[0].email}).exec(function(err2, records2) {
+					if(err2) {
+						console.log(err2);
+						return res.serverError(err2);
 					}
 					
-					Application.update({id: req.body.id}, {status: 2}).exec(function(err2, records2) {
-						if(err2) {
-							return res.serverError(err2);
-						}
-					
-						return res.redirect("/applications/" + req.body.appListType);
-					});
+					if(records2.length > 1) {
+						console.log("Error! Found multiple user accounts with this email: " + records[0].email);
+						return res.serverError("Error! Found multiple user accounts with this email: " + records[0].email);
+					} else if(records2.length == 1) { // Update link to newly hired application, update name, and un-delete account (if applicable)
+						User.update({id: records2[0].id}, {firstName: records[0].firstName, middleName: records[0].middleName, lastName: records[0].lastName, application: records[0], isDeleted: false}).exec(function(err4, records4) {
+							if(err4) {
+								return res.serverError(err4);
+							}
+						
+							// Update application status
+							Application.update({id: req.body.id}, {status: 2}).exec(function(err3, records3) {
+								if(err3) {
+									return res.serverError(err3);
+								}
+							
+								return res.redirect("/applications/" + req.body.appListType);
+							});
+						});
+					} else { // Otherwise create new account
+						AccountService.createAccount({email: records[0].email, accessLvl: 1, firstName: records[0].firstName, middleName: records[0].middleName, lastName: records[0].lastName, application: records[0]}, function(error) {
+							if(error) {
+								return res.serverError(error);
+							}
+							
+							// Update application status
+							Application.update({id: req.body.id}, {status: 2}).exec(function(err3, records3) {
+								if(err3) {
+									return res.serverError(err3);
+								}
+							
+								return res.redirect("/applications/" + req.body.appListType);
+							});
+						});
+					}
 				});
 			} else {
 				console.log("Find application by id did not return 1 record.");

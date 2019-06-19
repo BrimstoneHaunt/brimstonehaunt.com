@@ -37,8 +37,7 @@ module.exports = {
 		},
 		email: {
 			type: 'email',		
-			required: true,
-			unique: true
+			required: true
 		},
 		phone: {
 			type: 'string',		
