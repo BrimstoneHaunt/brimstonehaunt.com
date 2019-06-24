@@ -28,7 +28,7 @@
  *
  */
  
-var buildNumber = '7';
+var buildNumber = '8';
 
 module.exports = function(grunt) {
 

@@ -3,6 +3,9 @@
 	<a class="navbar-brand" href="/">
 		<img alt ="" src="images/logos/brimstone_haunt_light.png">
 	</a>
+	{{#if homepage}}
+		<a class="nav-link d-md-none" href="/apply" title="Apply" style="max-width: 35%;"><img src="/media/img/now-hiring.png"></a>
+	{{/if}}
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav-menu" aria-controls="main-nav-menu" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon navbar-toggler-icon-white"></span>
 	</button>
@@ -13,6 +16,9 @@
 				<li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="scrollPageTo('#tickets');"title="Tickets">Tickets</a></li>
 				<li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="scrollPageTo('#directions');" title="Directions">Directions</a></li>
 				<li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="scrollPageTo('#faq');" title="FAQ">FAQ</a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto d-md-inline-block d-none">
+				<li class="nav-item"><a class="nav-link" href="/apply" title="Apply"><img src="/media/img/now-hiring.png"></a></li>
 			</ul>
 		{{/if}}
 		<ul class="navbar-nav ml-auto">

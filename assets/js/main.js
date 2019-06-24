@@ -348,7 +348,7 @@ $(document).ready(function() {
 			},
 			autoHeight: true,
 			autoplay: {
-				delay: 10000
+				delay: 15000
 			},
 			grabCursor: true,
 			effect: 'slide',
