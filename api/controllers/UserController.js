@@ -282,15 +282,31 @@ module.exports = {
 	},
 	getAppDataDisplay: function(req, res) {
 		User.find({id: req.body.id, isDeleted: false}).populate('application').exec(function(err, records) {
-			return res.view('applicationlist', {
-				layout: 'management',
-				title: 'Application',
-				isLoggedIn: req.session.isLoggedIn,
-				canAdmin: req.session.canAdmin,
-				user: req.session.user,
-				appListType: "Hired",
-				appList: [records[0].application]
-			});
+			if(records[0].application && records[0].application.position) {
+				Position.find({id: records[0].application.position}).exec(function(err2, records2){
+					records[0].application.position = records2[0];
+					
+					return res.view('applicationlist', {
+						layout: 'management',
+						title: 'Application',
+						isLoggedIn: req.session.isLoggedIn,
+						canAdmin: req.session.canAdmin,
+						user: req.session.user,
+						appListType: "Hired",
+						appList: [records[0].application]
+					});
+				});
+			} else {
+				return res.view('applicationlist', {
+					layout: 'management',
+					title: 'Application',
+					isLoggedIn: req.session.isLoggedIn,
+					canAdmin: req.session.canAdmin,
+					user: req.session.user,
+					appListType: "Hired",
+					appList: [records[0].application]
+				});
+			}
 		})
 	}
 };

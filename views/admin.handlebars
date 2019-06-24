@@ -1,8 +1,8 @@
 <div id="admin-page" class="container-fluid">
 	<div class="row mt-5 justify-content-center">
-		{{#if (gteq user.accessLvl 3)}}
+		<!-- {{#if (gteq user.accessLvl 3)}}
 			<div class="col-auto my-3">
-				<a href="#" class="btn btn-outline-primary">Positions</a>
+				<a href="/positions" class="btn btn-outline-primary">Positions</a>
 			</div>
 			<div class="col-auto my-3">
 				<a href="#" class="btn btn-outline-primary">Content</a>
@@ -10,7 +10,7 @@
 		{{/if}}
 		<div class="col-auto my-3">
 			<a href="#" class="btn btn-outline-primary">Messages</a>
-		</div>
+		</div> -->
 		{{#if (gteq user.accessLvl 5)}}
 			<div class="col-auto my-3">
 				<a href="/timeclock/export" class="btn btn-outline-primary">Time Sheets</a>

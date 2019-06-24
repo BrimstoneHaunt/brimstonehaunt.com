@@ -1,0 +1,81 @@
+<div id="positions-page" class="container-fluid my-5">
+	<div class="row">
+		<div class="col">
+			<h1 class="ml-lg-3">Positions</h1>
+		</div>
+		<div class="col-auto">
+			<button class="btn btn-outline-primary" onclick="showCreatePosition();">Create New Position</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class="list-group">
+				<div id="createPosition" class="list-group-item" style="display: none;">
+					<form id="createPositionForm" onsubmit="return false;">
+						<div class="row">
+							<div class="col">
+								<input name="title" class="form-control" type="text" required="required" placeholder="Title">
+							</div>
+							<div class="col">
+								<input name="defaultPayrate" class="form-control" type="Number" placeholder="Default Pay Rate">
+							</div>
+							<div class="col">
+								<input name="canApply" type="checkbox"><label for="canApply">Include on Application</label>
+							</div>
+							<div class="col-auto">
+								<button class="btn btn-outline-success" onclick="createPosition();">Create</button>
+								<button class="btn btn-outline-danger" onclick="cancelCreatePosition();">Cancel</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				{{#each positions}}
+					<div class="list-group-item">
+						<div class="row">
+							<div class="col">
+								{{title}}
+							</div>
+							<div class="col">
+								{{currency defaultPayRate}}
+							</div>
+							<div class="col">
+								{{#if canApply}}
+									<span class="text-success">Included on Application</span>
+								{{else}}
+									<span class="text-danger">Not Included on Application</span>
+								{{/if}}
+							</div>
+							<div class="col-auto">
+								<button class="btn btn-outline-primary" onclick="editPosition();">Edit</button>
+							</div>
+						</div>
+						<div class="row" style="display: none;">
+							<div class="col">
+								<input name="title" class="form-control" type="text" required="required" placeholder="Title" value="{{title}}">
+							</div>
+							<div class="col">
+								<input name="defaultPayrate" class="form-control" type="Number" placeholder="Default Pay Rate" value="{{defaultPayrate}}">
+							</div>
+							<div class="col">
+								{{#if canApply}}
+									<input type="checkbox" checked><label>Include on Application</label>
+								{{else}}
+									<input type="checkbox"><label>Include on Application</label>
+								{{/if}}
+							</div>
+							<div class="col-auto">
+								<button class="btn btn-outline-danger" onclick="deletePosition();">Delete</button>
+								<button class="btn btn-outline-success" onclick="updatePosition();">Save</button>
+								<button class="btn btn-outline-secondary" onclick="cancelEditPosition();">Cancel</button>
+							</div>
+						</div>
+					</div>
+				{{else}}
+					<div class="list-group-item">
+						<center>No Positions Found!</center>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</div>

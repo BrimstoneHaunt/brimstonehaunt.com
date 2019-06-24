@@ -40,5 +40,32 @@ module.exports = {
 				});
 			});
 		});
+	},
+	showPositions: function(req, res) {
+		Position.find({isDeleted: false}).exec(function(err, records) {
+			return res.view('positions', {
+				layout: 'management',
+	    		title: "Positions",
+				isLoggedIn: req.session.isLoggedIn,
+				canAdmin: req.session.canAdmin,
+				user: req.session.user,
+				positions: records
+			});
+		});
+	},
+	createPosition: function(req, res) {
+		Position.create({
+			title: req.body.title,
+			defaultPayRate: req.body.defaultPayrate,
+			parentPosition: req.body.parentPosition,
+			canApply: req.body.canApply
+		}).exec(function(err, records) {
+			if(err) {
+				console.log(err);
+				return res.serverError(err);
+			}
+			
+			return res.redirect("/positions");
+		});
 	}		
 }

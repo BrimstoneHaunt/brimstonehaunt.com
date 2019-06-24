@@ -101,6 +101,8 @@ module.exports.routes = {
   // Admin Pages
   
   'get /admin': 'AdminController.index',
+  'get /positions': 'AdminController.showPositions',
+  'post /positions/create': 'AdminController.createPosition',
   'get /user/create': 'UserController.showCreate',
   'post /user/create': 'UserController.create',
   'get /user/list': 'UserController.list',

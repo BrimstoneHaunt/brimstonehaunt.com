@@ -103,5 +103,9 @@ module.exports = {
 			required: true,
 			defaultsTo: '1'
 		},
+		position: {
+			model: 'position',
+			required: false
+		}
 	}
 };

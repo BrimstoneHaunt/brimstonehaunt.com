@@ -296,6 +296,28 @@ function applicationReject(appID, appListType) {
 	});
 }
 
+function showCreatePosition() {
+	$("#createPosition").slideDown();
+	return false;
+}
+
+function cancelCreatePosition() {
+	$("#createPosition").slideUp(100);
+	$("#createPositionForm input").val("");
+	$("#createPositionForm input[type=checkbox]").prop("checked", false);
+	return false;
+}
+
+function createPosition() {
+	$.post("/positions/create", { title: $("#createPositionForm input[name=title]").val(), defaultPayrate: $("#createPositionForm input[name=defaultPayrate]").val(), canApply: $("#createPositionForm input[name=canApply]").is(":checked") }, function(resp) {
+		var newContent = $(resp).filter("#positions-page").html();
+		$("#positions-page").html(newContent);
+	}).fail(function() {
+		alert("Something went wrong!");
+	});
+	return false;
+}
+
 /* ----------------------------------------------------
   |                                                    |
   |	INIT                                               |

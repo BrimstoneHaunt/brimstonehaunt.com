@@ -4,6 +4,23 @@
 			<h1>Employment Application</h1>
 			<center><p class="text-danger">{{{ message }}}</p></center>
 			<form id="application-form" action="/apply" method="post" onsubmit="return preSubmitApplication();">
+				{{#if positions}}
+					<div class="row mt-4">
+						<div class="col">
+							<span>Position</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col mt-2">
+							<select name="position" class="form-control">
+								<option value="0">Any</option>
+								{{#each positions}}
+									<option value="{{id}}">{{title}}</option>
+								{{/each}}
+							</select>
+						</div>
+					</div>
+				{{/if}}
 				<div class="row mt-4">
 					<div class="col">
 						<span>Name</span>
@@ -78,7 +95,7 @@
 				</div>
 				<div class="row mt-4">
 					<div class="col">
-						<span>If yes, what position and scene/character (for actors) did you work in?</span>
+						<span>If yes, what position or scene/character (for actors) did you work in?</span>
 					</div>
 				</div>
 				<div class="row">
@@ -98,7 +115,7 @@
 				</div>
 				<div class="row mt-4">
 					<div class="col">
-						<span>Other Comments (Please indicate here what positions you would be interested in acting, concessions, building, etc.)</span>
+						<span>Other Comments</span>
 					</div>
 				</div>
 				<div class="row">
