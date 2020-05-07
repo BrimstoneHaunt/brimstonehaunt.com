@@ -41,7 +41,9 @@ module.exports.policies = {
         'clockedIn': 'canAdmin',
         'clockoutUser': 'canAdmin',
         'clockoutAll': 'canAdmin',
-        'timeSheetForUser': 'canAdmin'
+		'timeSheetForUser': 'canAdmin',
+		'badgescan': true,
+		'badgescanClockInOut': true
 	},
 	'UserController': {
 		'showCreate': 'canAdmin',
@@ -61,7 +63,9 @@ module.exports.policies = {
 		'getAppDataDisplay': 'canAdmin'
 	},
 	'AdminController': {
-		'*': 'canAdmin'
+		'*': 'canAdmin',
+		'getBadgescanauth': 'isAdmin',
+		'setBadgescanauth': 'isAdmin'
 	},
 	'ApplicationController': {
 		'*': true,

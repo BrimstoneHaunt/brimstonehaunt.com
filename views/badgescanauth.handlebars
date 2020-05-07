@@ -1,0 +1,24 @@
+<div id="badgescanauth-page" class="container-fluid my-5">
+    <div class="row mb-5">
+        <div class="col">
+            <h1 class="ml-lg-3">Badge Scanner Authorization</h1>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col">
+            <center><span class="text-danger">{{ message }}</span></center>
+        </div>
+    </div>
+    <form action="/badgescan" method="post">
+        <div class="row justify-content-center my-3">
+            <div class="col-md-6">
+                <input type="password" name="authcode" class="form-control" placeholder="Authorization Code" required="required" />
+            </div>
+        </div>
+        <div class="row justify-content-center my-3">
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-block btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
