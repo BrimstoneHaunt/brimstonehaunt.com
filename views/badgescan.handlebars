@@ -1,0 +1,109 @@
+<div class="container-fluid my-5">
+    <div class="row justify-content-center">
+        <div class="col-auto mb-5">
+            <h1 id="result">Searching For Camera...</h1>
+        </div>
+    </div>
+    <div id="video-container" class="row justify-content-center">
+        <div class="col-auto p-0 border border-primary rounded rounded-lg">
+            <video id="video" autoplay="autoplay" width="640" height="480"></video>
+        </div>
+    </div>
+    <div id="photo-container" class="row justify-content-center">
+        <div class="col-auto p-0 border rounded rounded-lg">
+            <canvas id="canvas" style="display: none;"></canvas>
+            <img id="photo" src="" />
+        </div>
+    </div>
+</div>
+
+<style>
+    #video-container .border, #photo-container .border {
+        border-width: 5px!important;
+    }
+
+    #video-container video {
+        display: block;
+    }
+</style>
+
+<script type="text/javascript">
+    var qr = new QrcodeDecoder();
+    var video = document.querySelector("#video");
+    var photo = document.querySelector("#photo");
+    var canvas = document.querySelector("#canvas");
+    var result = document.querySelector("#result");
+
+    $("#photo-container").hide();
+    $("#video-container").hide();
+
+    video.setAttribute('autoplay', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    
+    function startScanning() {
+        $("#photo-container .border").removeClass("border-danger");
+        $("#photo-container .border").removeClass("border-success");
+
+        qr.decodeFromCamera(video).then(function(res) {
+            takepicture();
+
+            if(res.data == "") {
+                qr.stop();
+                startScanning();
+                return;
+            }
+
+            $.post("/badgescanClockInOut", { empID: res.data }).done(function(data) {
+                if(data.error) {
+                    alert(data.message);
+                    window.location = "/badgescan";
+                } else {
+                    result.innerText = data.message;
+                    $("#photo-container .border").removeClass("border-warning");
+                    if(data.success) {
+                        $("#photo-container .border").addClass("border-success");
+                    } else {
+                        $("#photo-container .border").addClass("border-danger");
+                    }
+                    setTimeout(startScanning, 5000);
+                }
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                $("#photo-container .border").removeClass("border-warning");
+                $("#photo-container .border").addClass("border-danger");
+                result.innerText = "Something Went Wrong!";
+                alert("Something Went Wrong!");
+                setTimeout(startScanning, 1000);
+            });
+
+            result.innerText = "Contacting Server...";
+            $("#photo-container .border").addClass("border-warning");
+            $("#photo-container").show();
+            $("#video-container").hide();
+            qr.stop();
+        });
+        $("#photo-container").hide();
+        $("#video-container").show();
+    }
+
+    function takepicture() {
+        var context = canvas.getContext('2d');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        var data = canvas.toDataURL('image/png');
+        photo.setAttribute('src', data);
+    }
+
+    video.addEventListener('playing', function(event) {
+        result.innerText = "Scanning...";
+    });
+    
+    if (!qr.isCanvasSupported()) {
+        alert("Your browser doesn't match the required specs.");
+        throw new Error("Canvas and getUserMedia are required");
+    } else {
+        startScanning();
+    }
+</script>

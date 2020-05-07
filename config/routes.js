@@ -78,6 +78,15 @@ module.exports.routes = {
   'post /timeclock/clockout': 'TimeClockController.clockout',
   'post /timeclock/update': 'TimeClockController.update',
   'post /timeclock/delete': 'TimeClockController.delete',
+  'get /badgescan': {
+    view: 'badgescanauth',
+    locals: {
+      layout: 'management_simple',
+      title: "Badge Scan"
+    }
+  },
+  'post /badgescan': 'TimeClockController.badgescan',
+  'post /badgescanClockInOut': 'TimeClockController.badgescanClockInOut',
   
   // User Account Stuff
   
@@ -122,7 +131,9 @@ module.exports.routes = {
   'get /applications/rejected': 'ApplicationController.rejectedList',
   'post /application/hire': 'ApplicationController.hire',
   'post /application/hold': 'ApplicationController.hold',
-  'post /application/reject': 'ApplicationController.reject'
+  'post /application/reject': 'ApplicationController.reject',
+  'get /admin/badgescanauth': 'AdminController.getBadgescanauth',
+  'post /admin/badgescanauth': 'AdminController.setBadgescanauth',
 
   /***************************************************************************
   *                                                                          *

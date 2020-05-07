@@ -1,0 +1,29 @@
+<div id="badgescanauth-page" class="container-fluid my-5">
+    <div class="row mb-5">
+        <div class="col">
+            <h1 class="ml-lg-3">Badge Scanner Authcode</h1>
+        </div>
+        <div class="col-auto">
+            <a href="/badgescan" target="_blank" class="btn btn-outline-primary">Open Scanner</a>
+        </div>
+    </div>
+    {{#if success}}
+        <div class="row mb-5">
+            <div class="col">
+                <center><span class="text-success">Authcode Saved!</span></center>
+            </div>
+        </div>
+    {{/if}}
+    <form action="/admin/badgescanauth" method="post">
+        <div class="row justify-content-center my-3">
+            <div class="col-md-6">
+                <input type="text" name="authcode" class="form-control" placeholder="Authorization Code" required="required" value="{{ authcode }}" />
+            </div>
+        </div>
+        <div class="row justify-content-center my-3">
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-block btn-success">Save Authcode</button>
+            </div>
+        </div>
+    </form>
+</div>
