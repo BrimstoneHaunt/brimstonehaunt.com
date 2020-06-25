@@ -106,6 +106,9 @@ module.exports = {
 		position: {
 			model: 'position',
 			required: false
+		},
+		refferedfrom: {
+			type: 'string'
 		}
 	}
 };

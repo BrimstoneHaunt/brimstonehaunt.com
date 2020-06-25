@@ -8,6 +8,14 @@ Handlebars.registerHelper('nl2br', function(data) {
 	return out;
 });
 
+Handlebars.registerHelper('and', function(a, b) {
+	return a && b;
+});
+
+Handlebars.registerHelper('or', function(a, b) {
+	return a || b;
+});
+
 Handlebars.registerHelper('eq', function(a, b) {
 	return a == b;
 });

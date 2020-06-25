@@ -40,7 +40,7 @@ module.exports.policies = {
 		'viewExport': 'isAdmin',
         'clockedIn': 'canAdmin',
         'clockoutUser': 'canAdmin',
-        'clockoutAll': 'canAdmin',
+        'clockoutAll': 'isAdmin',
 		'timeSheetForUser': 'canAdmin',
 		'badgescan': true,
 		'badgescanClockInOut': true
@@ -55,11 +55,13 @@ module.exports.policies = {
 		'account': 'isLoggedIn',
 		'update': 'isLoggedIn',
 		'list': 'canAdmin',
+		'listDeleted': 'canAdmin',
 		'resetPassword': true,
 		'showResetPassword': true,
 		'adminUpdate': 'canAdmin',
 		'resetPasswordForUser': 'canAdmin',
 		'adminDelete': 'canAdmin',
+		'adminUndelete': 'canAdmin',
 		'getAppDataDisplay': 'canAdmin'
 	},
 	'AdminController': {

@@ -1,4 +1,4 @@
-<div id="positions-page" class="container-fluid my-5">
+<div id="positions-page" class="container-fluid py-5">
 	<div class="row">
 		<div class="col">
 			<h1 class="ml-lg-3">Positions</h1>
@@ -20,7 +20,7 @@
 								<input name="defaultPayrate" class="form-control" type="Number" placeholder="Default Pay Rate">
 							</div>
 							<div class="col">
-								<input name="canApply" type="checkbox"><label for="canApply">Include on Application</label>
+								<label><input name="canApply" type="checkbox" class="mr-2">Include on Application</label>
 							</div>
 							<div class="col-auto">
 								<button class="btn btn-outline-success" onclick="createPosition();">Create</button>
@@ -31,7 +31,7 @@
 				</div>
 				{{#each positions}}
 					<div class="list-group-item">
-						<div class="row">
+						<div id="position-{{id}}" class="row">
 							<div class="col">
 								{{title}}
 							</div>
@@ -46,27 +46,27 @@
 								{{/if}}
 							</div>
 							<div class="col-auto">
-								<button class="btn btn-outline-primary" onclick="editPosition();">Edit</button>
+								<button class="btn btn-outline-primary" onclick="showEditPosition({{id}});">Edit</button>
 							</div>
 						</div>
-						<div class="row" style="display: none;">
+						<div id="edit-position-{{id}}" class="row" style="display: none;">
 							<div class="col">
-								<input name="title" class="form-control" type="text" required="required" placeholder="Title" value="{{title}}">
+								<input name="title" class="form-control" type="text" required="required" placeholder="Title" value="{{title}}" data-orig-value="{{title}}">
 							</div>
 							<div class="col">
-								<input name="defaultPayrate" class="form-control" type="Number" placeholder="Default Pay Rate" value="{{defaultPayrate}}">
+								<input name="defaultPayrate" class="form-control" type="Number" placeholder="Default Pay Rate" value="{{defaultPayRate}}" data-orig-value="{{defaultPayRate}}">
 							</div>
 							<div class="col">
 								{{#if canApply}}
-									<input type="checkbox" checked><label>Include on Application</label>
+									<label><input name="canApply" type="checkbox" class="mr-2" checked data-orig-value="checked"> Include on Application</label>
 								{{else}}
-									<input type="checkbox"><label>Include on Application</label>
+									<label><input name="canApply" type="checkbox" class="mr-2" data-orig-value=""> Include on Application</label>
 								{{/if}}
 							</div>
 							<div class="col-auto">
-								<button class="btn btn-outline-danger" onclick="deletePosition();">Delete</button>
-								<button class="btn btn-outline-success" onclick="updatePosition();">Save</button>
-								<button class="btn btn-outline-secondary" onclick="cancelEditPosition();">Cancel</button>
+								<button class="btn btn-outline-danger" onclick="deletePosition({{id}});">Delete</button>
+								<button class="btn btn-outline-success" onclick="updatePosition({{id}});">Save</button>
+								<button class="btn btn-outline-secondary" onclick="cancelEditPosition({{id}});">Cancel</button>
 							</div>
 						</div>
 					</div>

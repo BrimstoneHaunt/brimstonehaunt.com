@@ -1,16 +1,24 @@
 <div id="time-sheet-page" class="container-fluid">
+    <input id="timesheetUser" type="hidden" value="{{ employee.id }}">
     <div class="list-group">
         {{#each timeEntries}}
             <div class="list-group-item">
                 <div class="row">
-                    <div class="col-5">
-                        <span class="text-success">{{ this.startTime }}</span>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-5">
+                                <span class="text-success">{{ this.startTime }}</span>
+                            </div>
+                            <div class="col-5">
+                                <span class="text-danger">{{ this.endTime }}</span>
+                            </div>
+                            <div class="col-2">
+                                <span>{{ this.duration }}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-5">
-                        <span class="text-danger">{{ this.endTime }}</span>
-                    </div>
-                    <div class="col-2">
-                        <span>{{ this.duration }}</span>
+                    <div class="col-auto actions">
+                        <button class="btn btn-link edit-btn" data-entryid="{{ this.id }}" data-starttime="{{ this.startTimeLocal }}" data-endtime="{{ this.endTimeLocal }}" data-comments="{{ this.comments }}" onclick="openTimeClockModal(this);">Edit</button>
                     </div>
                     <div class="col-12 pt-2">
                         <p class="m-0">{{{nl2br this.comments }}}</p>

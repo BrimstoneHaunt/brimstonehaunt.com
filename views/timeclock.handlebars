@@ -4,27 +4,33 @@
 			<button id="clock-in-btn" class="btn btn-success {{#if clockedIn}} d-none {{/if}}" onclick="startTimeClockNow();">Clock In Now</button>
 			<button id="clock-out-btn" class="btn btn-danger {{#unless clockedIn}} d-none {{/unless}}" onclick="stopTimeClockNow();">Clock Out Now</button>
 		</div>
-		<div class="col-auto">
-			<button class="btn btn-secondary {{#if clockedIn}} d-none {{/if}}" onclick="openTimeClockModal(null, 'start');">Start Clock At</button>
-			<button class="btn btn-secondary {{#unless clockedIn}} d-none {{/unless}}" onclick="openTimeClockModal(null, 'stop');">Stop Clock At</button>
-		</div>
+		{{#if (gteq user.accessLvl 2)}}
+			<div class="col-auto">
+				<button class="btn btn-secondary {{#if clockedIn}} d-none {{/if}}" onclick="openTimeClockModal(null, 'start');">Start Clock At</button>
+				<button class="btn btn-secondary {{#unless clockedIn}} d-none {{/unless}}" onclick="openTimeClockModal(null, 'stop');">Stop Clock At</button>
+			</div>
+		{{/if}}
 	</div>
     <div class="list-group">
     	{{#each timeEntries}}
             <div class="list-group-item entry-row">
         		<div class="row">
-        			<div class="col-4 start-time">
-        				<span class="text-success">{{ this.startTime }}</span>
-        			</div>
-        			<div class="col-4 end-time">
-        				<span class="text-danger">{{ this.endTime }}</span>
-        			</div>
-        			<div class="col-2">
-        				<span>{{ this.duration }}</span>
-        			</div>
-        			<div class="col-2 actions">
-        				<button class="btn btn-link edit-btn" data-entryid="{{ this.id }}" data-starttime="{{ this.startTimeLocal }}" data-endtime="{{ this.endTimeLocal }}" data-comments="{{ this.comments }}" onclick="openTimeClockModal(this);">Edit</button>
-        			</div>
+					<div class="col">
+						<div class="row">
+							<div class="col-5 start-time">
+								<span class="text-success">{{ this.startTime }}</span>
+							</div>
+							<div class="col-5 end-time">
+								<span class="text-danger">{{ this.endTime }}</span>
+							</div>
+							<div class="col-2">
+								<span>{{ this.duration }}</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-auto actions">
+						<button class="btn btn-link edit-btn" data-entryid="{{ this.id }}" data-starttime="{{ this.startTimeLocal }}" data-endtime="{{ this.endTimeLocal }}" data-comments="{{ this.comments }}" onclick="openTimeClockModal(this);">Edit</button>
+					</div>
                     <div class="col-12 pt-2 comments">
                         <p class="m-0">{{{nl2br this.comments }}}</p>
                     </div>
@@ -43,29 +49,33 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="row">
-					<div class="col-6">
-						<label>Start Time</label>
-						<input type="datetime-local" class="form-control start-time-input">
+				{{#if (gteq @root.user.accessLvl 2)}}
+					<div class="row">
+						<div class="col-6">
+							<label>Start Time</label>
+							<input type="datetime-local" class="form-control start-time-input">
+						</div>
+						<div class="col-6">
+							<label>End Time</label>
+							<input type="datetime-local" class="form-control end-time-input">
+						</div>
 					</div>
-					<div class="col-6">
-						<label>End Time</label>
-						<input type="datetime-local" class="form-control end-time-input">
-					</div>
-				</div>
-				<br>
+					<br>
+				{{/if}}
 				<div class="row">
 					<div class="col">
 						<label>Comments</label>
 						<textarea class="form-control comments-input" rows="5"></textarea>
 					</div>
 				</div>
-				<br>
-				<div class="row justify-content-center">
-					<div class="col-6">
-						<button class="btn btn-block btn-danger" onclick="deleteTimeEntry();">Delete Entry</button>
+				{{#if (gteq @root.user.accessLvl 2)}}
+					<br>
+					<div class="row justify-content-center">
+						<div class="col-6">
+							<button class="btn btn-block btn-danger" onclick="deleteTimeEntry();">Delete Entry</button>
+						</div>
 					</div>
-				</div>
+				{{/if}}
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

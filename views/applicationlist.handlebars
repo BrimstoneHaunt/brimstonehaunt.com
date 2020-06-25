@@ -1,4 +1,4 @@
-<div id="applicationlist-page" class="container-fluid my-5">
+<div id="applicationlist-page" class="container-fluid py-5">
 	<div class="row">
 		<div class="col">
 			<h1 class="ml-lg-3">{{appListType}} Applications</h1>
@@ -17,162 +17,33 @@
 					var fridays = ["", "", "Friday 9/27", "Friday 10/4", "Friday 10/11", "Friday 10/18", "Friday 10/25"];
 					var saturdays = ["", "", "Saturday 9/28", "Saturday 10/5", "Saturday 10/12", "Saturday 10/19", "Saturday 10/26"];
 				</script>
-				{{#each appList}}
-					<div class="list-group-item list-group-item-action" data-target="#app{{this.id}}-content" data-appid="{{this.id}}" onclick="">
-						<div class="row justify-content-center">
-							<div class="col">
-								<div class="row">
-									<div class="col-md-2">
-										{{#if this.position}}
-											{{ this.position.title }}
-										{{else}}
-											Any
-										{{/if}}
-									</div>
-									<div class="col-md-4">
-										{{ this.firstName }} {{ this.middleName }} {{ this.lastName }}
-									</div>
-									<div class="col-md-4">
-										{{ this.email }}
-									</div>
-									<div class="col-md-2">
-										{{#if this.over16 }}
-											<span class="text-success">Over 16</span>
-										{{else}}
-											<span class="text-danger">Under 16</span>
-										{{/if}}
-									</div>
-								</div>
-							</div>
-							{{#if (neq ../appListType 'Hired')}}
-								<div class="col-auto">
-									<div class="btn-group ">
-										<button type="button" class="btn btn-success btn-sm application-action" data-action="hire" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Hire</button>
-										{{#if (neq ../appListType 'Held')}}
-											<button type="button" class="btn btn-warning btn-sm application-action" data-action="hold" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Hold</button>
-										{{/if}}
-										{{#if (neq ../appListType 'Rejected')}}
-											<button type="button" class="btn btn-danger btn-sm application-action" data-action="reject" data-appid="{{this.id}}" data-applisttype="{{../appListType}}">Reject</button>
-										{{/if}}
-									</div>
-								</div>
-							{{/if}}
-						</div>
-					</div>
-					<div class="list-group-item {{#if (neq ../appListType 'Hired')}}collapse{{/if}} py-3 app-content" id="app{{this.id}}-content">
-						<div class="row">
-							<div class="col-md-4 my-2">
-								{{#if this.returning_worker }}
-									Returning Employee
-								{{else}}
-									New Employee
-								{{/if}}
-							</div>
-							<div class="col-md-4 my-2">
-								{{ this.phone }}
-							</div>
-							<div class="col-md-4 my-2">
-								{{ this.street }} {{ this.city }}, {{ this.state }} {{ this.zip }}
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4 my-2">
-								{{ this.previous_role }}
-							</div>
-							<div class="col-md-4 my-2">
-								{{ this.previous_haunt_work }}
-							</div>
-							<div class="col-md-4 my-2">
-								{{ this.comments }}
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4 my-2">
-								Height: {{ this.height }}
-							</div>
-							<div class="col-md-4 my-2">
-								Gender: {{ this.gender }}
-							</div>
-							<div class="col-md-4 my-2">
-								Shirt Size: {{ this.shirt_size }}
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4 my-2">
-								Womens Pant Size: {{ this.pant_size }}
-							</div>
-							<div class="col-md-4 my-2">
-								Mens Pant Waist: {{ this.pant_waist }}
-							</div>
-							<div class="col-md-4 my-2">
-								Mens Pant Length: {{ this.pant_length }}
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4 my-2">
-								{{#if this.makeup_allergies }}
-									Has makeup allergies
-								{{else}}
-									Does not have any makeup allergies
-								{{/if}}
-							</div>
-							<div class="col-md-4 my-2">
-								{{#if this.glasses }}
-									Wears glasses
-								{{else}}
-									Does not wear glasses
-								{{/if}}
-							</div>
-							<div class="col-md-4 my-2">
-								{{#if this.contacts }}
-									Wears contacts
-								{{else}}
-									Does not wear contacts
-								{{/if}}
-							</div>
-						</div>
-						<div class="row my-3 justify-content-center preavailability{{ this.id }}">
-							<div class="col-auto pre"></div>
-						</div>
-						<div class="row my-3 justify-content-center availability{{ this.id }}">
-							<div class="col-auto fr"></div>
-							<div class="col-auto sa"></div>
-						</div>
-					</div>
-					<script type="text/javascript">
-						var preavailabilitySTR = "{{ this.preavailability }}";
-						var preavailabilityARR = preavailabilitySTR.split(":");
-						
-						for(var i = startPre;i <= endPre;i++) {
-							if($.inArray("pre" + i, preavailabilityARR) == -1) {
-								$(".preavailability{{ this.id }} > .pre").append("<span class='text-danger'>" + predays[i] + "</span><br>");
-							} else {
-								$(".preavailability{{ this.id }} > .pre").append("<span class='text-success'>" + predays[i] + "</span><br>");
-							}
-						}
-						
-						var availabilitySTR = "{{ this.availability }}";
-						var availabilityARR = availabilitySTR.split(":");
-						
-						for(var i = startWeek;i <= endWeek;i++) {
-							if($.inArray("fr" + i, availabilityARR) == -1) {
-								$(".availability{{ this.id }} > .fr").append("<span class='text-danger'>" + fridays[i] + "</span><br>");
-							} else {
-								$(".availability{{ this.id }} > .fr").append("<span class='text-success'>" + fridays[i] + "</span><br>");
-							}
-							
-							if($.inArray("sa" + i, availabilityARR) == -1) {
-								$(".availability{{ this.id }} > .sa").append("<span class='text-danger'>" + saturdays[i] + "</span><br>");
-							} else {
-								$(".availability{{ this.id }} > .sa").append("<span class='text-success'>" + saturdays[i] + "</span><br>");
-							}
-						}
-					</script>
+				{{#if (eq appListType 'Hired')}}
+					{{#each appList}}
+						{{> management/applicationlistitem}}
+					{{/each}}
 				{{else}}
-					<div class="list-group-item">
-						<center>No Applications Found!</center>
-					</div>
-				{{/each}}
+					{{#if (gt user.accessLvl 3)}}
+						{{#each appList}}
+							{{#if (eq null this.position.id) }}
+								{{> management/applicationlistitem}}
+							{{/if}}
+						{{/each}}
+					{{/if}}
+					{{#each positions}}
+						{{#if (or (gt ../user.accessLvl 3) (eq id ../user.position))}}
+							<div class="row list-group-header" data-header-position-id="{{ this.id }}">
+								<div class="col">
+									<h3><center>{{this.title}}</center></h3>
+								</div>
+							</div>
+							{{#each ../appList}}
+								{{#if (eq ../id this.position.id) }}
+									{{> management/applicationlistitem}}
+								{{/if}}
+							{{/each}}
+						{{/if}}
+					{{/each}}
+				{{/if}}
 			</div>
 		</div>
 	</div>

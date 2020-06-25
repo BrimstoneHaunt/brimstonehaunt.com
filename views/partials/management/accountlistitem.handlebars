@@ -1,0 +1,63 @@
+<div class="list-group-item" data-item-position-id="{{ this.position.id }}">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 my-2">
+                    <span>{{this.firstName}} {{this.middleName}} {{this.lastName}}</span>
+                </div>
+                <div class="col-lg-4 col-md-6 my-2">
+                    <span>{{this.email}}</span>
+                </div>
+                <div class="col-lg-2 col-md-6 my-2">
+                    <span>{{{mapAccessLvl this.accessLvl}}}</span>
+                </div>
+                <div class="col-lg-2 col-md-6 my-2">
+                    {{#if (gteq @root.user.accessLvl 5)}}
+                        <span>{{currency this.payrate}}/hr</span>
+                    {{else if (eq @root.user.id this.id)}}
+                        <span>{{currency this.payrate}}/hr</span>
+                    {{else if (gt @root.user.accessLvl 2)}}
+                        {{#if (gt @root.user.accessLvl this.accessLvl)}}
+                            <span>{{currency this.payrate}}/hr</span>
+                        {{else}}
+                            <span>$XX.00/hr</span>
+                        {{/if}}
+                    {{else}}
+                        <span>$XX.00/hr</span>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <button id="user{{ this.id }}" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user{{ this.id }}ActionsDropdownButton">
+                {{#if (gteq @root.user.accessLvl 5)}}
+                    <button class="btn dropdown-item" onclick="openAdminAccountModal({{ this.id }});">Edit</button>
+                {{else if (gt @root.user.accessLvl this.accessLvl)}}
+                    <button class="btn dropdown-item" onclick="openAdminAccountModal({{ this.id }});">Edit</button>
+                {{/if}}
+                
+                {{#if (gteq @root.user.accessLvl 5)}}
+                    <button class="btn dropdown-item" onclick="openTimeSheet({{ this.id }});">View Time Sheet</button>
+                {{else if (eq @root.user.id this.id)}}
+                    <button class="btn dropdown-item" onclick="openTimeSheet({{ this.id }});">View Time Sheet</button>
+                {{else if (gt @root.user.accessLvl 2)}}
+                    {{#if (gt @root.user.accessLvl this.accessLvl)}}
+                        <button class="btn dropdown-item" onclick="openTimeSheet({{ this.id }});">View Time Sheet</button>
+                    {{/if}}
+                {{/if}}
+                
+                {{#if this.application}}
+                    <button class="btn dropdown-item" onclick="openAdminAppModal({{ this.id }});">View Application</button>
+                {{/if}}
+            </div>
+            <input type="hidden" id="{{this.id}}-first" value="{{this.firstName}}">
+            <input type="hidden" id="{{this.id}}-middle" value="{{this.middleName}}">
+            <input type="hidden" id="{{this.id}}-last" value="{{this.lastName}}">
+            <input type="hidden" id="{{this.id}}-email" value="{{this.email}}">
+            <input type="hidden" id="{{this.id}}-accessLvl" value="{{this.accessLvl}}">
+            <input type="hidden" id="{{this.id}}-position" value="{{this.position.id}}">
+            <input type="hidden" id="{{this.id}}-payrate" value="{{this.payrate}}">
+        </div>
+    </div>
+</div>

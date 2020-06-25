@@ -27,6 +27,9 @@ module.exports = {
 			required: true,
 			defaultsTo: '1'
 		},
+		position: {
+			model: 'position'
+		},
 		payrate: {
 			type: 'float',
 			required: false,

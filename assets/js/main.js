@@ -81,7 +81,8 @@ function stopTimeClockNow() {
 function clockout(user) {
     $.post("/timeclock/clockout/user", { user: user }, function(resp) {
         var newContent = $(resp).filter("#clockedin-page").html();
-        $("#clockedin-page").html(newContent);
+		$("#clockedin-page").html(newContent);
+		initRecordLists();
     }).fail(function() {
         alert("Something went wrong!");
     });
@@ -92,7 +93,8 @@ function clockout(user) {
 function clockoutAll() {
     $.post("/timeclock/clockout/all", {  }, function(resp) {
         var newContent = $(resp).filter("#clockedin-page").html();
-        $("#clockedin-page").html(newContent);
+		$("#clockedin-page").html(newContent);
+		initRecordLists();
     }).fail(function() {
         alert("Something went wrong!");
     });
@@ -101,6 +103,12 @@ function clockoutAll() {
 }
 
 function openTimeClockModal(that, type) {
+	window.timesheetEmployeeID = "";
+	if($("#timesheetUser").length > 0) {
+		window.timesheetEmployeeID = $("#timesheetUser").val();
+	}
+	$("#time-sheet-modal").modal("hide");
+
 	if(that) {
 		$("#timeclock-modal").data("entryid", $(that).data("entryid"));
 		$("#timeclock-modal .start-time-input").val($(that).data("starttime"));
@@ -114,31 +122,61 @@ function openTimeClockModal(that, type) {
 		$("#timeclock-modal").data("entryid", "NEW");
 	}
 	
-	$("#timeclock-modal").modal();
+	$("#timeclock-modal").modal("show");
 }
 
 function updateTimeEntry() {
 	var id = $("#timeclock-modal").data("entryid");
-	var startTime = $("#timeclock-modal .start-time-input").val();
-	var endTime = $("#timeclock-modal .end-time-input").val();
+	var startTime = $("#timeclock-modal .start-time-input") ? $("#timeclock-modal .start-time-input").val() : null;
+	var endTime = $("#timeclock-modal .end-time-input") ? $("#timeclock-modal .end-time-input").val() : null;
 	var comments = $("#timeclock-modal .comments-input").val();
 	var url = "";
-	
-	$("#timeclock-modal").modal('hide');
-	
-	if(id == "NEW") {
-		url = "/timeclock/clockin";
+
+	if(startTime == null && endTime == null) {
+		$("#timeclock-modal").modal('hide');
+
+		url = "/timeclock/update/comment";
+		
+		$.post(url, { id: id, comments: comments }, function(resp) {
+			var newContent = $(resp).filter("#timeclock-page").html();
+			if($("#timeclock-page").length > 0) {
+				$("#timeclock-page").html(newContent);
+				initTimeClockPage();
+			} else {
+				setTimeout(function() { openTimeSheet(window.timesheetEmployeeID); }, 300);
+			}
+		}).fail(function() {
+			alert("Something went wrong!");
+		});
 	} else {
-		url = "/timeclock/update";
+		var now = Date.now();
+		var startTimeDate = new Date(startTime);
+		var endTimeDate = endTime ? new Date(endTime) : null;
+
+		if(startTimeDate && ((startTimeDate <= endTimeDate && endTimeDate <= now) || !endTimeDate)) {
+			$("#timeclock-modal").modal('hide');
+			
+			if(id == "NEW") {
+				url = "/timeclock/clockin";
+			} else {
+				url = "/timeclock/update";
+			}
+			
+			$.post(url, { id: id, startTime: startTime, endTime: endTime, comments: comments }, function(resp) {
+				var newContent = $(resp).filter("#timeclock-page").html();
+				if($("#timeclock-page").length > 0) {
+					$("#timeclock-page").html(newContent);
+					initTimeClockPage();
+				} else {
+					setTimeout(function() { openTimeSheet(window.timesheetEmployeeID); }, 300);
+				}
+			}).fail(function() {
+				alert("Something went wrong!");
+			});
+		} else {
+			alert("End time must be after start time and cannot be in the future!");
+		}
 	}
-	
-	$.post(url, { id: id, startTime: startTime, endTime: endTime, comments: comments }, function(resp) {
-		var newContent = $(resp).filter("#timeclock-page").html();
-		$("#timeclock-page").html(newContent);
-		initTimeClockPage();
-	}).fail(function() {
-		alert("Something went wrong!");
-	});
 	
 	return false;
 }
@@ -193,6 +231,7 @@ function openAdminAccountModal(userID) {
 	$("#admin-account-modal input[name='lastName']").val($("#" + userID + "-last").val());
 	$("#admin-account-modal input[name='email']").val($("#" + userID + "-email").val());
 	$("#admin-account-modal select[name='accessLvl']").val($("#" + userID + "-accessLvl").val());
+	$("#admin-account-modal select[name='position']").val($("#" + userID + "-position").val());
 	$("#admin-account-modal input[name='payrate']").val($("#" + userID + "-payrate").val());
 	
 	$("#admin-account-modal").data("userid", userID);
@@ -207,13 +246,15 @@ function adminUpdateAccount() {
 	var last = $("#admin-account-modal input[name='lastName']").val();
 	var email = $("#admin-account-modal input[name='email']").val();
 	var accessLvl = $("#admin-account-modal select[name='accessLvl']").val();
+	var position = $("#admin-account-modal select[name='position']").val();
 	var payrate = $("#admin-account-modal input[name='payrate']").val();
 	
 	$("#admin-account-modal").modal('hide');
 	
-	$.post("/user/adminupdate", { id: id, first: first, middle: middle, last: last, email: email, accessLvl: accessLvl, payrate: payrate }, function(resp) {
+	$.post("/user/adminupdate", { id: id, first: first, middle: middle, last: last, email: email, accessLvl: accessLvl, payrate: payrate, position: position }, function(resp) {
 		var newContent = $(resp).filter("#accountlist-page").html();
 		$("#accountlist-page").html(newContent);
+		initRecordLists();
 	}).fail(function() {
 		alert("Something went wrong!");
 	});
@@ -240,7 +281,7 @@ function adminResetPassword() {
 }
 
 function adminDeleteAccount() {
-	if(confirm("Are you sure you want to delete this users account?")) {
+	if(confirm("Are you sure you want to deactivate this users account?")) {
 		var id = $("#admin-account-modal").data("userid");
 		
 		$("#admin-account-modal").modal('hide');
@@ -248,6 +289,25 @@ function adminDeleteAccount() {
 		$.post("/user/admindeleteaccount", { id: id }, function(resp) {
 			var newContent = $(resp).filter("#accountlist-page").html();
 			$("#accountlist-page").html(newContent);
+			initRecordLists();
+		}).fail(function() {
+			alert("Something went wrong!");
+		});
+	}
+	
+	return false;
+}
+
+function adminUndeleteAccount() {
+	if(confirm("Are you sure you want to reactivate this users account?")) {
+		var id = $("#admin-account-modal").data("userid");
+		
+		$("#admin-account-modal").modal('hide');
+		
+		$.post("/user/adminundeleteaccount", { id: id }, function(resp) {
+			var newContent = $(resp).filter("#accountlist-page").html();
+			$("#accountlist-page").html(newContent);
+			initRecordLists();
 		}).fail(function() {
 			alert("Something went wrong!");
 		});
@@ -272,6 +332,7 @@ function applicationHire(appID, appListType) {
 		$.post("/application/hire", { id: appID, appListType: appListType }, function(resp) {
 			var newContent = $(resp).filter("#applicationlist-page").html();
 			$("#applicationlist-page").html(newContent);
+			initRecordLists();
 		}).fail(function() {
 			alert("Something went wrong!");
 		});
@@ -282,6 +343,7 @@ function applicationHold(appID, appListType) {
 	$.post("/application/hold", { id: appID, appListType: appListType }, function(resp) {
 		var newContent = $(resp).filter("#applicationlist-page").html();
 		$("#applicationlist-page").html(newContent);
+		initRecordLists();
 	}).fail(function() {
 		alert("Something went wrong!");
 	});
@@ -291,6 +353,7 @@ function applicationReject(appID, appListType) {
 	$.post("/application/reject", { id: appID, appListType: appListType }, function(resp) {
 		var newContent = $(resp).filter("#applicationlist-page").html();
 		$("#applicationlist-page").html(newContent);
+		initRecordLists();
 	}).fail(function() {
 		alert("Something went wrong!");
 	});
@@ -318,6 +381,59 @@ function createPosition() {
 	return false;
 }
 
+function showEditPosition(id) {
+	cancelEditPosition();
+	
+	$("#position-" + id).fadeOut(function(){
+		$("#edit-position-" + id).fadeIn(function() {
+			$("[id^='edit-position-']:visible").hide();
+			$("[id^='position-']:hidden").show();
+			$("#position-" + id).hide();
+			$("#edit-position-" + id).show();
+		});
+	});
+
+	return false;
+}
+
+function cancelEditPosition() {
+	$("[id^='edit-position-']:visible").fadeOut('fast', function() {
+		$("[id^='position-']:hidden").fadeIn('fast');
+	});
+
+	$("input[type='text'], input[type='number']").each(function() {
+		$(this).val($(this).data('orig-value'));
+	});
+	$("input[type='checkbox']").each(function() {
+		$(this).prop('checked', $(this).data('orig-value') == 'checked');
+	});
+	
+	return false;
+}
+
+function deletePosition(id) {
+	if(confirm("Are you sure you wish to delete this position?")) {
+		$.post("/positions/delete", { id: id }, function(resp) {
+			var newContent = $(resp).filter("#positions-page").html();
+			$("#positions-page").html(newContent);
+		}).fail(function() {
+			alert("Something went wrong!");
+		});
+	}
+	return false;
+}
+
+function updatePosition(id) {
+	$.post("/positions/update", { id: id, title: $("#edit-position-" + id + " input[name=title]").val(), defaultPayrate: $("#edit-position-" + id + " input[name=defaultPayrate]").val(), canApply: $("#edit-position-" + id + " input[name=canApply]").is(":checked") }, function(resp) {
+		var newContent = $(resp).filter("#positions-page").html();
+		$("#positions-page").html(newContent);
+	}).fail(function() {
+		alert("Something went wrong!");
+	});
+
+	return false;
+}
+
 /* ----------------------------------------------------
   |                                                    |
   |	INIT                                               |
@@ -330,6 +446,27 @@ function initTimeClockPage() {
 			$(this).addClass("on-the-clock");
 		}
 	});
+}
+
+function initRecordLists() {
+	if($("[data-header-position-id]").length > 0) {
+		var message = "No Records Found!";
+		if($("#clockedin-page").length > 0) {
+			message = "No Clocked In Employees!";
+		} else if($("#accountlist-page").length > 0) {
+			message = "No Employees Found!";
+		} else if($("#applicationlist-page").length > 0) {
+			message = "No Applications Found!";
+		}
+
+		$("[data-header-position-id]").each(function() {
+			var curPosition = $(this).data("header-position-id");
+
+			if($("[data-item-position-id='" + curPosition + "']").length == 0) {
+				$(this).after("<div class='list-group-item'><center>" + message +  "</center></div>");
+			}
+		});
+	}
 }
 
 $(document).ready(function() {
@@ -382,22 +519,25 @@ $(document).ready(function() {
 			}
 		});
 	}
+
+	initRecordLists();
 }).on("scroll", function() {
-	var taglineDistance = $(window).scrollTop() - $('#tagline').offset().top;
-	var faqDistance = $(window).scrollTop() - $('#faq').offset().top;
-	
-	if(taglineDistance >= -150) {
-		$('#scythe').addClass('animate');
-	} else {
-		$('#scythe').removeClass('animate');
+	if($('#tagline').length > 0 && $('#faq').length > 0) {
+		var taglineDistance = $(window).scrollTop() - $('#tagline').offset().top;
+		var faqDistance = $(window).scrollTop() - $('#faq').offset().top;
+		
+		if(taglineDistance >= -150) {
+			$('#scythe').addClass('animate');
+		} else {
+			$('#scythe').removeClass('animate');
+		}
+		
+		if(faqDistance > -150) {
+			$('#zombie').addClass('animate');
+		} else {
+			$('#zombie').removeClass('animate');
+		}
 	}
-	
-	if(faqDistance > -150) {
-		$('#zombie').addClass('animate');
-	} else {
-		$('#zombie').removeClass('animate');
-	}
-	
 }).on("submit", "#giveaway-form", function() {
 	if($("input[name=code]").val() != "FREETIX19HH") {
 		alert("Invalid Code! The correct code for this giveaway can be found on our Facebook post.");

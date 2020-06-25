@@ -8,20 +8,19 @@ const bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
 	showCreate: function(req, res) {
-		return res.view('createuser', {
-			layout: 'management',
-			title: 'Create User',
-			isLoggedIn: req.session.isLoggedIn,
-			canAdmin: req.session.canAdmin,
-			user: req.session.user
+		Position.find({isDeleted: false}).exec(function(err, records) {
+			return res.view('createuser', {
+				layout: 'management',
+				title: 'Create User',
+				isLoggedIn: req.session.isLoggedIn,
+				canAdmin: req.session.canAdmin,
+				user: req.session.user,
+				positions: records
+			});
 		});
 	},
 	create: function(req, res) {
 		var pass = req.body.password;
-
-		if(!req.body.password) {
-			pass = (req.body.firstName.charAt(0) + req.body.lastName + "123").toLowerCase();
-		}
 
 		AccountService.createAccount(req.body, function(err) {
 			if(err) {
@@ -251,19 +250,38 @@ module.exports = {
 		});
 	},
 	list: function(req, res) {
-		User.find({isDeleted: false}).sort('lastName ASC').sort('firstName ASC').exec(function(err, records) {
-			return res.view('accountlist', {
-				layout: 'management',
-				title: 'Account List',
-				isLoggedIn: req.session.isLoggedIn,
-				canAdmin: req.session.canAdmin,
-				user: req.session.user,
-				accountList: records
+		User.find({isDeleted: false}).sort('lastName ASC').sort('firstName ASC').populate('position').exec(function(err, records) {
+			Position.find({isDeleted: false}).exec(function(err2, records2) {
+				return res.view('accountlist', {
+					layout: 'management',
+					title: 'Active Account List',
+					isLoggedIn: req.session.isLoggedIn,
+					canAdmin: req.session.canAdmin,
+					user: req.session.user,
+					accountList: records,
+					positions: records2
+				});
+			});
+		});
+	},
+	listDeleted: function(req, res) {
+		User.find({isDeleted: true}).sort('lastName ASC').sort('firstName ASC').populate('position').exec(function(err, records) {
+			Position.find({isDeleted: false}).exec(function(err2, records2) {
+				return res.view('accountlist', {
+					layout: 'management',
+					title: 'Inactive Account List',
+					isLoggedIn: req.session.isLoggedIn,
+					canAdmin: req.session.canAdmin,
+					user: req.session.user,
+					accountList: records,
+					positions: records2,
+					deletedList: true
+				});
 			});
 		});
 	},
 	adminUpdate: function(req, res) {		
-		User.update({id: req.body.id, isDeleted: false}, {email: req.body.email, accessLvl: req.body.accessLvl, payrate: req.body.payrate, firstName: req.body.first, middleName: req.body.middle, lastName: req.body.last}).exec(function(err, records) {
+		User.update({id: req.body.id, isDeleted: false}, {email: req.body.email, accessLvl: req.body.accessLvl, position: req.body.position, payrate: req.body.payrate, firstName: req.body.first, middleName: req.body.middle, lastName: req.body.last}).exec(function(err, records) {
 			if(err) {
 				return res.serverError(err);
 			}
@@ -280,8 +298,17 @@ module.exports = {
 			return res.redirect("/user/list");
 		});
 	},
+	adminUndelete: function(req, res) {		
+		User.update({id: req.body.id, isDeleted: true}, {isDeleted: false}).exec(function(err, records) {
+			if(err) {
+				return res.serverError(err);
+			}
+			
+			return res.redirect("/user/list/deleted");
+		});
+	},
 	getAppDataDisplay: function(req, res) {
-		User.find({id: req.body.id, isDeleted: false}).populate('application').exec(function(err, records) {
+		User.find({id: req.body.id}).populate('application').exec(function(err, records) {
 			if(records[0].application && records[0].application.position) {
 				Position.find({id: records[0].application.position}).exec(function(err2, records2){
 					records[0].application.position = records2[0];

@@ -1,82 +1,37 @@
-<div id="accountlist-page" class="container-fluid my-5">
+<div id="accountlist-page" class="container-fluid py-5">
 	<div class="row">
 		<div class="col">
-			<h1 class="ml-lg-3">Account List</h1>
+			<h1 class="ml-lg-3">{{ title }}</h1>
 		</div>
-		<div class="col-auto">
-			<a href="/user/create" class="btn btn-outline-primary">Create New Account</a>
-		</div>
+		{{#unless @root.deletedList}}
+			<div class="col-auto">
+				<a href="/user/create" class="btn btn-outline-primary">Create New Account</a>
+			</div>
+		{{/unless}}
 	</div>
 	<div class="row">
 		<div class="col">
 			<div class="list-group">
-				{{#each accountList}}
-					<div class="list-group-item">
-						<div class="row">
-							<div class="col-sm-10 col-8">
-								<div class="row">
-									<div class="col-lg-4 col-md-6 my-2">
-										<span>{{this.firstName}} {{this.middleName}} {{this.lastName}}</span>
-									</div>
-									<div class="col-lg-4 col-md-6 my-2">
-										<span>{{this.email}}</span>
-									</div>
-									<div class="col-lg-2 col-md-6 my-2">
-										<span>{{{mapAccessLvl this.accessLvl}}}</span>
-									</div>
-									<div class="col-lg-2 col-md-6 my-2">
-										{{#if (gteq ../user.accessLvl 5)}}
-											<span>{{currency this.payrate}}/hr</span>
-										{{else if (eq ../user.id this.id)}}
-											<span>{{currency this.payrate}}/hr</span>
-                                        {{else if (gt ../user.accessLvl 2)}}
-                                            {{#if (gt ../user.accessLvl this.accessLvl)}}
-                                               <span>{{currency this.payrate}}/hr</span>
-                                            {{else}}
-                                                <span>$XX.00/hr</span>
-                                            {{/if}}
-										{{else}}
-											<span>$XX.00/hr</span>
-										{{/if}}
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-2 col-4">
-                                <button id="user{{ this.id }}" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user{{ this.id }}ActionsDropdownButton">
-                                    {{#if (gteq ../user.accessLvl 5)}}
-                                        <button class="btn dropdown-item" onclick="openAdminAccountModal({{ this.id }});">Edit</button>
-                                    {{else if (gt ../user.accessLvl this.accessLvl)}}
-                                        <button class="btn dropdown-item" onclick="openAdminAccountModal({{ this.id }});">Edit</button>
-                                    {{/if}}
-                                    
-                                    {{#if (gteq ../user.accessLvl 5)}}
-                                        <button class="btn dropdown-item" onclick="openTimeSheet({{ this.id }});">View Time Sheet</button>
-                                    {{else if (eq ../user.id this.id)}}
-                                        <button class="btn dropdown-item" onclick="openTimeSheet({{ this.id }});">View Time Sheet</button>
-                                    {{else if (gt ../user.accessLvl 2)}}
-                                        {{#if (gt ../user.accessLvl this.accessLvl)}}
-                                            <button class="btn dropdown-item" onclick="openTimeSheet({{ this.id }});">View Time Sheet</button>
-                                        {{/if}}
-                                    {{/if}}
-                                    
-                                    {{#if this.application}}
-                                        <button class="btn dropdown-item" onclick="openAdminAppModal({{ this.id }});">View Application</button>
-                                    {{/if}}
-                                </div>
-                                <input type="hidden" id="{{this.id}}-first" value="{{this.firstName}}">
-                                <input type="hidden" id="{{this.id}}-middle" value="{{this.middleName}}">
-                                <input type="hidden" id="{{this.id}}-last" value="{{this.lastName}}">
-                                <input type="hidden" id="{{this.id}}-email" value="{{this.email}}">
-                                <input type="hidden" id="{{this.id}}-accessLvl" value="{{this.accessLvl}}">
-                                <input type="hidden" id="{{this.id}}-payrate" value="{{this.payrate}}">
+				{{#if (gt user.accessLvl 3)}}
+					{{#each accountList}}
+						{{#if (eq null this.position.id) }}
+							{{> management/accountlistitem}}
+						{{/if}}
+					{{/each}}
+				{{/if}}
+				{{#each positions}}
+					{{#if (or (gt ../user.accessLvl 3) (eq id ../user.position))}}
+						<div class="row list-group-header" data-header-position-id="{{ this.id }}">
+							<div class="col">
+								<h3><center>{{this.title}}</center></h3>
 							</div>
 						</div>
-					</div>
-				{{else}}
-					<div class="list-group-item">
-						<center>No Accounts Found!</center>
-					</div>
+						{{#each ../accountList}}
+							{{#if (eq ../id this.position.id) }}
+								{{> management/accountlistitem}}
+							{{/if}}
+						{{/each}}
+					{{/if}}
 				{{/each}}
 			</div>
 		</div>
@@ -92,52 +47,68 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="row">
-					<div class="col-sm-4">
-						<input name="firstName" class="form-control" type="text" required="required" placeholder="First Name"><br>
+				{{#unless @root.deletedList}}
+					<div class="row">
+						<div class="col">
+							<select name="position" class="form-control" required>
+								{{#each positions}}
+									<option value="{{id}}">{{title}}</option>
+								{{/each}}
+							</select>
+							<br>
+						</div>
 					</div>
-					<div class="col-sm-4">
-						<input name="middleName" class="form-control" type="text" placeholder="Middle Name"><br>
+					<div class="row">
+						<div class="col-sm-4">
+							<input name="firstName" class="form-control" type="text" required="required" placeholder="First Name"><br>
+						</div>
+						<div class="col-sm-4">
+							<input name="middleName" class="form-control" type="text" placeholder="Middle Name"><br>
+						</div>
+						<div class="col-sm-4">
+							<input name="lastName" class="form-control" type="text" required="required" placeholder="Last Name"><br>
+						</div>
 					</div>
-					<div class="col-sm-4">
-						<input name="lastName" class="form-control" type="text" required="required" placeholder="Last Name"><br>
+					<div class="row">
+						<div class="col-sm-4">
+							<input name="email" class="form-control" type="email" required="required" placeholder="Email Address"><br>
+						</div>
+						<div class="col-sm-4">
+							<select name="accessLvl" class="form-control">
+								<option value="1">Employee</option>
+								{{#if (gteq user.accessLvl 3)}}<option value="2">Supervisor</option>{{/if}}
+								{{#if (gteq user.accessLvl 4)}}<option value="3">Management</option>{{/if}}
+								{{#if (gteq user.accessLvl 5)}}<option value="4">Upper Management</option>{{/if}}
+								{{#if (gteq user.accessLvl 5)}}<option value="5">Administrator</option>{{/if}}
+							</select><br>
+						</div>
+						<div class="col-sm-4">
+							{{#if (gteq user.accessLvl 3)}}
+								<input name="payrate" class="form-control" type="Number" placeholder="Pay Rate"><br>
+							{{else}}
+								<input name="payrate" class="form-control d-none" type="Number" placeholder="Pay Rate" disabled="disabled"><br>
+							{{/if}}
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4">
-						<input name="email" class="form-control" type="email" required="required" placeholder="Email Address"><br>
+					<div class="row justify-content-center my-3">
+						<div class="col-auto">
+							<button class="btn btn-link" onclick="adminResetPassword();">Reset Password</button>
+						</div>
 					</div>
-					<div class="col-sm-4">
-						<select name="accessLvl" class="form-control">
-							<option value="1">Employee</option>
-							{{#if (gteq user.accessLvl 3)}}<option value="2">Supervisor</option>{{/if}}
-							{{#if (gteq user.accessLvl 4)}}<option value="3">Management</option>{{/if}}
-							{{#if (gteq user.accessLvl 5)}}<option value="4">Upper Management</option>{{/if}}
-							{{#if (gteq user.accessLvl 5)}}<option value="5">Administrator</option>{{/if}}
-						</select><br>
-					</div>
-					<div class="col-sm-4">
-						{{#if (gteq user.accessLvl 3)}}
-							<input name="payrate" class="form-control" type="Number" placeholder="Pay Rate"><br>
-						{{else}}
-							<input name="payrate" class="form-control d-none" type="Number" placeholder="Pay Rate" disabled="disabled"><br>
-						{{/if}}
-					</div>
-				</div>
-				<div class="row justify-content-center my-3">
-					<div class="col-auto">
-						<button class="btn btn-link" onclick="adminResetPassword();">Reset Password</button>
-					</div>
-				</div>
+				{{/unless}}
 				<div class="row justify-content-center">
 					<div class="col-6">
-						<button class="btn btn-block btn-danger" onclick="adminDeleteAccount();">Delete Account</button>
+						{{#if @root.deletedList}}
+							<button class="btn btn-block btn-success" onclick="adminUndeleteAccount();">Reactivate Account</button>
+						{{else}}
+							<button class="btn btn-block btn-danger" onclick="adminDeleteAccount();">Deactivate Account</button>
+						{{/if}}
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" onclick="adminUpdateAccount();">Save</button>
+				{{#unless @root.deletedList}}<button type="button" class="btn btn-primary" onclick="adminUpdateAccount();">Save</button>{{/unless}}
 			</div>
 		</div>
 	</div>
@@ -177,4 +148,45 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade" id="timeclock-modal" tabindex="-1" role="dialog" aria-labelledby="timeclockModalLabel" aria-hidden="true" data-entryid="">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="timeclockModalLabel">Time Clock Entry</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-6">
+						<label>Start Time</label>
+						<input type="datetime-local" class="form-control start-time-input">
+					</div>
+					<div class="col-6">
+						<label>End Time</label>
+						<input type="datetime-local" class="form-control end-time-input">
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col">
+						<label>Comments</label>
+						<textarea class="form-control comments-input" rows="5"></textarea>
+					</div>
+				</div>
+				<br>
+				<div class="row justify-content-center">
+					<div class="col-6">
+						<button class="btn btn-block btn-danger" onclick="deleteTimeEntry();">Delete Entry</button>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="setTimeout(function() { openTimeSheet(window.timesheetEmployeeID); }, 500);">Close</button>
+				<button type="button" class="btn btn-primary" onclick="updateTimeEntry();">Save</button>
+			</div>
+		</div>
+	</div>
 </div>

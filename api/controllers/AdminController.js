@@ -2,44 +2,100 @@ var moment = require('moment-timezone');
 
 module.exports = {
     index: function(req, res) {
-        User.count({isDeleted: false}, function(err1, count1) {
-            Timeclock.count({startTime: {'!': null }, endTime: null}, function(err2, count2) {
-                Application.count({status: 1}, function(err3, count3) {
-                    Application.count({status: 3}, function(err4, count4) {
-                        Application.count({status: 4}, function(err5, count5) {
-                            if(err1 || err2 || err3 || err4 || err5) {
-                                console.log(err1);
-                                console.log(err2);
-                                console.log(err3);
-                                console.log(err4);
-                                console.log(err5);
-                                
-                                return res.view('admin', {
-                                    layout: 'management',
-                                    title: "Admin",
-                                    isLoggedIn: req.session.isLoggedIn,
-                                    canAdmin: req.session.canAdmin,
-                                    user: req.session.user
+        if(req.session.user.accessLvl < 4) {
+            User.count({isDeleted: false, position: req.session.user.position}, function(err1, count1) {
+                Timeclock.find({startTime: {'!': null }, endTime: null}).populate('user').exec(function(err2, records) {
+                    Application.count({status: 1, position: req.session.user.position}, function(err3, count3) {
+                        Application.count({status: 3, position: req.session.user.position}, function(err4, count4) {
+                            Application.count({status: 4, position: req.session.user.position}, function(err5, count5) {
+                                User.count({isDeleted: true, position: req.session.user.position}, function(err6, count6) {
+                                    if(err1 || err2 || err3 || err4 || err5 || err6) {
+                                        console.log(err1);
+                                        console.log(err2);
+                                        console.log(err3);
+                                        console.log(err4);
+                                        console.log(err5);
+                                        console.log(err6);
+                                        
+                                        return res.view('admin', {
+                                            layout: 'management',
+                                            title: "Admin",
+                                            isLoggedIn: req.session.isLoggedIn,
+                                            canAdmin: req.session.canAdmin,
+                                            user: req.session.user
+                                        });
+                                    } else {
+                                        var count2 = 0;
+                                        for(var i = 0;i < records.length;i++) {
+                                            if(records[i].user.position == req.session.user.position) {
+                                                count2++;
+                                            }
+                                        }
+
+                                        return res.view('admin', {
+                                            layout: 'management',
+                                            title: "Admin",
+                                            isLoggedIn: req.session.isLoggedIn,
+                                            canAdmin: req.session.canAdmin,
+                                            numEmployees: count1,
+                                            numDeletedEmployees: count6,
+                                            numOnClock: count2,
+                                            numPendingApps: count3,
+                                            numHeldApps: count4,
+                                            numRejectedApps: count5,
+                                            user: req.session.user
+                                        });
+                                    }
                                 });
-                            } else {									
-                                return res.view('admin', {
-                                    layout: 'management',
-                                    title: "Admin",
-                                    isLoggedIn: req.session.isLoggedIn,
-                                    canAdmin: req.session.canAdmin,
-                                    numEmployees: count1,
-                                    numOnClock: count2,
-                                    numPendingApps: count3,
-                                    numHeldApps: count4,
-                                    numRejectedApps: count5,
-                                    user: req.session.user
-                                });
-                            }
+                            });
                         });
                     });
                 });
             });
-        });
+        } else {
+            User.count({isDeleted: false}, function(err1, count1) {
+                Timeclock.count({startTime: {'!': null }, endTime: null}, function(err2, count2) {
+                    Application.count({status: 1}, function(err3, count3) {
+                        Application.count({status: 3}, function(err4, count4) {
+                            Application.count({status: 4}, function(err5, count5) {
+                                User.count({isDeleted: true}, function(err6, count6) {
+                                    if(err1 || err2 || err3 || err4 || err5 || err6) {
+                                        console.log(err1);
+                                        console.log(err2);
+                                        console.log(err3);
+                                        console.log(err4);
+                                        console.log(err5);
+                                        console.log(err6);
+                                        
+                                        return res.view('admin', {
+                                            layout: 'management',
+                                            title: "Admin",
+                                            isLoggedIn: req.session.isLoggedIn,
+                                            canAdmin: req.session.canAdmin,
+                                            user: req.session.user
+                                        });
+                                    } else {
+                                        return res.view('admin', {
+                                            layout: 'management',
+                                            title: "Admin",
+                                            isLoggedIn: req.session.isLoggedIn,
+                                            canAdmin: req.session.canAdmin,
+                                            numEmployees: count1,
+                                            numDeletedEmployees: count6,
+                                            numOnClock: count2,
+                                            numPendingApps: count3,
+                                            numHeldApps: count4,
+                                            numRejectedApps: count5,
+                                            user: req.session.user
+                                        });
+                                    }
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        }
     },
     showPositions: function(req, res) {
         Position.find({isDeleted: false}).exec(function(err, records) {
@@ -66,6 +122,37 @@ module.exports = {
             }
             
             return res.redirect("/positions");
+        });
+    },
+    updatePosition: function(req, res) {
+        Position.update({id: req.body.id}, {
+            title: req.body.title,
+            defaultPayRate: req.body.defaultPayrate,
+            canApply: req.body.canApply
+        }).exec(function(err, records) {
+            if(err) {
+                console.log(err);
+                return res.serverError(err);
+            }
+            
+            return res.redirect("/positions");
+        });
+    },
+    deletePosition: function(req, res) {
+        User.update({position: req.body.id}, {position: null}).exec(function(err1, records1) {
+            if(err1) {
+                console.log(err1);
+                return res.serverError(err1);
+            }
+
+            Position.update({id: req.body.id}, {isDeleted: true}).exec(function(err2, records2) {
+                if(err2) {
+                    console.log(err2);
+                    return res.serverError(err2);
+                }
+                
+                return res.redirect("/positions");
+            });
         });
     },
     getBadgescanauth: function(req, res) {

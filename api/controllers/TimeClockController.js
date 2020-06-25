@@ -75,11 +75,15 @@ module.exports = {
                     var duration = (Math.round(diffHrs * 4) / 4).toFixed(2);
                     var startMoment = moment(start);
                     var endMoment = end ? moment(end) : null;
+                    var startTimeLocal = startMoment.tz('America/New_York').format('YYYY-MM-DDTHH:mm');
+                    var endTimeLocal = end ? endMoment.tz('America/New_York').format('YYYY-MM-DDTHH:mm') : "";
                     
                     finalData.push({ 
                         id: elem.id,
                         startTime: startMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A'),
                         endTime: endMoment ? endMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A') : "",
+                        startTimeLocal: startTimeLocal,
+                        endTimeLocal: endTimeLocal,
                         comments: elem.comments, 
                         duration: duration + " hrs"
                     });
@@ -160,7 +164,16 @@ module.exports = {
         var startTime = moment.tz(req.body.startTime, 'YYYY-MM-DDTHH:mm', 'America/New_York').toDate();
         var endTime = req.body.endTime ? moment.tz(req.body.endTime, 'YYYY-MM-DDTHH:mm', 'America/New_York').toDate() : null;
         
-        Timeclock.update({user: req.session.user.id, id: req.body.id}, {startTime: startTime, endTime: endTime, comments: req.body.comments}).exec(function(err, records) {
+        Timeclock.update({id: req.body.id}, {startTime: startTime, endTime: endTime, comments: req.body.comments}).exec(function(err, records) {
+            if(err) {
+                return res.serverError(err);
+            }
+            
+            return res.redirect("/timeclock");
+        });
+    },
+    updateComment: function(req, res) {
+        Timeclock.update({id: req.body.id}, {comments: req.body.comments}).exec(function(err, records) {
             if(err) {
                 return res.serverError(err);
             }
@@ -169,7 +182,7 @@ module.exports = {
         });
     },
     delete: function(req, res) {		
-        Timeclock.destroy({user: req.session.user.id, id: req.body.id}).exec(function(err, records) {
+        Timeclock.destroy({id: req.body.id}).exec(function(err, records) {
             if(err) {
                 return res.serverError(err);
             }
@@ -195,7 +208,7 @@ module.exports = {
                 console.log(err);
                 return res.serverError("Something went wrong. Unable to export time sheet data.");
             } else {
-                var CSV_STR = "Employee,Duration,Rate,Pay\r\n";
+                var CSV_STR = "Export Range: " + req.body.startExport + " through " + req.body.endExport + "\r\n\r\nEmployee,Duration,Rate,Pay\r\n";
                 records.forEach(function(user) {
                     if(user.timeEntries.length > 0) {
                         var totalDuration = 0;
@@ -278,42 +291,46 @@ module.exports = {
     },
     clockedIn: function(req, res) {
         Timeclock.find({startTime: {'!': null }, endTime: null}).populate('user').sort('startTime ASC').exec(function(err, records) {
-            if(err) {
-                console.log(err);
-                
-                return res.view('clockedin', {
-                    layout: 'management',
-                    title: "Clocked In Employees",
-                    isLoggedIn: req.session.isLoggedIn,
-                    canAdmin: req.session.canAdmin,
-                    user: req.session.user
-                });
-            } else {
-                var timeEntries = [];
-                records.forEach(function(elem) {
-                    var start = elem.startTime;
-                    var diffHrs = ((((new Date() - start) / 1000) / 60) / 60);
-                    var duration = (Math.round(diffHrs * 4) / 4).toFixed(2);
-                    var startMoment = moment(start);
-                    var startTimeLocal = startMoment.tz('America/New_York').format('YYYY-MM-DDTHH:mm');
+            Position.find({isDeleted: false}).exec(function(err2, records2) {
+                if(err || err2) {
+                    console.log(err);
+                    console.log(err2);
                     
-                    timeEntries.push({ 
-                        id: elem.id,
-                        startTime: startMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A'),
-                        duration: duration + " hrs",
-                        user: elem.user
+                    return res.view('clockedin', {
+                        layout: 'management',
+                        title: "Clocked In Employees",
+                        isLoggedIn: req.session.isLoggedIn,
+                        canAdmin: req.session.canAdmin,
+                        user: req.session.user
                     });
-                });
-                
-                return res.view('clockedin', {
-                    layout: 'management',
-                    title: "Clocked In Employees",
-                    isLoggedIn: req.session.isLoggedIn,
-                    canAdmin: req.session.canAdmin,
-                    timeEntries: timeEntries,
-                    user: req.session.user
-                });
-            }
+                } else {
+                    var timeEntries = [];
+                    records.forEach(function(elem) {
+                        var start = elem.startTime;
+                        var diffHrs = ((((new Date() - start) / 1000) / 60) / 60);
+                        var duration = (Math.round(diffHrs * 4) / 4).toFixed(2);
+                        var startMoment = moment(start);
+                        var startTimeLocal = startMoment.tz('America/New_York').format('YYYY-MM-DDTHH:mm');
+                        
+                        timeEntries.push({ 
+                            id: elem.id,
+                            startTime: startMoment.tz('America/New_York').format('ddd, MMM D, YYYY h:mm A'),
+                            duration: duration + " hrs",
+                            user: elem.user
+                        });
+                    });
+                    
+                    return res.view('clockedin', {
+                        layout: 'management',
+                        title: "Clocked In Employees",
+                        isLoggedIn: req.session.isLoggedIn,
+                        canAdmin: req.session.canAdmin,
+                        timeEntries: timeEntries,
+                        user: req.session.user,
+                        positions: records2
+                    });
+                }
+            });
         });
     },
     badgescan: function(req, res) {

@@ -1,0 +1,16 @@
+<div class="list-group-item" data-item-position-id="{{ this.user.position }}">
+    <div class="row">
+        <div class="col-md">
+            <span>{{ this.user.firstName }} {{ this.user.middleName }} {{ this.user.lastName }}</span>
+        </div>
+        <div class="col-md">
+            <span>{{ this.startTime }}</span>
+        </div>
+        <div class="col">
+            <span>{{ this.duration }}</span>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-sm btn-outline-danger" onclick="clockout({{ this.user.id }});">Clock Out</button>
+        </div>
+    </div>
+</div>

@@ -12,8 +12,8 @@
 					</div>
 					<div class="row">
 						<div class="col mt-2">
-							<select name="position" class="form-control">
-								<option value="0">Any</option>
+							<select name="position" class="form-control" required>
+								<option value="">Choose a Position</option>
 								{{#each positions}}
 									<option value="{{id}}">{{title}}</option>
 								{{/each}}
@@ -80,6 +80,25 @@
 					<div class="col">
 						<input name="over16" type="radio" value="y" checked><label for="">Yes</label>
 						<input name="over16" type="radio" value="n"><label for="">No</label>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<span>How did you hear about us?</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col mt-2">
+						<select name="refferedfrom" class="form-control" required>
+							<option value="">Choose a response</option>
+							<option value="Internet">Internet</option>
+							<option value="Friend/Family">Friend/Family</option>
+							<option value="Worked Here Before">Worked Here Before</option>
+							<option value="Other">Other</option>
+						</select>
+					</div>
+					<div class="col mt-2">
+						<input name="refferedfromother" type="text" class="form-control" placeholder="If 'Other' please explain">
 					</div>
 				</div>
 				<div class="row mt-4">

@@ -30,5 +30,9 @@ module.exports = {
 			required: true,
 			defaultsTo: false
 		},
+		employees: {
+			collection: 'user',
+			via: 'position'
+		}
 	}
 };

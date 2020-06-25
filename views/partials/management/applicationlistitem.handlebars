@@ -1,0 +1,155 @@
+<div class="list-group-item list-group-item-action" data-item-position-id="{{ this.position.id }}" data-target="#app{{this.id}}-content" data-appid="{{this.id}}" onclick="">
+    <div class="row justify-content-center">
+        <div class="col">
+            <div class="row">
+                <div class="col-md-2">
+                    {{#if this.position}}
+                        {{ this.position.title }}
+                    {{else}}
+                        Any
+                    {{/if}}
+                </div>
+                <div class="col-md-4">
+                    {{ this.firstName }} {{ this.middleName }} {{ this.lastName }}
+                </div>
+                <div class="col-md-4">
+                    {{ this.email }}
+                </div>
+                <div class="col-md-2">
+                    {{#if this.over16 }}
+                        <span class="text-success">Over 16</span>
+                    {{else}}
+                        <span class="text-danger">Under 16</span>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        {{#if (neq @root.appListType 'Hired')}}
+            <div class="col-auto">
+                <div class="btn-group ">
+                    <button type="button" class="btn btn-success btn-sm application-action" data-action="hire" data-appid="{{this.id}}" data-applisttype="{{@root.appListType}}">Hire</button>
+                    {{#if (neq @root.appListType 'Held')}}
+                        <button type="button" class="btn btn-warning btn-sm application-action" data-action="hold" data-appid="{{this.id}}" data-applisttype="{{@root.appListType}}">Hold</button>
+                    {{/if}}
+                    {{#if (neq @root.appListType 'Rejected')}}
+                        <button type="button" class="btn btn-danger btn-sm application-action" data-action="reject" data-appid="{{this.id}}" data-applisttype="{{@root.appListType}}">Reject</button>
+                    {{/if}}
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</div>
+<div class="list-group-item {{#if (neq @root.appListType 'Hired')}}collapse{{/if}} py-3 app-content" id="app{{this.id}}-content">
+    <div class="row">
+        <div class="col-md-4 my-2">
+            {{#if this.returning_worker }}
+                Returning Employee
+            {{else}}
+                New Employee
+            {{/if}}
+        </div>
+        <div class="col-md-4 my-2">
+            {{ this.phone }}
+        </div>
+        <div class="col-md-4 my-2">
+            {{ this.street }} {{ this.city }}, {{ this.state }} {{ this.zip }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 my-2">
+            {{ this.previous_role }}
+        </div>
+        <div class="col-md-4 my-2">
+            {{ this.previous_haunt_work }}
+        </div>
+        <div class="col-md-4 my-2">
+            {{ this.comments }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 my-2">
+            Height: {{ this.height }}
+        </div>
+        <div class="col-md-4 my-2">
+            Gender: {{ this.gender }}
+        </div>
+        <div class="col-md-4 my-2">
+            Shirt Size: {{ this.shirt_size }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 my-2">
+            Womens Pant Size: {{ this.pant_size }}
+        </div>
+        <div class="col-md-4 my-2">
+            Mens Pant Waist: {{ this.pant_waist }}
+        </div>
+        <div class="col-md-4 my-2">
+            Mens Pant Length: {{ this.pant_length }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 my-2">
+            {{#if this.makeup_allergies }}
+                Has makeup allergies
+            {{else}}
+                Does not have any makeup allergies
+            {{/if}}
+        </div>
+        <div class="col-md-4 my-2">
+            {{#if this.glasses }}
+                Wears glasses
+            {{else}}
+                Does not wear glasses
+            {{/if}}
+        </div>
+        <div class="col-md-4 my-2">
+            {{#if this.contacts }}
+                Wears contacts
+            {{else}}
+                Does not wear contacts
+            {{/if}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col my-2 text-center">
+            Heard about us from: {{ this.refferedfrom }}
+        </div>
+    </div>
+    <div class="row my-3 justify-content-center preavailability{{ this.id }}">
+        <div class="col-auto pre"></div>
+    </div>
+    <div class="row my-3 justify-content-center availability{{ this.id }}">
+        <div class="col-auto fr"></div>
+        <div class="col-auto sa"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    var preavailabilitySTR = "{{ this.preavailability }}";
+    var preavailabilityARR = preavailabilitySTR.split(":");
+    
+    for(var i = startPre;i <= endPre;i++) {
+        if($.inArray("pre" + i, preavailabilityARR) == -1) {
+            $(".preavailability{{ this.id }} > .pre").append("<span class='text-danger'>" + predays[i] + "</span><br>");
+        } else {
+            $(".preavailability{{ this.id }} > .pre").append("<span class='text-success'>" + predays[i] + "</span><br>");
+        }
+    }
+    
+    var availabilitySTR = "{{ this.availability }}";
+    var availabilityARR = availabilitySTR.split(":");
+    
+    for(var i = startWeek;i <= endWeek;i++) {
+        if($.inArray("fr" + i, availabilityARR) == -1) {
+            $(".availability{{ this.id }} > .fr").append("<span class='text-danger'>" + fridays[i] + "</span><br>");
+        } else {
+            $(".availability{{ this.id }} > .fr").append("<span class='text-success'>" + fridays[i] + "</span><br>");
+        }
+        
+        if($.inArray("sa" + i, availabilityARR) == -1) {
+            $(".availability{{ this.id }} > .sa").append("<span class='text-danger'>" + saturdays[i] + "</span><br>");
+        } else {
+            $(".availability{{ this.id }} > .sa").append("<span class='text-success'>" + saturdays[i] + "</span><br>");
+        }
+    }
+</script>

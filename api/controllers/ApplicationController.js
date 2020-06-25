@@ -29,6 +29,7 @@ module.exports = {
 				});
 			} else {
 				var position = req.body.position == 0 ? null : req.body.position;
+				var refferedfrom = req.body.refferedfromother ? req.body.refferedfrom + ": " + req.body.refferedfromother : req.body.refferedfrom;
 				var over16 = req.body.over16 == 'y';
 				var returning_worker = req.body.returning_worker == 'y';
 				var makeup_allergies = req.body.makeup_allergies == 'y';
@@ -51,7 +52,7 @@ module.exports = {
 					availability += elem;
 				});
 				
-				Application.create({firstName: req.body.first, middleName: req.body.middle, lastName: req.body.last, street: req.body.street, city: req.body.city, state: req.body.state, zip: req.body.zip, email: req.body.email, phone: req.body.phone, over16: over16, returning_worker: returning_worker, previous_role: req.body.previous_role, previous_haunt_work: req.body.previous_haunt_work, comments: req.body.comments, height: req.body.height, gender: req.body.gender, shirt_size: req.body.shirt_size, pant_size: req.body.pant_size, pant_waist: req.body.pant_waist, pant_length: req.body.pant_length, makeup_allergies: makeup_allergies, glasses: glasses, contacts: contacts, preavailability: preavailability, availability: availability, position: position}).exec(function(err, records) {
+				Application.create({firstName: req.body.first, middleName: req.body.middle, lastName: req.body.last, street: req.body.street, city: req.body.city, state: req.body.state, zip: req.body.zip, email: req.body.email, phone: req.body.phone, over16: over16, returning_worker: returning_worker, previous_role: req.body.previous_role, previous_haunt_work: req.body.previous_haunt_work, comments: req.body.comments, height: req.body.height, gender: req.body.gender, shirt_size: req.body.shirt_size, pant_size: req.body.pant_size, pant_waist: req.body.pant_waist, pant_length: req.body.pant_length, makeup_allergies: makeup_allergies, glasses: glasses, contacts: contacts, preavailability: preavailability, availability: availability, position: position, refferedfrom: refferedfrom}).exec(function(err, records) {
 					if(err) {
 						console.log(err);
 						return res.view('apply', {
@@ -72,40 +73,49 @@ module.exports = {
 	},
 	pendingList: function(req, res) {
 		Application.find({status: 1}).sort('createdAt ASC').populate('position').exec(function(err, records) {
-			return res.view('applicationlist', {
-				layout: 'management',
-				title: 'Application List',
-				isLoggedIn: req.session.isLoggedIn,
-				canAdmin: req.session.canAdmin,
-				user: req.session.user,
-				appListType: "Pending",
-				appList: records
+			Position.find({isDeleted: false}).exec(function(err2, records2) {
+				return res.view('applicationlist', {
+					layout: 'management',
+					title: 'Application List',
+					isLoggedIn: req.session.isLoggedIn,
+					canAdmin: req.session.canAdmin,
+					user: req.session.user,
+					appListType: "Pending",
+					appList: records,
+					positions: records2
+				});
 			});
 		});
 	},
 	heldList: function(req, res) {
 		Application.find({status: 3}).sort('createdAt ASC').populate('position').exec(function(err, records) {
-			return res.view('applicationlist', {
-				layout: 'management',
-				title: 'Application List',
-				isLoggedIn: req.session.isLoggedIn,
-				canAdmin: req.session.canAdmin,
-				user: req.session.user,
-				appListType: "Held",
-				appList: records
+			Position.find({isDeleted: false}).exec(function(err2, records2) {
+				return res.view('applicationlist', {
+					layout: 'management',
+					title: 'Application List',
+					isLoggedIn: req.session.isLoggedIn,
+					canAdmin: req.session.canAdmin,
+					user: req.session.user,
+					appListType: "Held",
+					appList: records,
+					positions: records2
+				});
 			});
 		});
 	},
 	rejectedList: function(req, res) {
 		Application.find({status: 4}).sort('createdAt ASC').populate('position').exec(function(err, records) {
-			return res.view('applicationlist', {
-				layout: 'management',
-				title: 'Application List',
-				isLoggedIn: req.session.isLoggedIn,
-				canAdmin: req.session.canAdmin,
-				user: req.session.user,
-				appListType: "Rejected",
-				appList: records
+			Position.find({isDeleted: false}).exec(function(err2, records2) {
+				return res.view('applicationlist', {
+					layout: 'management',
+					title: 'Application List',
+					isLoggedIn: req.session.isLoggedIn,
+					canAdmin: req.session.canAdmin,
+					user: req.session.user,
+					appListType: "Rejected",
+					appList: records,
+					positions: records2
+				});
 			});
 		});
 	},
@@ -143,7 +153,7 @@ module.exports = {
 							});
 						});
 					} else { // Otherwise create new account
-						AccountService.createAccount({email: records[0].email, accessLvl: 1, firstName: records[0].firstName, middleName: records[0].middleName, lastName: records[0].lastName, application: records[0]}, function(error) {
+						AccountService.createAccount({email: records[0].email, accessLvl: 1, firstName: records[0].firstName, middleName: records[0].middleName, lastName: records[0].lastName, application: records[0], position: records[0].position}, function(error) {
 							if(error) {
 								return res.serverError(error);
 							}
