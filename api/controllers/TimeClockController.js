@@ -348,7 +348,7 @@ module.exports = {
                                 message: "Invalid Authcode!"
                             });
                         } else {
-                            req.session.badgescan = true;
+                            res.cookie('badgescan', { auth: true }, { maxAge: 43200000 });
                             return res.view('badgescan', {
                                 layout: 'bare',
                                 title: "Badge Scan"
@@ -360,43 +360,50 @@ module.exports = {
         }
     },
     badgescanClockInOut: function(req, res) {
-        if(req.session.badgescan) {
+        if(req.cookies && req.cookies.badgescan && req.cookies.badgescan.auth) {
             var empID = req.body.empID;
             console.log("Employee ID " + empID + " scanning badge.");
 
-            User.find({id: empID, isDeleted: false}).exec(function(err, records) {
-                if(err){
-                    console.log(err);
-                    return res.serverError(err);
-                } else if(records.length == 1) {
-                    var employee = records[0];
+            if(!empID.includes("BSH_")) {
+                return res.json({ error: false, success: false, message: "Employee Not Found!" });
+            } else {
 
-                    Timeclock.find({user: empID, startTime: {'!': null }, endTime: null}).exec(function(err1, records1) {
-                        if(err1) {
-                            console.log(err1);
-                            return res.serverError(err1);
-                        } else if (records1.length > 0) {
-                            Timeclock.update({user: empID, startTime: {'!': null }, endTime: null}, {endTime: new Date()}).exec(function(err2, records2) {
-                                if(err2) {
-                                    return res.serverError(err2);
-                                }
-                                
-                                return res.json({ error: false, success: true, message: employee.firstName + " " + employee.lastName + " clocked out." });
-                            });
-                        } else {
-                            Timeclock.create({startTime: new Date(), comments: "Badge Scan", user: empID}).exec(function(err2, records2) {
-                                if(err2) {
-                                    return res.serverError(err2);
-                                }
-                                
-                                return res.json({ error: false, success: true, message: employee.firstName + " " + employee.lastName + " clocked in." });
-                            });
-                        }
-                    });
-                } else {
-                    return res.json({ error: false, success: false, message: "Employee Not Found!" });
-                }
-            });
+                empID = empID.replace('BSH_','');
+
+                User.find({id: empID, isDeleted: false}).exec(function(err, records) {
+                    if(err){
+                        console.log(err);
+                        return res.serverError(err);
+                    } else if(records.length == 1) {
+                        var employee = records[0];
+
+                        Timeclock.find({user: empID, startTime: {'!': null }, endTime: null}).exec(function(err1, records1) {
+                            if(err1) {
+                                console.log(err1);
+                                return res.serverError(err1);
+                            } else if (records1.length > 0) {
+                                Timeclock.update({user: empID, startTime: {'!': null }, endTime: null}, {endTime: new Date()}).exec(function(err2, records2) {
+                                    if(err2) {
+                                        return res.serverError(err2);
+                                    }
+                                    
+                                    return res.json({ error: false, success: true, message: employee.firstName + " " + employee.lastName + " clocked out." });
+                                });
+                            } else {
+                                Timeclock.create({startTime: new Date(), comments: "Badge Scan", user: empID}).exec(function(err2, records2) {
+                                    if(err2) {
+                                        return res.serverError(err2);
+                                    }
+                                    
+                                    return res.json({ error: false, success: true, message: employee.firstName + " " + employee.lastName + " clocked in." });
+                                });
+                            }
+                        });
+                    } else {
+                        return res.json({ error: false, success: false, message: "Employee Not Found!" });
+                    }
+                });
+            }
         } else {
             return res.json({ error: true, success: false, message: "Authorization Expired!" });
         }

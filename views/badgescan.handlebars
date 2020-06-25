@@ -1,29 +1,63 @@
-<div class="container-fluid my-5">
-    <div class="row justify-content-center">
-        <div class="col-auto mb-5">
-            <h1 id="result">Searching For Camera...</h1>
+<div class="container-fluid mb-5">
+    <div class="row justify-content-center mb-3">
+        <div class="col-auto">
+            <img id="logo" alt ="" src="/images/logos/brimstone_haunt_light.png">
         </div>
     </div>
-    <div id="video-container" class="row justify-content-center">
-        <div class="col-auto p-0 border border-primary rounded rounded-lg">
-            <video id="video" autoplay="autoplay" width="640" height="480"></video>
+    <div id="buttonContainer">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <button class="btn btn-outline-success btn-lg" onclick="startScanning()">Start Scanning</button>
+            </div>
         </div>
     </div>
-    <div id="photo-container" class="row justify-content-center">
-        <div class="col-auto p-0 border rounded rounded-lg">
-            <canvas id="canvas" style="display: none;"></canvas>
-            <img id="photo" src="" />
+    <div id="scannerContainer">
+        <div class="row justify-content-center">
+            <div class="col-auto mb-5">
+                <h1 id="result">Searching For Camera</h1>
+            </div>
+        </div>
+        <div id="video-container" class="row justify-content-center">
+            <div class="col-auto p-0 border border-primary rounded rounded-lg">
+                <video id="video" autoplay="autoplay" width="640" height="480"></video>
+            </div>
+        </div>
+        <div id="photo-container" class="row justify-content-center">
+            <div class="col-auto p-0 border rounded rounded-lg">
+                <canvas id="canvas" style="display: none;"></canvas>
+                <img id="photo" src="" />
+            </div>
         </div>
     </div>
 </div>
 
 <style>
+    html, body {
+        background: #2d2d2d;
+        color: white;
+    }
+
+    #logo {
+        height: 100px;
+    }
+
     #video-container .border, #photo-container .border {
         border-width: 5px!important;
+        overflow: hidden;
+        max-height: 490px;
+        max-width: 650px;
+        height: 100vh;
+        width: 100vw;
     }
 
     #video-container video {
         display: block;
+        position: absolute;
+        top: -50%;
+        bottom: -50%;
+        left: -50%;
+        right: -50%;
+        margin: auto;
     }
 </style>
 
@@ -33,6 +67,7 @@
     var photo = document.querySelector("#photo");
     var canvas = document.querySelector("#canvas");
     var result = document.querySelector("#result");
+    var timer = null;
 
     $("#photo-container").hide();
     $("#video-container").hide();
@@ -42,10 +77,19 @@
     video.setAttribute('playsinline', '');
     
     function startScanning() {
+        result.innerText = "Searching For Camera";
+
+        timer = setTimeout(function() {
+            qr.stop();
+            $("#buttonContainer").show();
+            $("#scannerContainer").hide();
+        }, 300000); //5 min
+
         $("#photo-container .border").removeClass("border-danger");
         $("#photo-container .border").removeClass("border-success");
 
         qr.decodeFromCamera(video).then(function(res) {
+            clearTimeout(timer);
             takepicture();
 
             if(res.data == "") {
@@ -66,7 +110,7 @@
                     } else {
                         $("#photo-container .border").addClass("border-danger");
                     }
-                    setTimeout(startScanning, 5000);
+                    setTimeout(startScanning, 3000);
                 }
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 $("#photo-container .border").removeClass("border-warning");
@@ -76,12 +120,14 @@
                 setTimeout(startScanning, 1000);
             });
 
-            result.innerText = "Contacting Server...";
+            result.innerText = "Contacting Server";
             $("#photo-container .border").addClass("border-warning");
             $("#photo-container").show();
             $("#video-container").hide();
             qr.stop();
         });
+        $("#buttonContainer").hide();
+        $("#scannerContainer").show();
         $("#photo-container").hide();
         $("#video-container").show();
     }
@@ -97,7 +143,7 @@
     }
 
     video.addEventListener('playing', function(event) {
-        result.innerText = "Scanning...";
+        result.innerText = "Scanning";
     });
     
     if (!qr.isCanvasSupported()) {
