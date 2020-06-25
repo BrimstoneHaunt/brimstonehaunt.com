@@ -7,7 +7,7 @@
 var scrollOffset = 100;
 var homePageBanner = null;
 var countdown = {
-	openingDate: new Date("Sep 27, 2019 19:00:00").getTime(),
+	openingDate: new Date("Sep 25, 2020 19:00:00").getTime(),
 	timer: null,
 	update: function() {
 		var now = new Date().getTime();
@@ -17,10 +17,21 @@ var countdown = {
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		
+		if(days < 0) days = 0;
+		if(hours < 0) hours = 0;
+		if(minutes < 0) minutes = 0;
+		if(seconds < 0) seconds = 0;
+		
 		$("#countdown-timer #count-days").html(days);
 		$("#countdown-timer #count-hours").html(hours);
 		$("#countdown-timer #count-minutes").html(minutes);
 		$("#countdown-timer #count-seconds").html(seconds);
+		
+		if(days <= 0) {
+			$("#countdown-title span").html("Now Open!<br>Friday and Saturday Nights<br>Through October.");
+		} else {
+			$("#countdown-title span").html("We're sharpening the blades in anticipation");
+		}
 	},
 	start: function() {
 		countdown.timer = setInterval(countdown.update, 1000);
