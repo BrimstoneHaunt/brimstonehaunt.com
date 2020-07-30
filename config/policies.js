@@ -66,8 +66,8 @@ module.exports.policies = {
 	},
 	'AdminController': {
 		'*': 'canAdmin',
-		'getBadgescanauth': 'isAdmin',
-		'setBadgescanauth': 'isAdmin'
+		'getBadgescanauth': 'canAdmin',
+		'setBadgescanauth': 'canAdmin'
 	},
 	'ApplicationController': {
 		'*': true,
