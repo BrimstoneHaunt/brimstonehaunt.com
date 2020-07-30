@@ -1,0 +1,37 @@
+<div id="badges-page">
+    {{#each users}}
+        <div class="row no-gutter justify-content-center">
+            <div class="col">
+                <div class="row justify-content-center my-3">
+                    <div class="col-6">
+                        <img src="/images/logos/brimstone_haunt_simple_detail.png" />
+                    </div>
+                </div>
+                <div class="row justify-content-center my-3">
+                    {{!-- <div class="col text-right">
+                        <img height="256" width="256" src="/images/scarecrow.png" />
+                    </div> --}}
+                    <div class="col-auto">
+                        <div class="qrcode" data-userID="{{ id }}"></div>
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col text-center">
+                        <span class="h1">{{ firstName }} {{ middleName }} {{ lastName }}</span>
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col text-center">
+                        <span class="h1">{{#if position}}{{ position.title }}{{/if}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="my-5" style="break-after:page; break-after:always;"></div>
+    {{/each}}
+</div>
+<script type="text/javascript">
+    $(".qrcode").each(function() {
+        new QRCode($(this)[0], "BSH_" + $(this).data());
+    });
+</script>

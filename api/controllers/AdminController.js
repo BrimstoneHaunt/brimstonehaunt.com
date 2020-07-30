@@ -165,13 +165,21 @@ module.exports = {
                     console.log("Bad Authcode Setup!");
                     return res.serverError("Bad Authcode Setup!");
                 } else {
-                    return res.view('badgescanauthcode', {
-                        layout: 'management',
-                        title: "Admin",
-                        authcode: records.length == 0 ? "" : records[0].authcode,
-                        isLoggedIn: req.session.isLoggedIn,
-                        canAdmin: req.session.canAdmin,
-                        user: req.session.user
+                    User.find({isDeleted: false}).sort('lastName ASC').sort('firstName ASC').exec(function(err2, records2) {
+                        if(err2) {
+                            console.log(err2);
+                            return res.serverError(err2);
+                        } else {
+                            return res.view('badgescanauthcode', {
+                                layout: 'management',
+                                title: "Admin",
+                                authcode: records.length == 0 ? "" : records[0].authcode,
+                                users: records2,
+                                isLoggedIn: req.session.isLoggedIn,
+                                canAdmin: req.session.canAdmin,
+                                user: req.session.user
+                            });
+                        }
                     });
                 }
             }
@@ -195,14 +203,22 @@ module.exports = {
                                 console.log(err2);
                                 return res.serverError(err2);
                             } else {
-                                return res.view('badgescanauthcode', {
-                                    layout: 'management',
-                                    title: "Admin",
-                                    authcode: pass,
-                                    success: true,
-                                    isLoggedIn: req.session.isLoggedIn,
-                                    canAdmin: req.session.canAdmin,
-                                    user: req.session.user
+                                User.find({isDeleted: false}).sort('lastName ASC').sort('firstName ASC').exec(function(err3, records3) {
+                                    if(err3) {
+                                        console.log(err3);
+                                        return res.serverError(err3);
+                                    } else {
+                                        return res.view('badgescanauthcode', {
+                                            layout: 'management',
+                                            title: "Admin",
+                                            authcode: pass,
+                                            users: records3,
+                                            success: true,
+                                            isLoggedIn: req.session.isLoggedIn,
+                                            canAdmin: req.session.canAdmin,
+                                            user: req.session.user
+                                        });
+                                    }
                                 });
                             }
                         });
@@ -212,14 +228,22 @@ module.exports = {
                                 console.log(err2);
                                 return res.serverError(err2);
                             } else {
-                                return res.view('badgescanauthcode', {
-                                    layout: 'management',
-                                    title: "Admin",
-                                    authcode: pass,
-                                    success: true,
-                                    isLoggedIn: req.session.isLoggedIn,
-                                    canAdmin: req.session.canAdmin,
-                                    user: req.session.user
+                                User.find({isDeleted: false}).sort('lastName ASC').sort('firstName ASC').exec(function(err3, records3) {
+                                    if(err3) {
+                                        console.log(err3);
+                                        return res.serverError(err3);
+                                    } else {
+                                        return res.view('badgescanauthcode', {
+                                            layout: 'management',
+                                            title: "Admin",
+                                            authcode: pass,
+                                            users: records3,
+                                            success: true,
+                                            isLoggedIn: req.session.isLoggedIn,
+                                            canAdmin: req.session.canAdmin,
+                                            user: req.session.user
+                                        });
+                                    }
                                 });
                             }
                         });
@@ -227,5 +251,22 @@ module.exports = {
                 }
             }
         });
-    }
+    },
+    viewBadges: function(req, res) {
+        User.find({id: req.body.users}).sort('lastName ASC').sort('firstName ASC').populate('position').exec(function(err, records) {
+            if(err) {
+                console.log(err);
+                return res.serverError(err);
+            } else {
+                return res.view('badges', {
+                    layout: 'management',
+                    title: "Admin",
+                    users: records,
+                    isLoggedIn: req.session.isLoggedIn,
+                    canAdmin: req.session.canAdmin,
+                    user: req.session.user
+                });
+            }
+        });
+    },
 }

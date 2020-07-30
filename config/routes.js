@@ -139,6 +139,7 @@ module.exports.routes = {
   'post /application/reject': 'ApplicationController.reject',
   'get /admin/badgescanauth': 'AdminController.getBadgescanauth',
   'post /admin/badgescanauth': 'AdminController.setBadgescanauth',
+  'post /admin/badges': 'AdminController.viewBadges'
 
   /***************************************************************************
   *                                                                          *

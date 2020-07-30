@@ -577,4 +577,34 @@ $(document).ready(function() {
 			alert("Something went wrong!");
 		});
 	}
+}).on("change", "#badgescanauth-page input[name='selectAllUsers']", function() {
+	if($(this).is(":checked")) {
+		$("input[name='selectedUsers']").prop("checked", true);
+	} else {
+		$("input[name='selectedUsers']").prop("checked", false);
+	}
+}).on("change", "#badgescanauth-page input[name='selectedUsers']", function() {
+	var allChecked = true;
+	$("input[name='selectedUsers']").each(function() {
+		if(!$(this).is(":checked")) {
+			allChecked = false;
+			return false;
+		}
+	});
+	$("input[name='selectAllUsers']").prop("checked", allChecked);
+}).on("click", "#badgescanauth-page #viewBadges", function() {
+	var selectedUsers = [];
+	$("input[name='selectedUsers']").each(function() {
+		if($(this).is(":checked")) {
+			selectedUsers.push($(this).val());
+		}
+	});
+	$.post("/admin/badges", { users: selectedUsers }, function(resp) {
+		var w = window.open('about:blank');
+		w.document.open();
+		w.document.write(resp);
+		w.document.close();
+	}).fail(function() {
+		alert("Something went wrong!");
+	});
 });

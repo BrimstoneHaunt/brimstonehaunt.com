@@ -1,4 +1,4 @@
-<div id="badgescanauth-page" class="container-fluid my-5">
+<div id="badgescanauth-page" class="container-fluid py-5">
     <div class="row mb-5">
         <div class="col">
             <h1 class="ml-lg-3">Badge Scanner Authcode</h1>
@@ -26,4 +26,26 @@
             </div>
         </div>
     </form>
+    <div class="w-100 my-5 border-bottom border-secondary"></div>
+    <div class="row justify-content-center my-3">
+        <div class="col-md-4">
+            <button type="button" id="viewBadges" class="btn btn-block btn-secondary">View Badges</button>
+        </div>
+    </div>
+    <div class="row justify-content-center my-3">
+        <div class="col-md-6">
+            <div class="list-group">
+                <label class="list-group-item">
+                    <input type="checkbox" name="selectAllUsers" />
+                    <span class="ml-2">All</span>
+                </label>
+                {{#each users}}
+                    <label class="list-group-item">
+                        <input type="checkbox" name="selectedUsers" value="{{ id }}" />
+                        <span class="ml-2">{{ firstName }} {{ middleName }} {{ lastName }}</span>
+                    </label>
+                {{/each}}
+            </div>
+        </div>
+    </div>
 </div>
