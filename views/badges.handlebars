@@ -1,10 +1,10 @@
-<div id="badges-page">
+<div id="badges-page" style="width: 306px; font-family: Arial Narrow,Arial,sans-serif;">
     {{#each users}}
         <div class="row no-gutter justify-content-center">
             <div class="col">
                 <div class="row justify-content-center my-3">
-                    <div class="col-6">
-                        <img src="/images/logos/brimstone_haunt_simple_detail.png" />
+                    <div class="col-auto">
+                        <img width="150" src="/images/logos/brimstone_haunt_flat_color.png" />
                     </div>
                 </div>
                 <div class="row justify-content-center my-3">
@@ -15,23 +15,29 @@
                         <div class="qrcode" data-userID="{{ id }}"></div>
                     </div>
                 </div>
-                <div class="row my-3">
-                    <div class="col text-center">
-                        <span class="h1">{{ firstName }} {{ middleName }} {{ lastName }}</span>
-                    </div>
-                </div>
-                <div class="row my-3">
-                    <div class="col text-center">
-                        <span class="h1">{{#if position}}{{ position.title }}{{/if}}</span>
+                <div class="row justify-content-center my-3" style="background-color: #186218; color: white;">
+                    <div class="col-auto text-center">
+                        <span class="h2 my-1" style="word-break: break-word; display: block; font-weight: bold; text-transform: uppercase;">{{ firstName }} {{ lastName }}</span>
+                        <span class="h3">{{#if position}}{{ position.title }}{{/if}}</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="my-5" style="break-after:page; break-after:always;"></div>
+        {{#unless @last}}
+            <div class="my-5" style="break-after:page; break-after:always;"></div>
+            <div class="py-1"></div>
+        {{/unless}}
     {{/each}}
 </div>
 <script type="text/javascript">
     $(".qrcode").each(function() {
-        new QRCode($(this)[0], "BSH_" + $(this).data());
+        new QRCode($(this)[0], {
+            text: "BSH_" + $(this).data("userid"),
+            width: 175,
+            height: 175,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
     });
 </script>

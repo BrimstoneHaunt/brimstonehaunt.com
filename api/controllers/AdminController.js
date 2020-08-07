@@ -259,7 +259,7 @@ module.exports = {
                 return res.serverError(err);
             } else {
                 return res.view('badges', {
-                    layout: 'management',
+                    layout: 'bare',
                     title: "Admin",
                     users: records,
                     isLoggedIn: req.session.isLoggedIn,
