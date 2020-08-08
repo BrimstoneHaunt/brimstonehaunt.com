@@ -192,5 +192,14 @@ module.exports = {
 		
 			return res.redirect("/applications/" + req.body.appListType);
 		});
+	},
+	saveadminnote: function(req, res) {
+		Application.update({id: req.body.id}, {adminNote: req.body.note}).exec(function(err, records) {
+			if(err) {
+				return res.serverError(err);
+			}
+		
+			return res.redirect("/applications/" + req.body.appListType);
+		});
 	}
 }

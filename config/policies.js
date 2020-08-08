@@ -77,6 +77,7 @@ module.exports.policies = {
 		'rejectedList': 'canAdmin',
 		'hire': 'canAdmin',
 		'hold': 'canAdmin',
-		'reject': 'canAdmin'
+		'reject': 'canAdmin',
+		'saveadminnote': 'canAdmin'
 	}
 };

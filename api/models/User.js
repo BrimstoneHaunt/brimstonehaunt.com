@@ -60,6 +60,9 @@ module.exports = {
 			required: true,
 			defaultsTo: false
 		},
+		adminNote: {
+			type: 'string'
+		}
 	},
 	customToJSON: function() {
 		return _.omit(this, ['password'])

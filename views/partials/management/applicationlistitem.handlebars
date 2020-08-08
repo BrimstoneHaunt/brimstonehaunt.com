@@ -1,6 +1,6 @@
 <div class="list-group-item list-group-item-action" data-item-position-id="{{ this.position.id }}" data-target="#app{{this.id}}-content" data-appid="{{this.id}}" onclick="">
     <div class="row justify-content-center">
-        <div class="col">
+        <div class="col-sm">
             <div class="row">
                 <div class="col-md-2">
                     {{#if this.position}}
@@ -25,7 +25,7 @@
             </div>
         </div>
         {{#if (neq @root.appListType 'Hired')}}
-            <div class="col-auto">
+            <div class="col-auto mt-3 mt-sm-0">
                 <div class="btn-group ">
                     <button type="button" class="btn btn-success btn-sm application-action" data-action="hire" data-appid="{{this.id}}" data-applisttype="{{@root.appListType}}">Hire</button>
                     {{#if (neq @root.appListType 'Held')}}
@@ -57,13 +57,13 @@
     </div>
     <div class="row">
         <div class="col-md-4 my-2">
-            {{ this.previous_role }}
+            {{{space2nbs (nl2br this.previous_role) }}}
         </div>
         <div class="col-md-4 my-2">
-            {{ this.previous_haunt_work }}
+            {{{space2nbs (nl2br this.previous_haunt_work) }}}
         </div>
         <div class="col-md-4 my-2">
-            {{ this.comments }}
+            {{{space2nbs (nl2br this.comments) }}}
         </div>
     </div>
     <div class="row">
@@ -112,16 +112,34 @@
         </div>
     </div>
     <div class="row">
-        <div class="col my-2 text-center">
+        <div class="col my-2">
             Heard about us from: {{ this.refferedfrom }}
         </div>
     </div>
-    <div class="row my-3 justify-content-center preavailability{{ this.id }}">
-        <div class="col-auto pre"></div>
-    </div>
-    <div class="row my-3 justify-content-center availability{{ this.id }}">
-        <div class="col-auto fr"></div>
-        <div class="col-auto sa"></div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-12">
+            <div class="row my-3 justify-content-center preavailability{{ this.id }}">
+                <div class="col-auto pre"></div>
+            </div>
+            <div class="row my-3 justify-content-center availability{{ this.id }}">
+                <div class="col-auto fr"></div>
+                <div class="col-auto sa"></div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row my-3">
+                <div class="col">
+                    <textarea id="appAdminNote{{ this.id }}" name="admin_note" class="form-control" rows="5" {{#if (eq @root.appListType 'Hired')}} disabled="disabled" {{/if}}>{{{ nl2charCode this.adminNote }}}</textarea>
+                </div>
+            </div>
+            {{#if (neq @root.appListType 'Hired')}}
+                <div class="row my-3 justify-content-end">
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-primary" onclick="saveAppAdminNote({{ this.id }}, '{{@root.appListType}}');">Save Notes</button>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
     </div>
 </div>
 <script type="text/javascript">

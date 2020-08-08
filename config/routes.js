@@ -137,6 +137,7 @@ module.exports.routes = {
   'post /application/hire': 'ApplicationController.hire',
   'post /application/hold': 'ApplicationController.hold',
   'post /application/reject': 'ApplicationController.reject',
+  'post /application/saveadminnote': 'ApplicationController.saveadminnote',
   'get /admin/badgescanauth': 'AdminController.getBadgescanauth',
   'post /admin/badgescanauth': 'AdminController.setBadgescanauth',
   'post /admin/badges': 'AdminController.viewBadges'

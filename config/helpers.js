@@ -1,9 +1,26 @@
 Handlebars = require('handlebars');
 
+Handlebars.registerHelper('space2nbs', function(data) {
+	var out = data;
+	if(data) {
+		out = data.replace(/(?:\s)/g, '&nbsp;');
+	}
+	return out;
+});
+
 Handlebars.registerHelper('nl2br', function(data) {
 	var out = data;
 	if(data) {
 		out = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
+	}
+	return out;
+});
+
+Handlebars.registerHelper('nl2charCode', function(data) {
+	var out = data;
+	var newline = String.fromCharCode(13, 10);
+	if(data) {
+		out = data.replace(/(?:\r\n|\r|\n)/g, '&#10;');
 	}
 	return out;
 });

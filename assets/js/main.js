@@ -244,6 +244,7 @@ function openAdminAccountModal(userID) {
 	$("#admin-account-modal select[name='accessLvl']").val($("#" + userID + "-accessLvl").val());
 	$("#admin-account-modal select[name='position']").val($("#" + userID + "-position").val());
 	$("#admin-account-modal input[name='payrate']").val($("#" + userID + "-payrate").val());
+	$("#admin-account-modal textarea[name='adminNote']").val($("#" + userID + "-adminNote").val());
 	
 	$("#admin-account-modal").data("userid", userID);
 	
@@ -259,10 +260,11 @@ function adminUpdateAccount() {
 	var accessLvl = $("#admin-account-modal select[name='accessLvl']").val();
 	var position = $("#admin-account-modal select[name='position']").val();
 	var payrate = $("#admin-account-modal input[name='payrate']").val();
+	var note = $("#admin-account-modal textarea[name='adminNote']").val();
 	
 	$("#admin-account-modal").modal('hide');
 	
-	$.post("/user/adminupdate", { id: id, first: first, middle: middle, last: last, email: email, accessLvl: accessLvl, payrate: payrate, position: position }, function(resp) {
+	$.post("/user/adminupdate", { id: id, first: first, middle: middle, last: last, email: email, accessLvl: accessLvl, payrate: payrate, position: position, note: note }, function(resp) {
 		var newContent = $(resp).filter("#accountlist-page").html();
 		$("#accountlist-page").html(newContent);
 		initRecordLists();
@@ -438,6 +440,18 @@ function updatePosition(id) {
 	$.post("/positions/update", { id: id, title: $("#edit-position-" + id + " input[name=title]").val(), defaultPayrate: $("#edit-position-" + id + " input[name=defaultPayrate]").val(), canApply: $("#edit-position-" + id + " input[name=canApply]").is(":checked") }, function(resp) {
 		var newContent = $(resp).filter("#positions-page").html();
 		$("#positions-page").html(newContent);
+	}).fail(function() {
+		alert("Something went wrong!");
+	});
+
+	return false;
+}
+
+function saveAppAdminNote(id, appListType) {
+	$.post("/application/saveadminnote", { id: id, note: $("#appAdminNote" + id).val(), appListType: appListType }, function(resp) {
+		var newContent = $(resp).filter("#applicationlist-page").html();
+		$("#applicationlist-page").html(newContent);
+		initRecordLists();
 	}).fail(function() {
 		alert("Something went wrong!");
 	});

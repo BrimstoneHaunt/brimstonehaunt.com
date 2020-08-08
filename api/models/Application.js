@@ -109,6 +109,9 @@ module.exports = {
 		},
 		refferedfrom: {
 			type: 'string'
+		},
+		adminNote: {
+			type: 'string'
 		}
 	}
 };

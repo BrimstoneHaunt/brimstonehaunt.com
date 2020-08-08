@@ -281,7 +281,7 @@ module.exports = {
 		});
 	},
 	adminUpdate: function(req, res) {		
-		User.update({id: req.body.id, isDeleted: false}, {email: req.body.email, accessLvl: req.body.accessLvl, position: req.body.position, payrate: req.body.payrate, firstName: req.body.first, middleName: req.body.middle, lastName: req.body.last}).exec(function(err, records) {
+		User.update({id: req.body.id, isDeleted: false}, {email: req.body.email, accessLvl: req.body.accessLvl, position: req.body.position, payrate: req.body.payrate, firstName: req.body.first, middleName: req.body.middle, lastName: req.body.last, adminNote: req.body.note}).exec(function(err, records) {
 			if(err) {
 				return res.serverError(err);
 			}
