@@ -186,7 +186,7 @@ module.exports = {
 			} 
 			else if(records.length == 1) 
 			{
-				User.update({ id: records[0].id }, { password: (records[0].firstName.charAt(0) + records[0].lastName + "123").toLowerCase(), isTempPassword: true }).exec(function(err, records) {
+				User.update({ id: records[0].id }, { password: (records[0].firstName.charAt(0) + records[0].lastName.trim() + "123").toLowerCase(), isTempPassword: true }).exec(function(err, records) {
 					if(err) {
 						console.log(err);
 						return res.view('login', {
@@ -230,7 +230,7 @@ module.exports = {
 			} 
 			else if(records.length == 1) 
 			{
-				User.update({ id: records[0].id }, { password: (records[0].firstName.charAt(0) + records[0].lastName + "123").toLowerCase(), isTempPassword: true }).exec(function(err, records) {
+				User.update({ id: records[0].id }, { password: (records[0].firstName.charAt(0) + records[0].lastName.trim() + "123").toLowerCase(), isTempPassword: true }).exec(function(err, records) {
 					if(err) {
 						console.log(err);
 						return res.json({ success: false, message: "Something went wrong. Unable to reset password." });
