@@ -30,6 +30,10 @@ module.exports = {
 		position: {
 			model: 'position'
 		},
+		managedPositions: {
+			collection: 'position',
+			via: 'managers'
+		},
 		payrate: {
 			type: 'float',
 			required: false,
@@ -77,7 +81,9 @@ module.exports = {
 		});
 	},
 	beforeUpdate: function(user, cb) {
-		if(user.password) {
+		// console.log("Update password with user: " + sails.config.globals.updatePassWithUser);
+		
+		if(sails.config.globals.updatePassWithUser && user.password) {
 			bcrypt.genSalt(10, function(err, salt) {
 				bcrypt.hash(user.password, salt, null, function(err, hash) {
 					if(err) return cb(err);

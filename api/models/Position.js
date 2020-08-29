@@ -33,6 +33,10 @@ module.exports = {
 		employees: {
 			collection: 'user',
 			via: 'position'
+		},
+		managers: {
+			collection: 'user',
+			via: 'managedPositions'
 		}
 	}
 };

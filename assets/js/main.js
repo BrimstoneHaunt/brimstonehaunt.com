@@ -237,6 +237,16 @@ function openTimeSheet(userID) {
 }
 
 function openAdminAccountModal(userID) {
+	$("input[name='managedPositions']").prop("checked", false);
+	$("#managedPositions").hide();
+
+	if($("#" + userID + "-accessLvl").val() == 4) {
+		$.each($("#" + userID + "-managedPositions").val().split(","), function(index, value) {
+			$("#position" + value).prop("checked", true);
+		});
+		$("#managedPositions").show();
+	}
+
 	$("#admin-account-modal input[name='firstName']").val($("#" + userID + "-first").val());
 	$("#admin-account-modal input[name='middleName']").val($("#" + userID + "-middle").val());
 	$("#admin-account-modal input[name='lastName']").val($("#" + userID + "-last").val());
@@ -261,10 +271,14 @@ function adminUpdateAccount() {
 	var position = $("#admin-account-modal select[name='position']").val();
 	var payrate = $("#admin-account-modal input[name='payrate']").val();
 	var note = $("#admin-account-modal textarea[name='adminNote']").val();
+	var managedPositions = "";
+	$("input[name='managedPositions']:checked").each(function(){
+		managedPositions += $(this).val() + ",";
+	});
 	
 	$("#admin-account-modal").modal('hide');
 	
-	$.post("/user/adminupdate", { id: id, first: first, middle: middle, last: last, email: email, accessLvl: accessLvl, payrate: payrate, position: position, note: note }, function(resp) {
+	$.post("/user/adminupdate", { id: id, first: first, middle: middle, last: last, email: email, accessLvl: accessLvl, payrate: payrate, position: position, managedPositions: managedPositions, note: note }, function(resp) {
 		var newContent = $(resp).filter("#accountlist-page").html();
 		$("#accountlist-page").html(newContent);
 		initRecordLists();
@@ -449,6 +463,18 @@ function updatePosition(id) {
 
 function saveAppAdminNote(id, appListType) {
 	$.post("/application/saveadminnote", { id: id, note: $("#appAdminNote" + id).val(), appListType: appListType }, function(resp) {
+		var newContent = $(resp).filter("#applicationlist-page").html();
+		$("#applicationlist-page").html(newContent);
+		initRecordLists();
+	}).fail(function() {
+		alert("Something went wrong!");
+	});
+
+	return false;
+}
+
+function moveApp(appID, positionID, appListType) {
+	$.post("/application/move", { id: appID, position: positionID, appListType: appListType }, function(resp) {
 		var newContent = $(resp).filter("#applicationlist-page").html();
 		$("#applicationlist-page").html(newContent);
 		initRecordLists();

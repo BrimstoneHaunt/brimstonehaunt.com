@@ -19,6 +19,8 @@ module.exports = function serverError (data, options) {
   var res = this.res;
   var sails = req._sails;
 
+  sails.config.globals.updatePassWithUser = false;
+
   // Set status code
   res.status(500);
 

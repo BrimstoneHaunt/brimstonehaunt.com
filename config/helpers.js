@@ -1,5 +1,15 @@
 Handlebars = require('handlebars');
 
+Handlebars.registerHelper('objArr2str', function(arr, attr) {
+	var out = "";
+	if(arr) {
+		for(var i = 0;i < arr.length;i++) {
+			out += arr[i][attr] + ",";
+		}
+	}
+	return out;
+});
+
 Handlebars.registerHelper('space2nbs', function(data) {
 	var out = data;
 	if(data) {

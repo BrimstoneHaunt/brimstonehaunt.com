@@ -126,7 +126,9 @@ module.exports = {
 						message: message
 					});
 				} else {
+					sails.config.globals.updatePassWithUser = true;
 					User.update({ email: req.body.email, isDeleted: false }, { password: req.body.newPassword, isTempPassword: false }).exec(function(err, records) {
+						sails.config.globals.updatePassWithUser = false;
 						if(err) {
 							return res.view('changepassword', {
 								layout: 'management',
@@ -186,7 +188,9 @@ module.exports = {
 			} 
 			else if(records.length == 1) 
 			{
-				User.update({ id: records[0].id }, { password: (records[0].firstName.charAt(0) + records[0].lastName + "123").toLowerCase(), isTempPassword: true }).exec(function(err, records) {
+				sails.config.globals.updatePassWithUser = true;
+				User.update({ id: records[0].id }, { password: (records[0].firstName.charAt(0) + records[0].lastName.trim() + "123").toLowerCase(), isTempPassword: true }).exec(function(err, records) {
+					sails.config.globals.updatePassWithUser = false;
 					if(err) {
 						console.log(err);
 						return res.view('login', {
@@ -230,7 +234,9 @@ module.exports = {
 			} 
 			else if(records.length == 1) 
 			{
-				User.update({ id: records[0].id }, { password: (records[0].firstName.charAt(0) + records[0].lastName + "123").toLowerCase(), isTempPassword: true }).exec(function(err, records) {
+				sails.config.globals.updatePassWithUser = true;
+				User.update({ id: records[0].id }, { password: (records[0].firstName.charAt(0) + records[0].lastName.trim() + "123").toLowerCase(), isTempPassword: true }).exec(function(err, records) {
+					sails.config.globals.updatePassWithUser = false;
 					if(err) {
 						console.log(err);
 						return res.json({ success: false, message: "Something went wrong. Unable to reset password." });
@@ -250,7 +256,7 @@ module.exports = {
 		});
 	},
 	list: function(req, res) {
-		User.find({isDeleted: false}).sort('lastName ASC').sort('firstName ASC').populate('position').exec(function(err, records) {
+		User.find({isDeleted: false}).sort('lastName ASC').sort('firstName ASC').populate('position').populate('managedPositions').exec(function(err, records) {
 			Position.find({isDeleted: false}).exec(function(err2, records2) {
 				return res.view('accountlist', {
 					layout: 'management',
@@ -265,7 +271,7 @@ module.exports = {
 		});
 	},
 	listDeleted: function(req, res) {
-		User.find({isDeleted: true}).sort('lastName ASC').sort('firstName ASC').populate('position').exec(function(err, records) {
+		User.find({isDeleted: true}).sort('lastName ASC').sort('firstName ASC').populate('position').populate('managedPositions').exec(function(err, records) {
 			Position.find({isDeleted: false}).exec(function(err2, records2) {
 				return res.view('accountlist', {
 					layout: 'management',
@@ -280,13 +286,42 @@ module.exports = {
 			});
 		});
 	},
-	adminUpdate: function(req, res) {		
+	adminUpdate: function(req, res) {
 		User.update({id: req.body.id, isDeleted: false}, {email: req.body.email, accessLvl: req.body.accessLvl, position: req.body.position, payrate: req.body.payrate, firstName: req.body.first, middleName: req.body.middle, lastName: req.body.last, adminNote: req.body.note}).exec(function(err, records) {
 			if(err) {
 				return res.serverError(err);
 			}
-			
-			return res.redirect("/user/list");
+
+			Position.find({isDeleted: false}).exec(function(err2, records2) {
+				if(err2) {
+					return res.serverError(err2);
+				}
+
+				var positionIDs = [];
+				for(var i = 0;i < records2.length;i++) {
+					positionIDs.push(records2[i].id);
+				}
+				var user = records[0];
+				user.managedPositions.remove(positionIDs);
+				user.save(function(err3) {
+					if(err3) {
+						return res.serverError(err3);
+					}
+
+					if(req.body.managedPositions != "") {
+						user.managedPositions.add(req.body.managedPositions.replace(/,\s*$/, "").split(","));
+						user.save(function(err4) {
+							if(err4) {
+								return res.serverError(err4);
+							}
+
+							return res.redirect("/user/list");
+						});
+					} else {
+						return res.redirect("/user/list");
+					}
+				});
+			});
 		});
 	},
 	adminDelete: function(req, res) {		

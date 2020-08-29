@@ -57,6 +57,7 @@
             <input type="hidden" id="{{this.id}}-email" value="{{this.email}}">
             <input type="hidden" id="{{this.id}}-accessLvl" value="{{this.accessLvl}}">
             <input type="hidden" id="{{this.id}}-position" value="{{this.position.id}}">
+            <input type="hidden" id="{{this.id}}-managedPositions" value="{{ objArr2str this.managedPositions 'id'}}">
             <input type="hidden" id="{{this.id}}-payrate" value="{{this.payrate}}">
             <input type="hidden" id="{{this.id}}-adminNote" value="{{{ nl2charCode this.adminNote }}}">
         </div>

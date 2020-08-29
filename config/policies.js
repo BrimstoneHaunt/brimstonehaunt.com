@@ -78,6 +78,7 @@ module.exports.policies = {
 		'hire': 'canAdmin',
 		'hold': 'canAdmin',
 		'reject': 'canAdmin',
-		'saveadminnote': 'canAdmin'
+		'saveadminnote': 'canAdmin',
+		'move': 'isAdmin'
 	}
 };

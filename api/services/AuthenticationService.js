@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
 	authenticateUser: function(options, done) {
-		User.find({email: options.email, isDeleted: false}).exec(function(err, records) {
+		User.find({email: options.email, isDeleted: false}).populate('managedPositions').exec(function(err, records) {
 			if(err) 
 			{
 				console.log(err);

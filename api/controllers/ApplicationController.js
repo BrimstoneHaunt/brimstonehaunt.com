@@ -138,7 +138,7 @@ module.exports = {
 						console.log("Error! Found multiple user accounts with this email: " + records[0].email);
 						return res.serverError("Error! Found multiple user accounts with this email: " + records[0].email);
 					} else if(records2.length == 1) { // Update link to newly hired application, update name, and un-delete account (if applicable)
-						User.update({id: records2[0].id}, {firstName: records[0].firstName, middleName: records[0].middleName, lastName: records[0].lastName, application: records[0], isDeleted: false}).exec(function(err4, records4) {
+						User.update({id: records2[0].id}, {firstName: records[0].firstName, middleName: records[0].middleName, lastName: records[0].lastName, application: records[0], position: records[0].position, isDeleted: false}).exec(function(err4, records4) {
 							if(err4) {
 								return res.serverError(err4);
 							}
@@ -195,6 +195,15 @@ module.exports = {
 	},
 	saveadminnote: function(req, res) {
 		Application.update({id: req.body.id}, {adminNote: req.body.note}).exec(function(err, records) {
+			if(err) {
+				return res.serverError(err);
+			}
+		
+			return res.redirect("/applications/" + req.body.appListType);
+		});
+	},
+	move: function(req, res) {
+		Application.update({id: req.body.id}, {position: req.body.position}).exec(function(err, records) {
 			if(err) {
 				return res.serverError(err);
 			}

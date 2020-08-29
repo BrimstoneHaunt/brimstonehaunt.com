@@ -34,6 +34,16 @@
                     {{#if (neq @root.appListType 'Rejected')}}
                         <button type="button" class="btn btn-danger btn-sm application-action" data-action="reject" data-appid="{{this.id}}" data-applisttype="{{@root.appListType}}">Reject</button>
                     {{/if}}
+                    {{#if (gteq @root.user.accessLvl 5)}}
+                        <button type="button" id="moveApp{{this.id}}" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Move</button>
+                        <div class="dropdown-menu" aria-labelledby="moveApp{{this.id}}">
+                            {{#each @root.positions}}
+                                {{#if this.canApply}}
+                                    <button class="dropdown-item" onclick="event.stopPropagation(); moveApp({{../id}}, {{this.id}}, '{{@root.appListType}}');">{{this.title}}</button>
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                    {{/if}}
                 </div>
             </div>
         {{/if}}
