@@ -4,7 +4,6 @@
   |                                                    |
    ---------------------------------------------------- */
    
-var scrollOffset = 100;
 var homePageBanner = null;
 var countdown = {
 	openingDate: new Date("Sep 25, 2020 19:00:00").getTime(),
@@ -46,24 +45,6 @@ var countdown = {
   |	FUNCTIONS                                          |
   |                                                    |
    ---------------------------------------------------- */
-
-function scrollPageTo(section) {
-	if($('#main-nav .navbar-collapse').attr('aria-expanded'))
-	{
-		$('#main-nav-menu').collapse('hide');
-		setTimeout(function() {
-			$('html, body').animate({
-		        scrollTop: $(section).offset().top - scrollOffset
-		    }, 250);
-		}, 500);
-	}
-	else
-	{
-		$('html, body').animate({
-	        scrollTop: $(section).offset().top - scrollOffset
-	    }, 750);
-	}
-}
 
 function startTimeClockNow() {
 	$.post("/timeclock/clockin", {  }, function(resp) {
@@ -520,7 +501,48 @@ function initRecordLists() {
 	}
 }
 
+var player;
+function onYouTubeIframeAPIReady() {
+		player = new YT.Player('bg-video-player', {
+		height: '390',
+		width: '640',
+		videoId: 'AUz9KEK2OFc',
+		playerVars: { 
+			'autoplay': 1,
+			'controls': 0,
+            'showinfo': 0,
+            'rel': 0
+		},
+		events: {
+			'onReady': onPlayerReady,
+			'onStateChange': onPlayerStateChange
+		}
+	});
+}
+
+function onPlayerReady(event) {
+	event.target.setVolume(0);
+}
+
+function onPlayerStateChange(event) {
+	if(event.data == YT.PlayerState.ENDED) {
+		event.target.playVideo();
+	}
+}
+
 $(document).ready(function() {
+	var tag = document.createElement('script');
+	tag.id = 'iframe-demo';
+	tag.src = 'https://www.youtube.com/iframe_api';
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+	$.stellar({
+		// horizontalOffset: 65,
+		// responsive: true,
+		horizontalScrolling: false
+	});
+
 	if($(".swiper-container").length > 0) {
 		homePageBanner = new Swiper('.swiper-container', {
 			direction: 'horizontal',
@@ -573,28 +595,13 @@ $(document).ready(function() {
 
 	initRecordLists();
 }).on("scroll", function() {
-	if($('#tagline').length > 0 && $('#faq').length > 0) {
-		var taglineDistance = $(window).scrollTop() - $('#tagline').offset().top;
-		var faqDistance = $(window).scrollTop() - $('#faq').offset().top;
-		
-		if(taglineDistance >= -150) {
-			$('#scythe').addClass('animate');
-		} else {
-			$('#scythe').removeClass('animate');
-		}
-		
-		if(faqDistance > -150) {
-			$('#zombie').addClass('animate');
-		} else {
-			$('#zombie').removeClass('animate');
-		}
-	}
+	$("body#main-layout").toggleClass("navbar-short", $(window).scrollTop() > 0);
 }).on("submit", "#giveaway-form", function() {
 	if($("input[name=code]").val() != "FREETIX19HH") {
 		alert("Invalid Code! The correct code for this giveaway can be found on our Facebook post.");
 		return false;
 	}
-}).on("click", "#app-list .list-group-item-action, #time-clock-user-list .list-group-item-action", function() {
+}).on("click", ".list-group-item-action", function() {
 	$($(this).data("target")).slideToggle();
 	$(this).toggleClass("active");
 }).on("click", ".application-action", function(e) {

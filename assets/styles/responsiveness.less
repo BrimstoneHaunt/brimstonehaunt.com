@@ -7,147 +7,95 @@
 /* Extra small  and small devices (phones, 767px and down) */
 @media (max-width: 767px)
 {
-	body#main-layout
-	{
-		.tag-line {
-			font-size: 50px;
-			line-height: 50px;
-			margin-top: 25px;
-		}
-		
-		.tag-line2 {
-			font-size: 25px;
-		}
-	}
-	
-	.section .section-content
-	{
-		// padding: 0;
-	}
-	
 	#embeded-map
 	{
 		height: 300px;
 	}
 	
-	.section .section-heading h2, #sponsor-page h2, #photos-page h2, #team-page h2
-	{
-		// font-size: 32px;
-	}
-	
-	#countdown-title
-	{
-		font-size: 50px;
-		line-height: 50px;
-	}
-	
 	#countdown-timer ul li
 	{
-		margin: 0 5px;
+		margin: 0px;
+		padding: 0px;
 	}
 	
 	#countdown-timer ul li .countdown-count
 	{
-		font-size: 20px;
+		font-size: 2.5rem;
 	}
 	
 	#countdown-timer ul li .countdown-label
 	{
-		font-size: 14px;
+		font-size: 0.75rem;
+	}
+}
+
+/* Extra small devices (small phones, 499px and down) */
+@media (max-width: 499px)
+{
+
+}
+
+/* Small devices (normal phones, 500px and up) */
+@media (min-width: 500px)
+{
+	.h-font-md {
+		font-size: 2rem;
 	}
 	
-	#tickets {
-	    #price-list li
-	    {
-		   font-size: 14px;
-	    }
+	.h-font-lg {
+		font-size: 5rem;
 	}
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) 
 {	
-	body#main-layout
-	{
-		padding-top: 100px;
-		
-		.content-narrow {
-			width: 75%;
-			margin: 0 auto;
-		}
+	#main-nav {
+		align-items: normal;
 	}
-	
-	#main-nav, #simple-nav, #management-nav
-	{
-		.navbar-brand	
-		{
-			height: 100px;
-		}
-	}
-	
+
 	#giveaway-page {
 		h2 {
 			font-size: 32px;
 		}
 	}
-	
-	#tickets {
-	    #price-list li
-	    {
-		   font-size: 14px;
-	    }
+
+	.h-font-md {
+		font-size: 2rem;
 	}
 	
-	#countdown-title
-	{
-		font-size: 75px;
-		line-height: 75px;
+	.h-font-lg {
+		font-size: 5rem;
 	}
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px)
 {
-	body#main-layout {
-		.content-wide {
-			width: 75%;
-			margin: 0 auto;
-		}
-		
-		.content-narrow {
-			width: 45%;
-			margin: 0 auto;
-		}
+	.h-font-md {
+		font-size: 3rem;
 	}
 	
-	#tickets {
-	    #price-list li
-	    {
-		   font-size: 18px;
-	    }
+	.h-font-lg {
+		font-size: 6rem;
 	}
 }
 
 /* Extra large devices (large desktops, 1900px and up) */
 @media (min-width: 1900px)
 {
-	body#main-layout
-	{
-		font-size: 18px;
-		
-		p
-		{
-			font-size: 18px;
-		}
-		
-		.tag-line {
-			font-size: 100px;
-			line-height: 100px;
-			margin-top: 100px;
-		}
-		
-		.tag-line2 {
-			font-size: 50px;
-		}
+	.h-font-md {
+		font-size: 3rem;
+	}
+	
+	.h-font-lg {
+		font-size: 7rem;
+	}
+}
+
+@media (max-height: 700px)
+{
+	.section.full-height {
+		height: fit-content;
 	}
 }
