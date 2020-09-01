@@ -1,35 +1,11 @@
 /*
-	YELLOW: #F4D402;
-	ORANGE: #d8541f;
-	Green:	#c0d12f;
+	RED: 	#F73327
+	ORANGE: #BE4816
 */
 
 
-@font-face {
-	font-family:"mistress";
-	src: url("/mistress.ttf");
-}
-
-@font-face {
-	font-family:"lakeshore-drive";
-	src: url("/lakeshore-drive.otf");
-}
-
-@keyframes spin {
-	0% { z-index: 9; opacity: 0; width: 0%; top: 9.25%; transform: rotate(-90deg); }
-	25% { opacity: 1; width: 20%; top: 1%; transform: rotate(-100deg); }
-	50% { transform: rotate(-120deg); }
-	75% { transform: rotate(-150deg); }
-	100% { z-index: 9; opacity: 1; width: 40%; top: -9%; transform: rotate(-260deg); }
-}
-
-@keyframes pop-in {
-	0% { opacity: 0; background-position-x: 250px; }
-	25% { opacity: 0.05; }
-	50% { opacity: 0.1; }
-	75% { opacity: 0.15; }
-	100% { opacity: 1; background-position-x: center; }
-}
+@import url('https://fonts.googleapis.com/css2?family=Six+Caps&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
 
 /* ----------------------------------------------------
@@ -37,6 +13,27 @@
   |	GENERAL                                            |
   |                                                    |
    ---------------------------------------------------- */
+
+html {
+	scroll-behavior: smooth;
+}
+
+.container-fluid {
+	position: relative;
+	overflow: hidden;
+}
+
+.text-justify {
+	text-align-last: center;
+}
+
+.text-danger {
+	color: #F73327!important;
+}
+
+.list-group-item-action {
+	cursor: pointer;
+}
 
 img
 {
@@ -51,10 +48,10 @@ ul
 	margin: 0;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, 
-.btn-primary:active:hover, .btn-primary:active:focus
+.btn, .btn:hover, .btn:focus, .btn:active, 
+.btn:active:hover, .btn:active:focus
 {
-	font-family: 'Roboto Condensed', sans-serif;
+	font-family: 'Raleway', sans-serif;
 }
 
 .link-unstyled {
@@ -75,6 +72,15 @@ label.error {
 	color: red;
 }
 
+.fine-print {
+	font-size: 0.75rem;
+
+	&.dividers {
+		border-left: 2px solid white;
+		border-right: 2px solid white;
+	}
+}
+
 /* ----------------------------------------------------
   |                                                    |
   |	HEADINGS                                           |
@@ -83,7 +89,7 @@ label.error {
 
 h1
 {
-	font-size: 40px;
+	font-size: 6rem;
 	padding: 10px 0px;
 	margin: 0;
 	font-weight: bold;
@@ -91,7 +97,7 @@ h1
 
 h2
 {
-	font-size: 32px;
+	font-size: 5rem;
 	padding: 10px 0px;
 	margin: 0;
 	font-weight: bold;
@@ -99,7 +105,7 @@ h2
 
 h3
 {
-	font-size: 24px;
+	font-size: 4rem;
 	padding: 10px 0px;
 	margin: 0;
 	font-weight: bold;
@@ -107,10 +113,32 @@ h3
 
 h4
 {
-	font-size: 16px;
+	font-size: 2rem;
 	padding: 10px 0px;
 	margin: 0;
 	font-weight: bold;
+}
+
+h5
+{
+	font-size: 1.5rem;
+	padding: 10px 0px;
+	margin: 0;
+	font-weight: bold;
+}
+
+.h-font, [class^="h-font-"], div[class*=" h-font-"] {
+	font-family: 'Six Caps', sans-serif;
+}
+
+.h-font-md {
+	font-size: 1.5rem;
+	line-height: 1;
+}
+
+.h-font-lg {
+	font-size: 3rem;
+	line-height: 1;
 }
 
 /* ----------------------------------------------------
@@ -119,7 +147,7 @@ h4
   |                                                    |
    ---------------------------------------------------- */
 
-.fa
+.fa, .fas, .far, .fab
 {
 	margin: 5px;
 	
@@ -223,7 +251,7 @@ h4
 	}
 }
 
-.fa-facebook
+.fa-facebook-f
 {
 	background-color: #3C599F;
 }
@@ -251,8 +279,8 @@ h4
    
 body
  {
-	 font-size: 14px;
-	 font-family: 'Roboto Slab', sans-serif;
+	 font-size: 16px;
+	 font-family: 'Raleway', sans-serif;
 	 height: 100%;
  }
 
@@ -265,160 +293,68 @@ body
 body#main-layout
 {
 	color: white;
-	padding-top: 75px;
-	background-color: #2D2D2D;
+	background-color: #000000;
+	padding-top: 10rem;
+
+	&.navbar-short {
+		padding-top: 5rem;
+	}
 	
 	p
 	{
-		font-size: 14px;
+		font-size: 1rem;
 		color: white;
-		font-family: 'Roboto Slab', sans-serif;
+		font-family: 'Raleway', sans-serif;
 	}
 	
 	a, a:hover, a:focus, a:visited
 	{
-		color: #F4D402;
+		color: #F73327;
 	}
 	
 	a.subtle-link, a.subtle-link:hover, a.subtle-link:focus, a.subtle-link:visited
 	{
 		color: white;
+		font-weight: bold;
+	}
+
+	.btn {
+		text-transform: uppercase;
+		letter-spacing: 1px;
 	}
 	
 	.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:visited
 	{
-		font-family: 'Roboto Slab', sans-serif;
-		font-size: 14px;
+		font-family: 'Raleway', sans-serif;
+		font-size: 1rem;
 		color: white;
 	}
 
 	.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, 
 	.btn-primary:active:hover, .btn-primary:active:focus
 	{
-		font-family: 'Roboto Condensed', sans-serif;
 		background: none;
 		font-weight: bold;
-		background-color: #F4D402;
-		border-color: #F4D402;
+		background-color: #F73327;
+		border-color: #F73327;
+		outline: none;
+		color: white;
+	}
+
+	.btn-outline-primary, .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active, 
+	.btn-outline-primary:active:hover, .btn-outline-primary:active:focus
+	{
+		background: none;
+		font-weight: bold;
+		border-color: #F73327;
 		outline: none;
 	}
-	
-	.font-mistress {
-		font-family: 'mistress';
-	}
-	
-	.bg-1 {
-		background-image: url("/images/scratchy metal.png");
-		/* Create the parallax scrolling effect */
-		background-attachment: fixed;
-		background-position: top left;
-		background-repeat: no-repeat;
-		background-size: cover;
-		
-		.mask {
-			display: flex;
-			margin-right: -15px;
-			margin-left: -15px;
-			background-color: rgba(0, 0, 0, 0.5);
-		}
-	}
-	
-	.bg-2 {
-		background-image: url("/images/scratchy stone.png");
-		/* Create the parallax scrolling effect */
-		background-attachment: fixed;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		color: black;
-		
-		.mask {
-			display: flex;
-			margin-right: -15px;
-			margin-left: -15px;
-			background-color: rgba(255, 255, 255, 0.5);
-		}
-		
-		p {
-			color: black;
-		}
-	}
-	
-	.bg-3 {
-		background-image: url("/images/red cave.png");
-		/* Create the parallax scrolling effect */
-		background-attachment: fixed;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		
-		.mask {
-			display: flex;
-			margin-right: -15px;
-			margin-left: -15px;
-			background-color: rgba(0, 0, 0, 0.25);
-		}
-	}
-	
-	.tag-line {
-		font-size: 75px;
-		color: #F4D402;
-		line-height: 75px;
-		text-align: center;
-		margin-top: 50px;
-	}
-	
-	.tag-line2 {
-		font-size: 35px;
-		text-align: center;
-	}
-	
-	// .cover-scythe {
-	// 	z-index: 10;
-	// 	position: relative;
-	// }
-	
-	.cover-zombie {
-		z-index: 10;
-		position: relative;
-	}
-	
-	#scythe {
-		opacity: 0;
-		position: absolute;
-		z-index: -1;
-		width: 40%;
-		top: -9%;
-		left: 18%;
-		transform: rotate(-90deg);
-		transform-origin: 100% 100% 0;
-		
-		&.animate {
-			animation: spin 0.75s linear 1;
-		}
-	}
-	
-	#zombie {
-		opacity: 0;
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		background-image: url("/images/zombie.png");
-		/* Create the parallax scrolling effect */
-		background-attachment: fixed;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		
-		&.animate {
-			animation: pop-in 0.1s linear 1;
-			opacity: 1;
-		}
-	}
-	
-	#animation-container {
-		position: relative;
-		overflow: hidden;
+
+	.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active, 
+	.btn-outline-primary:active:hover, .btn-outline-primary:active:focus
+	{
+		background-color: #F73327;
+		color: white;
 	}
 }
 
@@ -431,7 +367,7 @@ body#main-layout
 #main-nav
 {
 	background: none;
-	background-color: #2D2D2D;
+	background-color: #000000;
 	border: none;
 	border-bottom: 1px solid white;
 }
@@ -439,8 +375,16 @@ body#main-layout
 #main-nav .navbar-brand
 {
 	color: white;
-	height: 75px;
+	height: 10rem;
 	padding: 5px;
+	transition: all 0.3s ease-in-out;
+}
+
+body#main-layout.navbar-short {
+	#main-nav .navbar-brand
+	{
+		height: 5rem;
+	}
 }
 
 .navbar-toggler {
@@ -454,14 +398,15 @@ body#main-layout
 
 #main-nav-menu .navbar-nav li a
 {
-	color: #F4D402;
-	font-size: 16px;
+	color: white;
+	font-size: 1rem;
 	text-transform: uppercase;
+	text-align: center;
 }
 
 #main-nav-menu .navbar-nav li a:hover
 {
-	color: white;
+	color: #F73327;
 }
 
 #main-nav-menu .navbar-nav li a:focus, #main-nav-menu .navbar-nav li a:active, #main-nav-menu .navbar-nav li a:active:focus, #main-nav-menu .navbar-nav li.open a,
@@ -485,7 +430,7 @@ body#main-layout
 #main-nav-menu .dropdown-menu
 {
 	background: none;
-	background-color: #2D2D2D;
+	background-color: #000000;
 	min-width: 200px;
 }
 
@@ -493,6 +438,14 @@ body#main-layout
 {
 	text-align: left;
 	text-transform: none;
+}
+
+#main-nav-menu #navbar-social-links {
+	flex-direction: row;
+
+	li a {
+		color: #BE4816;
+	}
 }
 
 /* ----------------------------------------------------
@@ -504,13 +457,13 @@ body#main-layout
 #simple-nav
 {
 	background: none;
-	background-color: #8D8D8D;
+	background-color: #000000;
 	border: none;
-	border-bottom: 1px solid #4d4d4d;
+	border-bottom: 1px solid #ffffff;
 	
 	.navbar-brand
 	{
-		height: 75px;
+		height: 7rem;
 		padding: 5px;
 	}
 }
@@ -524,13 +477,13 @@ body#main-layout
 #management-nav
 {
 	background: none;
-	background-color: #8D8D8D;
+	background-color: #000000;
 	border: none;
-	border-bottom: 1px solid #4d4d4d;
+	border-bottom: 1px solid #ffffff;
 	
 	.navbar-brand
 	{
-		height: 75px;
+		height: 5rem;
 		padding: 5px;
 	}
 	
@@ -571,14 +524,15 @@ body
 	width: 100%;
 	height: 61px; /* Set the fixed height of the footer here */
 	line-height: 60px; /* Vertically center the text there */
-	background-color: black;
+	background-color: #F73327;
 	overflow: hidden;
-	font-size: 12px;
-	color: #CDCDCD;
+	font-size: 1rem;
+	color: white;
 	
 	a
 	{
-		color: white;
+		color: white!important;
+		font-weight: bold;
 	}
 }
 
@@ -613,14 +567,6 @@ body
   |                                                    |
    ---------------------------------------------------- */
 
-#countdown-title
-{
-	font-size: 100px;
-	line-height: 100px;
-	font-family: 'mistress';
-	color: white;
-}
-
 #countdown-timer ul
 {
 	display: inline-block;
@@ -632,33 +578,21 @@ body
 	display: inline-block;
 	text-align: center;
 	padding: 0px 10px;
-	background-color: #2d2d2d;
-	border-radius: 10px;
-	border: 1px solid #2d2d2d;
 	margin: 0 10px;
-}
-
-#countdown-timer ul li:first-child
-{
-	width: auto;
-}
-
-#countdown-timer ul li:last-child
-{
-	width: auto;
-	border: none;
+	vertical-align: top;
 }
 
 #countdown-timer ul li .countdown-count, .countdown-open
 {
-	font-size: 38px;
-	color: white;
+	font-size: 4rem;
+	color: #F73327;
+	font-family: 'Six Caps', serif;
 }
 
 #countdown-timer ul li .countdown-label
 {
-	font-size: 20px;
-	color: #c0d12f;
+	font-size: 1rem;
+	color: #F73327;
 }
 
 /* ----------------------------------------------------
@@ -666,30 +600,65 @@ body
   |	SECTIONS                                           |
   |                                                    |
    ---------------------------------------------------- */
-   
-.section
-{
-	margin-top: 50px;
+ 
+.section, .section .section-heading, .section .section-content {
+	position: relative;
 }
 
-.section:first-child
-{
-	margin-top: 0px;
+.section {
+	margin-left: -15px;
+	margin-right: -15px;
+	background: black;
 }
 
-.section .section-heading h2, #sponsor-page h2, #photos-page h2, #team-page h2, #news-page h2
+.section.video-bg {
+	background: none;
+}
+
+.section-heading, .section-content {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.section .section-heading h2, #application-page h1, #news-page h1
 {
 	text-transform: uppercase;
-	margin-bottom: 25px;
-	font-size: 75px;
-	font-family: 'lakeshore-drive';
+	padding-top: 50px;
+	padding-bottom: 25px;
+	font-family: 'Six Caps';
 	font-weight: normal;
-	color: #F4D402;
+	color: white;
+	text-align: center;
+}
+
+#application-page h1
+{
+	color: black;
 }
 
 .section .section-content
 {
-	padding: 0 25px;
+	height: 100%;
+	padding-bottom: 50px;
+}
+
+.section.full-height {
+	height: 0;
+	min-height: calc(~"100vh - 10rem");
+}
+
+body#main-layout.navbar-short .section.full-height {
+	min-height: calc(~"100vh - 5rem");
+}
+
+.section.dividers-red {
+	border-top: 2px solid #F73327;
+	border-bottom: 2px solid #F73327;
+}
+
+.section.dividers-white {
+	border-top: 2px solid white;
+	border-bottom: 2px solid white;
 }
 
 /* ----------------------------------------------------
@@ -697,19 +666,42 @@ body
   |	TICKETS                                            |
   |                                                    |
    ---------------------------------------------------- */
+.ticket-card {
+	background: #F73327;
+	color: white;
+	text-align: center;
 
-#tickets {
-	#price-list li
-	{
-	   margin-bottom: 10px;
-	   border-bottom: 1px dashed #8D8D8D;
-	   display: inline-block;
-	   width: 100%;
+	p {
+		height: 120px;
+		margin: 0;
 	}
-	
-	.fine-print p {
-		font-size: 10px;
-		margin-bottom: 0;
+
+	span {
+		white-space: nowrap;
+	}
+
+	span.price {
+		font-family: 'Six Caps', sans-serif;
+		font-size: 6rem;
+		line-height: 1;
+	}
+
+	h4 {
+		font-family: 'Six Caps', sans-serif;
+		margin: 0;
+		margin-top: 25px;
+		text-shadow:
+			-1px -1px 0 #000,  //down left
+			1px -1px 0 #000,   //down right
+			-1px 1px 0 #000,   //up left
+			1px 1px 0 #000;    //up right
+		letter-spacing: 1px;
+	}
+
+	.divider {
+		display: block;
+		border-bottom: 1px solid black;
+		margin: 25px 0;
 	}
 }
 
@@ -720,18 +712,12 @@ body
   |	DIRECTIONS                                            |
   |                                                    |
    ---------------------------------------------------- */
-
-#directions li
-{
-	margin-bottom: 10px;
-	text-align: justify;
-}
-
 #embeded-map
 {
 	border: 0;
 	width: 100%;
-	height: 400px;
+	height: 600px;
+	margin-bottom: -7px;
 }
    
 /* ----------------------------------------------------
@@ -776,7 +762,7 @@ body
 // }
 
 .zombie-bg {
-	background: #2d2d2d;
+	background: #000000;
 	background-image: url("/media/img/zombie_woods.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
@@ -794,7 +780,7 @@ body
 
 #groupPricingModal p
 {
-	font-size: 18px!important;
+	font-size: 1rem;
 }
 
 #groupPricingModal .modal-header button.close
@@ -823,10 +809,6 @@ body
 			text-align: center;
 		}
 	}
-	
-	.fine-print p {
-		font-size: 10px!important;
-	}
 }
 
 /* ----------------------------------------------------
@@ -836,45 +818,12 @@ body
    ---------------------------------------------------- */
 
 #social-links 
-{
-	background-color: #2D2D2D;
-	border-top: 1px solid white;
-	
+{	
+	border-top: 2px solid white;
 	p, span, a 
 	{
 		color: white;
 		text-decoration: none!important;
-	}
-	
-	.prompt
-	{
-		font-family: 'Roboto Condensed', sans-serif;
-		font-size: 18px;
-	}
-}
-
-/* ----------------------------------------------------
-  |                                                    |
-  |	NEWS PAGE                                          |
-  |                                                    |
-   ---------------------------------------------------- */
-
-#news-page
-{
-	ul
-	{
-		list-style: square;
-		margin-left: 25px;
-		
-		li
-		{
-			padding: 0 0 25px 0;
-			
-			a
-			{
-				font-size: 16px;
-			}
-		}
 	}
 }
 
@@ -903,61 +852,18 @@ body
 
 /* ----------------------------------------------------
   |                                                    |
-  |	PHOTOS PAGE                                        |
-  |                                                    |
-   ---------------------------------------------------- */
-   
-#photos-page
-{
-	.img-container
-	{
-		text-align: center;
-		
-		&.vid:before
-		{
-			content: '\f04b';
-			font-family: FontAwesome;
-			font-weight: normal;
-			font-style: normal;
-			color: white;
-			font-size: 50px;
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			pointer-events: none;
-		}
-		
-		img
-		{
-			border: 1px solid white;
-			height: auto;
-			width: auto;
-			max-width: 100%;
-			margin: 15px 0;
-		}
-	}
-}
-
-/* ----------------------------------------------------
-  |                                                    |
   |	GIVEAWAY PAGE                                      |
   |                                                    |
    ---------------------------------------------------- */
 
-#giveaway-page {
-	h2 {
-		font-size: 16px;
-		font-weight: 400;
-		font-family: 'Roboto Condensed', sans-serif;
-	}
-	
+#giveaway-page {	
 	.giveaway-flyer {
 		max-height: 1000px;
 		max-width: 100%;
 	}
 	
 	.fine-print {
-		font-size: 11px;
+		font-size: 1rem;
 	}
 }
 
@@ -1011,4 +917,145 @@ body
 
 .list-group-header {
 	margin-top: 50px;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	PARALLAX                                           |
+  |                                                    |
+   ---------------------------------------------------- */
+
+.parallax {
+	/* Create the parallax scrolling effect */
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+	&::before {
+		content: "";
+		background-color: rgba(0, 0, 0, 0.5);
+		position: absolute;
+		height: 100%;
+		width: 100%;
+	}
+}
+
+[data-background='bg_scratchy_red'] {
+	background-image: url("/media/img/bg_scratchy_red.jpg");
+}
+
+[data-background='bg_scratchy_gray'] {
+	background-image: url("/media/img/bg_scratchy_gray.png");
+}
+
+[data-background='bg_stone_red'] {
+	background-image: url("/media/img/bg_stone_red.jpg");
+}
+
+[data-background='bg_stone_gray'] {
+	background-image: url("/media/img/bg_stone_gray.jpg");
+}
+
+[data-background='bg_hayride'] {
+	background-image: url("/media/img/bg_hayride.jpg");
+}
+
+[data-background='bg_forest'] {
+	background-image: url("/media/img/bg_forest.jpg");
+}
+
+[data-background='bg_psychosis'] {
+	background-image: url("/media/img/bg_psychosis.jpg");
+}
+
+[data-background='bg_zombie'] {
+	background-image: url("/media/img/bg_zombie.jpg");
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	VIDEO                                              |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#bg-video-player {
+	position: absolute; 
+	z-index: 0; 
+	width: 1920px;
+	height: 1080px; 
+	top: -150px; 
+	left: 0px; 
+	overflow: hidden; 
+	opacity: 1; 
+	user-select: none;
+	margin-left: calc(~"0px - ((1920px - 100vw)/2)"); 
+	max-width: initial; 
+	// margin-top: -140px;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	FAQ Acordian                                       |
+  |                                                    |
+   ---------------------------------------------------- */
+
+.faq.list-group {
+	.list-group-item {
+		background: none;
+		color: white;
+		margin-bottom: 25px;
+		border-radius: 5px;
+		text-align: justify;
+		text-align-last: center;
+		padding: 0;
+
+		span {
+			padding: 15px 25px;
+			display: block;
+		}
+	}
+
+	.list-group-item-action {
+		background: black;
+		text-align: left;
+		text-align-last: left;
+
+		&::after {
+			content: "";
+			display: block;
+			width: 0%;
+			margin: 0 50%;
+			border-bottom: 2px solid #F73327;
+			transition: all 0.5s ease-in-out;
+		}
+	}
+
+	.list-group-item.active {
+		border-radius: 5px 5px 0 0;
+		border: none;
+
+		&::after {
+			width: 100%;
+			margin: 0;
+		}
+	}
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	Anchor                                             |
+  |                                                    |
+   ---------------------------------------------------- */
+
+.anchor {
+	display: block;
+	visibility: hidden;
+	height: 0px;
+	position: relative;
+	top: -10rem;
+}
+
+body#main-layout.navbar-short .anchor {
+	top: -5rem;
 }

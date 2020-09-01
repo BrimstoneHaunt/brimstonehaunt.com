@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<div id="animation-container">
+	<!-- BANNERS -->
+	<div class="container-fluid">
+		<!-- <div class="row" style="background-color: red; padding: 25px; font-size: 16px; color: black;">
+			<div class="col">
+				<center>10/26/2019 2:30pm - WE WILL BE CLOSED DUE TO WEATHER TONIGHT (10/26)! WE LOOK FORWARD TO SEEING YOU NEXT SEASON!</center>
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<!-- <div class="swiper-slide">
+						<a href="https://www.bigtickets.com/e/brimstonehaunt/brimstone-haunted-hayride-the-forgotten-forest" target="_blank">
+							<img src="media/img/banner_slides/tickets_banner.jpg" />
+						</a>
+					</div> -->
+					{{!-- <div class="swiper-slide">
+						<img src="media/img/banner_slides/2426-Brimstone-Website-Banner-1_4.gif" />
+					</div> --}}
+					
+					<div class="swiper-slide">
+						<img src="media/img/banner_slides/2426-Brimstone-Website-Banner-2_4.gif" />
+					</div>
+					<div class="swiper-slide">
+						<img src="media/img/banner_slides/2426-Brimstone-Website-Banner-3_4.gif" />
+					</div>
+					<div class="swiper-slide">
+						<img src="media/img/banner_slides/2426-Brimstone-Website-Banner-4_4.gif" />
+					</div>
+					<div class="swiper-slide">
+						<a href="/apply">
+							<img src="media/img/banner_slides/2426-Brimstone-Website-Banner-5_2.gif" />
+						</a>
+					</div>
+				</div>
+				<div class="swiper-pagination swiper-pagination-white"></div>
+				<div class="swiper-button-prev swiper-button-white"></div>
+				<div class="swiper-button-next swiper-button-white"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- TAG LINE -->
+	<div class="container-fluid bg-1 cover-scythe">
+		<div class="mask">
+			<div class="content-wide">
+				<div id="tagline" class="row">
+					<div class="col-lg-8">
+						<p class="tag-line font-mistress">Sow terror. Reap fear.<br>Harvest time is here.</p>
+						<p class="tag-line2">3 great scares for the<br>family and the brave!</p>
+					</div>
+					<div class="col-lg-4">
+						<center><img src="images/scarecrow.png" /></center>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- SWINGING SCYTHE -->
+	<div id="scythe" class="d-none d-lg-block">
+		<img src="images/scythe.png" />
+	</div>
+
+	<!-- ATTRACTIONS -->
+	<div class="container-fluid bg-2">
+		<div class="mask">
+			<div class="content-wide">
+				<div id="attractions" class="section my-5">
+					<div class="row align-items-center section-content">
+						<div class="col-md-4">
+							<img class="attraction-img" src="images/logos/haunted_hayride_color.png" alt="" />
+						</div>
+						<div class="col-md-8 px-3">
+							<p class="text-justify">The Brimstone Farm was once a prosperous family farm. Now, it is a place full of long-lost memories, stories, and curses. Many horrors have been reported in these fields but not many are willing to talk about the events that occur in the corn. Come see what’s waiting for you around every twist and turn.</p>
+						</div>
+					</div>
+					<div class="row align-items-center section-content">
+						<div class="col-md-4 order-md-last">
+							<img class="attraction-img" src="images/logos/forest_color.png" alt="" />
+						</div>
+						<div class="col-md-8 px-3 order-md-first">
+							<p class="text-justify">This is no ordinary woods walk. The Forgotten Forest is a place shrouded in mystery. Many people have gone searching for answers to the unnatural events that occur in and around the forest but none have ever returned. Only the bravest should dare enter these trees and IF you make it back out, you will not be the same as when you went in.</p>
+						</div>
+					</div>
+					<div class="row align-items-center section-content">
+						<div class="col-md-4">
+							<img class="attraction-img" src="images/logos/psychosis.png" alt="" />
+						</div>
+						<div class="col-md-8 px-3">
+							<p class="text-justify">Around every dark corner awaits disturbing scenes of horror that will pull you further from reality. Get the yell scared out of you as you wind through the dark maze-like pathways trying to find a way out. Or surrender to the darkness and join the horror in a permanent state of Psychosis.</p>
+						</div>
+					</div>
+					<div class="row align-items-center section-content">
+						<div class="col-md-4 order-md-last">
+							<img class="attraction-img" src="images/logos/zombie_assault.png" alt="" />
+						</div>
+						<div class="col-md-8 px-3 order-md-first">
+							<p class="text-justify">The zombie apocalypse is here. The infection has spread to every corner of the globe and the future seems bleak. There is a small refugee camp nearby that has managed to fight off the hoard and is heavily reinforced. Board our armored bus with a group of fellow survivors and a small assault team who will protect you in transit to the camp and see if you can survive the zombie assault.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid bg-1">
+		<div class="mask">
+			<div class="content-narrow">
+				<!-- COUNTDOWN -->
+				<div class="row justify-content-center mt-5">
+					<div id="countdown-title" class="col">
+						<center><span>We're sharpening the blades in anticipation</span></center>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div id="countdown-timer" class="col-auto">
+						<ul>
+							<li><span id="count-days" class="countdown-count"></span><br/><span class="countdown-label">DAYS</span></li>
+							<li><span id="count-hours" class="countdown-count"></span><br/><span class="countdown-label">HOURS</span></li>
+							<li><span id="count-minutes" class="countdown-count"></span><br/><span class="countdown-label">MINUTES</span></li>
+							<li><span id="count-seconds" class="countdown-count"></span><br/><span class="countdown-label">SECONDS</span></li>
+						</ul>
+					</div>
+				</div>
+				
+				<!-- TICKETS -->
+				<div id="tickets" class="section">
+					<div class="row section-heading">
+						<div class="col">
+							<center><h2>Tickets</h2></center>
+						</div>
+					</div>
+					<div class="row justify-content-center section-content">
+						<div class="col">
+							<ul id="price-list">
+								<li><span class="float-left">Haunted Hayride</span><span class="float-right">$15.00</span></li>
+								<li><span class="float-left">Forgotten Forest</span><span class="float-right">$15.00</span></li>
+								<li><span class="float-left">Combo (Haunted Hayride + Forgotten Forest)</span><span class="float-right">$27.00</span></li>
+								<li><span class="float-left">Fast Pass</span><span class="float-right">Combo Ticket + $20.00</span></li>
+								<li><span class="float-left">Psychosis</span><span class="float-right">$8</span></li>
+								<li><span class="float-left">Zombie Assault</span><span class="float-right">$5.00 at the door</span></li>
+							</ul>
+							{{!-- <a href="javascript:void(0);" class="subtle-link float-right" data-toggle="modal" data-target="#groupPricingModal">Group Pricing</a><br/><br/> --}}
+							
+							<p class="text-center">For group outing info contact <a href="mailto:groups@brimstonehaunt.com">groups@brimstonehaunt.com</a> or call 937-805-9322.</p>
+
+							<!-- <h4><center><strong>
+								<a href="https://www.bigtickets.com/e/brimstonehaunt/brimstone-haunted-hayride-the-forgotten-forest" target="_blank">
+									Purchase Tickets Online Now!
+								</a>
+							</strong></center></h4><br/> -->
+
+							<div class="fine-print">
+								<p>* Ticket office opens at 7pm and closes at 11:30pm.</p>
+								<p>* Open Friday and Saturday nights September 25 through October 31, 2020.</p>
+								<p>* Combo ticket includes entry to the Haunted Hayride and Forgotten Forest only.</p>
+								<p>* Fast passes are only good for use with a combo ticket. Fast pass pricing is in addition to the cost of the combo ticket.</p>
+								<p>* Psycosis and Zombie Assault are not part of the combo ticket and do not have a fast pass option.</p>
+								<p>* Prices are subject to change at any time.</p>
+								<p>* No refunds!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- DIRECTIONS -->
+				<div id="directions"  class="section">
+					<div class="row section-heading">
+						<div class="col">
+							<center><h2>Directions</h2></center>
+						</div>
+					</div>
+					<div class="row section-content">
+						<div class="col">
+							<h4><center><strong>
+								<a href="http://maps.apple.com/?address=472,Brimstone+Rd,Wilmington,Ohio" target="_blank">
+									472 Brimstone Rd, Wilmington, OH 45177
+								</a>
+							</strong></center></h4>
+							<br/>
+							<ul id="directions">
+								<li><strong>Coming from I-75: </strong>Take Exit 38 (Springboro/Franklin) and head East on State Route 73 for 15 miles then turn left on Brimstone Road.</li>
+								<li><strong>Coming from I-71: </strong>Take Exit 45 (Waynesville) and head West on State Route 73 for 2 miles then turn right on Brimstone Road.</li>
+							</ul>
+							<br/><br/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<iframe id="embeded-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3078.466591997571!2d-83.98506478424625!3d39.503957679481616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x884094d73418c903%3A0x22bede9365cedce0!2s472+Brimstone+Rd%2C+Wilmington%2C+OH+45177!5e0!3m2!1sen!2sus!4v1492628414617" frameborder="0" allowfullscreen>
+								Your web browser does not support iframes. Please update to a browser with iframe support. We recommend <a href="https://www.google.com/chrome/">Google Chrome</a>
+							</iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- FAQ -->
+	<div class="container-fluid bg-3">
+		<!-- SURPRISE ZOMBIE -->
+		<div id="zombie"></div>
+		<div class="mask">
+			<div class="content-narrow">
+				<div id="faq" class="section mb-5">
+					<div class="row section-heading">
+						<div class="col">
+							<center><h2>FAQ</h2></center>
+						</div>
+					</div>
+					<div class="row section-content">
+						<div class="col">
+							<ul class="faq">
+								<li><strong>Q: What time do you open?</strong></li>
+								<li>A: The ticket office opens at 7:00pm.</li>
+								<br/>
+								<li><strong>Q: What time are the first groups sent out?</strong></li>
+								<li>A: Our attractions will start running as soon as it is dark out.</li>
+								<br/>
+								<li><strong>Q: How scary are the attractions?</strong></li>
+								<li>A: The Hayride can be enjoyed by the whole family. It is a low-medium intensity haunt but still has it's fair share of scares and surprises. The Forgotten Forest and Psychosis are high intensity haunts with many scares. Zombie Assault is a simulator and features many virtual scares and action sequences.</li>
+								<br/>
+								<li><strong>Q: How long are the attractions?</strong></li>
+								<li>A: The Hayride is a one mile trail that takes about 20 minutes to ride through. The Forgotten Forest is a quarter mile walking path that usually takes about 20 minutes. Psychosis is a 5-10 minute indoor walk through. Zombie Assault is about a 5 minute long simulation.</li>
+								<br/>
+								<li><strong>Q: What time do you close?</strong></li>
+								<li>A: The ticket office closes at 11:30pm. <b>The Hayride queue line closes at 11:45.</b> The hayride will run until everyone in queue prior to 11:45pm has gone. All other attractions will run until queue lines are empty.</li>
+								<br/>
+								<li><strong>Q: Do you close for weather?</strong></li>
+								<li>A: Yes if the weather is bad there is a chance we will have to close since our attractions are outdoors. You can check our social media for announcements related to closings.</li>
+								<br/>
+								<li><strong>Q: Is my ticket only good the night I purchase it?</strong></li>
+								<li>A: No. Tickets are good for any night during the season in which they were purchased.</li>
+								<br><br>
+								<li><strong>Photography and Video</strong></li>
+								<li>All photography and video is prohibited inside of the attractions. It is allowed in queue lines and the midway/tickets/concessions area.</li>
+								<br>
+								<li>While visiting Brimstone Haunt, you may be photographed or video recorded. These images and video may be used in the future for educational or marketing purposes. Admission to Brimstone Haunt or its programs serves as permission for image and video use.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- SOCIAL -->
+	<div class="container-fluid">
+		<div id="social-links" class="row cover-zombie">
+			<!-- LARGE VERSION -->
+			<div class="col text-center py-5 d-none d-md-inline-block">
+				<a href="http://www.facebook.com/brimstonehaunt" target="_blank">
+					<span class="fa icon-zoom icon-circle fa-facebook fa-icon-huge"></span>
+					<br><br><span class="prompt">LIKE US</span>
+				</a>
+			</div>
+			<div class="col text-center py-5 d-none d-md-inline-block">
+				<a href="http://www.twitter.com/brimstonehaunt" target="_blank">
+					<span class="fa icon-zoom icon-circle fa-twitter fa-icon-huge"></span>
+					<br><br><span class="prompt">FOLLOW US</span>
+				</a>
+			</div>
+			<div class="col text-center py-5 d-none d-md-inline-block">
+				<a href="http://www.instagram.com/brimstonehaunt" target="_blank">
+					<span class="fa icon-zoom icon-circle fa-instagram fa-icon-huge"></span>
+					<br><br><span class="prompt">FOLLOW US</span>
+				</a>
+			</div>
+			<div class="col text-center py-5 d-none d-md-inline-block">
+				<a href="https://www.youtube.com/channel/UCgWZui6ksqZNi7_2BMrfjRw" target="_blank">
+					<span class="fa icon-zoom icon-circle fa-youtube fa-icon-huge"></span>
+					<br><br><span class="prompt">WATCH US</span>
+				</a>
+			</div>
+			<!-- SMALL VERSION -->
+			<div class="col text-center py-5 d-inline-block d-md-none">
+				<a href="http://www.facebook.com/brimstonehaunt" target="_blank">
+					<span class="fa icon-zoom icon-circle fa-facebook fa-icon-normal"></span>
+				</a>
+			</div>
+			<div class="col text-center py-5 d-inline-block d-md-none">
+				<a href="http://www.twitter.com/brimstonehaunt" target="_blank">
+					<span class="fa icon-zoom icon-circle fa-twitter fa-icon-normal"></span>
+				</a>
+			</div>
+			<div class="col text-center py-5 d-inline-block d-md-none">
+				<a href="http://www.instagram.com/brimstonehaunt" target="_blank">
+					<span class="fa icon-zoom icon-circle fa-instagram fa-icon-normal"></span>
+				</a>
+			</div>
+			<div class="col text-center py-5 d-inline-block d-md-none">
+				<a href="https://www.youtube.com/channel/UCgWZui6ksqZNi7_2BMrfjRw" target="_blank">
+					<span class="fa icon-zoom icon-circle fa-youtube fa-icon-normal"></span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="groupPricingModal" tabindex="-1" role="dialog" aria-labelledby="groupPricingModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content zombie-bg">
+			<div class="mask">
+				<div class="modal-header">
+					<h5 class="modal-title" id="groupPricingModalLabel">Group Pricing</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<center>
+						<h2>The more the scarier! Bring the whole horde for a horrifyingly good time!</h2><br/>
+						<p>Purchase online or choose the convenience of a Promo Code to let your friends, family, and employees enjoy scares whenever they want.</p>
+						<div id="pricing-table" class="row">
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col header">
+										Minimum of 10 Tickets Per<br>Order = No additional fees!
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										Hayride $12, a $3 savings
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										Walk $10, a $2 savings
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										Psychosis $6, a $2 savings
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										Combo $25, a $2 savings
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										Fast Pass $37, a $10 savings
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col header">
+										eCONVENIENCE Promo Code –<br>A $2 savings off every ticket!
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										Hayride $13
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										Walk $10
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										Psychosis $6
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										Combo $25
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										Fast Pass $45
+									</div>
+								</div>
+							</div>
+						</div>
+						<br>
+						<p>To set up an eCONVENIENCE Promo Code or for groups larger than 10 contact <a href="mailto:groups@brimstonehaunt.com">groups@brimstonehaunt.com</a> or call 937-805-9322.</p>
+						<br><br>
+						<div class="fine-print">
+							<p>eCONVENIENCE Discount Ticket Program qualification is based upon agreement to the following Terms & Conditions: 1. Brimstone Haunt offers the eCONVENIENCE Discount Ticket Program to employees/members of Brimstone Haunt approved organizations. Attraction admission tickets are sold electronically at a discounted rate via www.brimstonehaunt.com. 2. The ORGANIZATION agrees to internally promote the program and distribute the electronic discount code to employees/members. 3. The eCONVENIENCE Discount Ticket Program is for the express use of the employees/members of the ORGANIZATION. Tickets may not be resold. 4. Ticket purchases must be in the form of Credit or Debit Card. The purchase price to your employees will be $13 for Brimstone Haunted Hayride, $10 for Forgotten Forest, $6 for Psychosis, $25 for combo and $45 for combo + fast pass. Employees/members of ORGANIZATION will be charged internet convenience and service fee. 5. All online ticket orders are non-refundable.</p>
+						</div>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
