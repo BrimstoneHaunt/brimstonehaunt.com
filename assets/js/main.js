@@ -4,6 +4,30 @@
   |                                                    |
    ---------------------------------------------------- */
    
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+	},
+	SmallWindow: function() {
+		return window.innerWidth < 768;
+	},
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+};
+
 var homePageBanner = null;
 var countdown = {
 	openingDate: new Date("Sep 25, 2020 19:00:00").getTime(),
@@ -45,6 +69,22 @@ var countdown = {
   |	FUNCTIONS                                          |
   |                                                    |
    ---------------------------------------------------- */
+
+function scrollPageTo(target) {
+	$('#main-nav-menu').collapse('hide');
+	if($(window).scrollTop() <= 5) {
+		$(window).scrollTop(6);
+		setTimeout(function() {
+			$('html, body').animate({
+				scrollTop: $(target).offset().top
+			}, 500);
+		}, 250);
+	} else {
+		$('html, body').animate({
+			scrollTop: $(target).offset().top
+		}, 750);
+	}
+}
 
 function startTimeClockNow() {
 	$.post("/timeclock/clockin", {  }, function(resp) {
@@ -531,17 +571,19 @@ function onPlayerStateChange(event) {
 }
 
 $(document).ready(function() {
-	var tag = document.createElement('script');
-	tag.id = 'iframe-demo';
-	tag.src = 'https://www.youtube.com/iframe_api';
-	var firstScriptTag = document.getElementsByTagName('script')[0];
-	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	if(!isMobile.any()) {
+		var tag = document.createElement('script');
+		tag.id = 'iframe-demo';
+		tag.src = 'https://www.youtube.com/iframe_api';
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	}
 
-	$.stellar({
-		// horizontalOffset: 65,
-		// responsive: true,
-		horizontalScrolling: false
-	});
+	if(!isMobile.any() && !isMobile.SmallWindow()) {
+		$.stellar({
+			horizontalScrolling: false
+		});
+	}
 
 	if($(".swiper-container").length > 0) {
 		homePageBanner = new Swiper('.swiper-container', {
@@ -595,7 +637,7 @@ $(document).ready(function() {
 
 	initRecordLists();
 }).on("scroll", function() {
-	$("body#main-layout").toggleClass("navbar-short", $(window).scrollTop() > 0);
+	$("body#main-layout").toggleClass("navbar-short", $(window).scrollTop() > 5);
 }).on("submit", "#giveaway-form", function() {
 	if($("input[name=code]").val() != "FREETIX19HH") {
 		alert("Invalid Code! The correct code for this giveaway can be found on our Facebook post.");

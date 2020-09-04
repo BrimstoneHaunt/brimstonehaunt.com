@@ -13,11 +13,6 @@
   |	GENERAL                                            |
   |                                                    |
    ---------------------------------------------------- */
-
-html {
-	scroll-behavior: smooth;
-}
-
 .container-fluid {
 	position: relative;
 	overflow: hidden;
@@ -690,12 +685,8 @@ body#main-layout.navbar-short .section.full-height {
 		font-family: 'Six Caps', sans-serif;
 		margin: 0;
 		margin-top: 25px;
-		text-shadow:
-			-1px -1px 0 #000,  //down left
-			1px -1px 0 #000,   //down right
-			-1px 1px 0 #000,   //up left
-			1px 1px 0 #000;    //up right
-		letter-spacing: 1px;
+		letter-spacing: 3px;
+		font-size: 2.5rem;
 	}
 
 	.divider {
@@ -990,8 +981,15 @@ body#main-layout.navbar-short .section.full-height {
 	opacity: 1; 
 	user-select: none;
 	margin-left: calc(~"0px - ((1920px - 100vw)/2)"); 
-	max-width: initial; 
-	// margin-top: -140px;
+	max-width: initial;
+}
+
+div#bg-video-player {
+	background-attachment: scroll;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url("/media/img/video_thumbnail.jpg");
 }
 
 /* ----------------------------------------------------
