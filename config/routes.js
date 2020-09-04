@@ -38,25 +38,21 @@ module.exports.routes = {
     view: 'homepage',
     locals: {
     	homepage: true,
-    	title: "Home"
-    }
-  },
-  'get /gallery': {
-    view: 'gallery',
-    locals: {
-    	title: "Gallery"
-    }
-  },
-  'get /sponsors': {
-    view: 'sponsors',
-    locals: {
-    	title: "Sponsors"
+    	title: "4 Great Scares for the Family and the Brave"
     }
   },
   'get /news': {
     view: 'news',
     locals: {
-    	title: "News"
+      layout: 'simple',
+    	title: "Press Releases"
+    }
+  },
+  'get /policies': {
+    view: 'policies',
+    locals: {
+      layout: 'simple',
+    	title: "Policies"
     }
   },
   'get /giveaway': {

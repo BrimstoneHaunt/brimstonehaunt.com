@@ -7,6 +7,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Six+Caps&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
+@keyframes shadow-pulse-red {
+	0% {
+		text-shadow: 
+			0px 0px 1px #f73327, 
+			0px 0px 3px #f73327, 
+			0px 0px 5px #f73327, 
+			0px 0px 10px #f73327;
+	}
+	25% {
+		text-shadow: 
+			0px 0px 1px #f73327, 
+			0px 0px 3px #f73327, 
+			0px 0px 5px #f73327;
+	}
+	50% {
+		text-shadow: 
+			0px 0px 1px #f73327,
+			0px 0px 3px #f73327;
+	}
+	75% {
+		text-shadow: 
+			0px 0px 1px #f73327, 
+			0px 0px 3px #f73327, 
+			0px 0px 5px #f73327;
+	}
+	100% {
+		text-shadow: 
+			0px 0px 1px #f73327, 
+			0px 0px 3px #f73327, 
+			0px 0px 5px #f73327, 
+			0px 0px 10px #f73327;
+	}
+}
+
 
 /* ----------------------------------------------------
   |                                                    |
@@ -69,11 +103,42 @@ label.error {
 
 .fine-print {
 	font-size: 0.75rem;
+	line-height: 3;
 
 	&.dividers {
 		border-left: 2px solid white;
 		border-right: 2px solid white;
 	}
+	
+	&.divider-left {
+		border-left: 1px solid white;
+	}
+	
+	&.divider-right {
+		border-right: 1px solid white;
+	}
+}
+
+.list-group-item-dark {
+	color: white;
+	background: black;
+	font-weight: bold;
+}
+
+.alert {
+	z-index: 99;
+}
+
+.alert-danger {
+	background-color: #F73327;
+	border-color: #F73327;
+	color: white;
+}
+
+.alert-warning {
+	background-color: #BE4816;
+	border-color: #BE4816;
+	color: white;
 }
 
 /* ----------------------------------------------------
@@ -127,13 +192,14 @@ h5
 }
 
 .h-font-md {
-	font-size: 1.5rem;
+	font-size: 2rem;
 	line-height: 1;
 }
 
 .h-font-lg {
-	font-size: 3rem;
+	font-size: 4rem;
 	line-height: 1;
+	animation: shadow-pulse-red 5s infinite;
 }
 
 /* ----------------------------------------------------
@@ -397,11 +463,17 @@ body#main-layout.navbar-short {
 	font-size: 1rem;
 	text-transform: uppercase;
 	text-align: center;
+	transition: all 0.5s ease-in-out;
 }
 
 #main-nav-menu .navbar-nav li a:hover
 {
-	color: #F73327;
+	color: white;
+	text-shadow: 
+		0px 0px 1px #f73327, 
+		0px 0px 3px #f73327, 
+		0px 0px 5px #f73327, 
+		0px 0px 10px #f73327;
 }
 
 #main-nav-menu .navbar-nav li a:focus, #main-nav-menu .navbar-nav li a:active, #main-nav-menu .navbar-nav li a:active:focus, #main-nav-menu .navbar-nav li.open a,
@@ -440,6 +512,18 @@ body#main-layout.navbar-short {
 
 	li a {
 		color: #BE4816;
+
+		span.fa-icon-small {
+			transition: 0.25s ease-in-out;
+		}
+		&:hover {
+			color: #BE4816;
+			text-shadow: none;
+
+			span.fa-icon-small {
+				transform: scale(1.5);
+			}
+		}
 	}
 }
 
@@ -531,6 +615,17 @@ body
 	}
 }
 
+.footer.dark {
+	background-color: black;
+	color: white;
+}
+
+#footer-links {
+	border-top: 2px solid white;
+	line-height: 3;
+	background: #F73327;
+}
+
 /* ----------------------------------------------------
   |                                                    |
   |	SWIPER                                             |
@@ -615,7 +710,7 @@ body
 	padding-right: 15px;
 }
 
-.section .section-heading h2, #application-page h1, #news-page h1
+.section .section-heading h2, #application-page h1, #news-page h1, #accountlist-page h1, #login-page h2, #clockedin-page h1, #applicationlist-page h1, #positions-page h1, #time-sheet-page h1, #badgescanauth-page h1, #policy-page h1
 {
 	text-transform: uppercase;
 	padding-top: 50px;
@@ -626,9 +721,20 @@ body
 	text-align: center;
 }
 
-#application-page h1
+#application-page h1, #news-page h1, #accountlist-page h1, #login-page h2, #clockedin-page h1, #applicationlist-page h1, #positions-page h1, #time-sheet-page h1, #badgescanauth-page h1, #policy-page h1
 {
 	color: black;
+	padding-top: 0;
+	font-size: 5rem;
+}
+
+#accountlist-page h1, #clockedin-page h1, #applicationlist-page h1, #positions-page h1, #time-sheet-page h1, #badgescanauth-page h1 {
+	text-align: left;
+}
+
+#accountlist-page h3, #clockedin-page h3, #applicationlist-page h3 {
+	font-family: 'Six Caps';
+	text-transform: uppercase;
 }
 
 .section .section-content
@@ -1056,4 +1162,23 @@ div#bg-video-player {
 
 body#main-layout.navbar-short .anchor {
 	top: -5rem;
+}
+
+/* ----------------------------------------------------
+  |                                                    |
+  |	News Page                                          |
+  |                                                    |
+   ---------------------------------------------------- */
+
+#news-page, #policy-page {
+	.list-group-item:not(.list-group-item-dark, .active) {
+		&:hover {
+			background-color: #ededed;
+		}
+	}
+
+	.list-group-item.active {
+		background-color: #F73327;
+		color: white;
+	}
 }
