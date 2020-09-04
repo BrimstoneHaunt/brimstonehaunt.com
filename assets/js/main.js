@@ -584,33 +584,14 @@ $(document).ready(function() {
 			horizontalScrolling: false
 		});
 	}
-
-	if($(".swiper-container").length > 0) {
-		homePageBanner = new Swiper('.swiper-container', {
-			direction: 'horizontal',
-			loop: true,
-			navigation: {
-				nextEl: '.swiper-button-next',
-				prevEl: '.swiper-button-prev',
-			},
-			pagination: {
-				el: '.swiper-pagination',
-				hideOnClick: false,
-				clickable: true
-			},
-			autoHeight: true,
-			autoplay: {
-				delay: 15000
-			},
-			grabCursor: true,
-			effect: 'slide',
-			spaceBetween: 25,
-		});
-		homePageBanner.update();
-	}
 	
 	if($("#countdown-timer").length > 0) {
 		countdown.start();
+	}
+
+	if($("#policy-page").length > 0) {
+		$(":target").slideToggle();
+		$("[data-target='#" + $(":target").attr("id") +"']").toggleClass("active");
 	}
 	
 	if($("#timeclock-page").length > 0) {
