@@ -140,12 +140,17 @@ function openTimeClockModal(that, type) {
 		window.timesheetEmployeeID = $("#timesheetUser").val();
 	}
 	$("#time-sheet-modal").modal("hide");
+	$("#timeclock-modal .delete-time-entry").show();
 
 	if(that) {
 		$("#timeclock-modal").data("entryid", $(that).data("entryid"));
 		$("#timeclock-modal .start-time-input").val($(that).data("starttime"));
 		$("#timeclock-modal .end-time-input").val($(that).data("endtime"));
 		$("#timeclock-modal .comments-input").val($(that).data("comments"));
+
+		if($(that).data("entryid") == "adminNEW") {
+			$("#timeclock-modal .delete-time-entry").hide();
+		}
 	} else if(type == "stop") {
 		$("#timeclock-modal").data("entryid", $("#timeclock-page .entry-row").first().find(".edit-btn").data("entryid"));
 		$("#timeclock-modal .start-time-input").val($("#timeclock-page .entry-row").first().find(".edit-btn").data("starttime"));
