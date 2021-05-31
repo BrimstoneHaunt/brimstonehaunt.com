@@ -137,7 +137,8 @@ module.exports.routes = {
   'post /application/move': 'ApplicationController.move',
   'get /admin/badgescanauth': 'AdminController.getBadgescanauth',
   'post /admin/badgescanauth': 'AdminController.setBadgescanauth',
-  'post /admin/badges': 'AdminController.viewBadges'
+  'post /admin/badges': 'AdminController.viewBadges',
+  'post /timeclock/adminAddEntry': 'TimeClockController.adminAddEntry'
 
   /***************************************************************************
   *                                                                          *

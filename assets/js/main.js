@@ -163,7 +163,7 @@ function updateTimeEntry() {
 	var endTime = $("#timeclock-modal .end-time-input") ? $("#timeclock-modal .end-time-input").val() : null;
 	var comments = $("#timeclock-modal .comments-input").val();
 	var url = "";
-
+	
 	if(startTime == null && endTime == null) {
 		$("#timeclock-modal").modal('hide');
 
@@ -187,14 +187,19 @@ function updateTimeEntry() {
 
 		if(startTimeDate && ((startTimeDate <= endTimeDate && endTimeDate <= now) || !endTimeDate)) {
 			$("#timeclock-modal").modal('hide');
+
+			var data = { id: id, startTime: startTime, endTime: endTime, comments: comments };
 			
-			if(id == "NEW") {
+			if(id == "adminNEW") {
+				url = "/timeclock/adminAddEntry";
+				data.employeeID = window.timesheetEmployeeID;
+			} else if(id == "NEW") {
 				url = "/timeclock/clockin";
 			} else {
 				url = "/timeclock/update";
 			}
 			
-			$.post(url, { id: id, startTime: startTime, endTime: endTime, comments: comments }, function(resp) {
+			$.post(url, data, function(resp) {
 				var newContent = $(resp).filter("#timeclock-page").html();
 				if($("#timeclock-page").length > 0) {
 					$("#timeclock-page").html(newContent);

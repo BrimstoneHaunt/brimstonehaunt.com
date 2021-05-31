@@ -42,6 +42,7 @@ module.exports.policies = {
         'clockoutUser': 'canAdmin',
         'clockoutAll': 'isAdmin',
 		'timeSheetForUser': 'canAdmin',
+		'adminAddEntry': 'canAdmin',
 		'badgescan': true,
 		'badgescanClockInOut': true
 	},

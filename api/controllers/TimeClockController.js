@@ -95,7 +95,7 @@ module.exports = {
                     isLoggedIn: req.session.isLoggedIn,
                     canAdmin: req.session.canAdmin,
                     user: req.session.user,
-                    employee: records1[0] ? records1[0].user : null,
+                    employee: records1[0] ? records1[0].user : { id: req.body.id },
                     timeEntries: finalData
                 });
             }
@@ -108,8 +108,8 @@ module.exports = {
         var comments = null;
         
         if(req.body.startTime) {
-            var start = moment.tz(req.body.startTime, 'YYYY-MM-DDTHH:mm', 'America/New_York').toDate();
-            var end = req.body.endTime ? moment.tz(req.body.endTime, 'YYYY-MM-DDTHH:mm', 'America/New_York').toDate() : null;
+            start = moment.tz(req.body.startTime, 'YYYY-MM-DDTHH:mm', 'America/New_York').toDate();
+            end = req.body.endTime ? moment.tz(req.body.endTime, 'YYYY-MM-DDTHH:mm', 'America/New_York').toDate() : null;
             comments = req.body.comments;
         }
         
@@ -424,5 +424,19 @@ module.exports = {
         } else {
             return res.json({ error: true, success: false, message: "Authorization Expired!" });
         }
-    }
+    },
+    adminAddEntry: function(req, res) {
+        var now = new Date();
+        var start = req.body.startTime ? moment.tz(req.body.startTime, 'YYYY-MM-DDTHH:mm', 'America/New_York').toDate() : now;
+        var end = req.body.endTime ? moment.tz(req.body.endTime, 'YYYY-MM-DDTHH:mm', 'America/New_York').toDate() : now;
+        var comments = req.body.comments ? req.body.comments : "";
+        
+        Timeclock.create({startTime: start, endTime: end, comments: comments, user: req.body.employeeID}).exec(function(err2, records2) {
+            if(err2) {
+                return res.serverError(err2);
+            }
+            
+            return res.redirect("/timeclock");
+        });
+    },
 }
