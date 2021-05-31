@@ -71,7 +71,7 @@ module.exports.policies = {
 		'viewBadges': 'canAdmin'
 	},
 	'ApplicationController': {
-		'*': true,
+		'*': false,
 		'pendingList': 'canAdmin',
 		'heldList': 'canAdmin',
 		'rejectedList': 'canAdmin',
