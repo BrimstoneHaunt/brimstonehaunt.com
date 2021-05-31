@@ -30,7 +30,7 @@ var isMobile = {
 
 var homePageBanner = null;
 var countdown = {
-	openingDate: new Date("Sep 25, 2020 19:00:00").getTime(),
+	openingDate: new Date("Sep 24, 2021 19:00:00").getTime(),
 	timer: null,
 	update: function() {
 		var now = new Date().getTime();

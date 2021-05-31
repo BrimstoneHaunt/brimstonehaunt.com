@@ -365,7 +365,7 @@ module.exports = {
                                 message: "Invalid Authcode!"
                             });
                         } else {
-                            res.cookie('badgescan', { auth: true }, { maxAge: 43200000 });
+                            res.cookie('badgescan', { auth: true }, { maxAge: 172800000 });
                             return res.view('badgescan', {
                                 layout: 'bare',
                                 title: "Badge Scan"
